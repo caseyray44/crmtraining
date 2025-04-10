@@ -3,9 +3,10 @@ import json
 import os
 import logging
 
-# Import chapter modules and final quizzes from chapter1.py and chapter2.py
+# Import chapter modules and final quizzes from chapter1, chapter2, and chapter3
 from chapter1 import CH1_MODULES, CH1_FINAL_QUIZ
 from chapter2 import CH2_MODULES, CH2_FINAL_QUIZ
+from chapter3 import CH3_MODULES, CH3_FINAL_QUIZ
 
 # Set up logging for debugging
 logging.basicConfig(level=logging.INFO, filename="training.log", filemode="a",
@@ -38,7 +39,7 @@ logging.basicConfig(level=logging.INFO, filename="training.log", filemode="a",
 #         st.error("Error saving progress. Progress may not be saved.")
 
 ################################################################
-#                 USER CREDENTIALS (SAME FOR BOTH)             #
+#                     USER CREDENTIALS                         #
 ################################################################
 USERS = {
     "Damon123": {"password": "pass123", "role": "trainee"},
@@ -47,7 +48,7 @@ USERS = {
 }
 
 ################################################################
-#            FALLBACK FUNCTION FOR RE-RUN BEHAVIOR             #
+#            FALLBACK FUNCTION FOR RE-RUN BEHAVIOR              #
 ################################################################
 def rerun_app():
     """
@@ -59,14 +60,14 @@ def rerun_app():
         st.warning("st.experimental_rerun() is not available. Please manually select the next module in the sidebar.")
 
 ################################################################
-#          UNIVERSAL show_chapter() FUNCTION                   #
+#         UNIVERSAL show_chapter() FUNCTION                      #
 ################################################################
 def show_chapter(chapter_name: str, modules, final_quiz):
     """
     Unified function to present module content (and tasks) for a chapter.
     Uses only session_state to save the current module index.
     
-    chapter_name: "Chapter 1" or "Chapter 2"
+    chapter_name: "Chapter 1", "Chapter 2", or "Chapter 3"
     modules: list of dicts (with keys: title, content, task_type, task, etc.)
     final_quiz: list of quiz questions for the chapter
     """
@@ -172,6 +173,15 @@ def show_chapter(chapter_name: str, modules, final_quiz):
         st.info("No task available for this module.")
 
 ################################################################
+#             OPTIONAL: SCALABLE CHAPTER SELECTION             #
+################################################################
+CHAPTERS = {
+    "Chapter 1": {"modules": CH1_MODULES, "final_quiz": CH1_FINAL_QUIZ},
+    "Chapter 2": {"modules": CH2_MODULES, "final_quiz": CH2_FINAL_QUIZ},
+    "Chapter 3": {"modules": CH3_MODULES, "final_quiz": CH3_FINAL_QUIZ}
+}
+
+################################################################
 #                     MAIN APP LOGIC                           #
 ################################################################
 def main():
@@ -197,19 +207,17 @@ def main():
                 st.error("Incorrect username or password.")
         return  # Do not proceed until login is successful.
 
-    # Allow the user to choose a chapter.
-    chapter = st.sidebar.selectbox("Select Chapter", ["Chapter 1", "Chapter 2"])
+    # Allow the user to choose a chapter from the scalable CHAPTERS dictionary.
+    chapter = st.sidebar.selectbox("Select Chapter", list(CHAPTERS.keys()))
     
-    if chapter == "Chapter 1":
+    # Dynamically display the selected chapter's content.
+    if chapter in CHAPTERS:
         try:
-            show_chapter("Chapter 1", CH1_MODULES, CH1_FINAL_QUIZ)
+            show_chapter(chapter, CHAPTERS[chapter]["modules"], CHAPTERS[chapter]["final_quiz"])
         except Exception as e:
-            st.error(f"Error displaying Chapter 1: {e}")
-    elif chapter == "Chapter 2":
-        try:
-            show_chapter("Chapter 2", CH2_MODULES, CH2_FINAL_QUIZ)
-        except Exception as e:
-            st.error(f"Error displaying Chapter 2: {e}")
+            st.error(f"Error displaying {chapter}: {e}")
+    else:
+        st.warning("Please select a chapter to begin.")
 
 if __name__ == "__main__":
     main()
