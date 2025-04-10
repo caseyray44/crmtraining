@@ -1,0 +1,89 @@
+2025-04-10 07:31:16,099 - ERROR - Error loading progress from progress_ch1.json: Expecting value: line 1 column 1 (char 0)
+2025-04-10 07:31:16,099 - INFO - No progress file found at progress_ch2.json. Initializing new progress.
+2025-04-10 07:31:18,030 - ERROR - Error loading progress from progress_ch1.json: Expecting value: line 1 column 1 (char 0)
+2025-04-10 07:31:18,030 - INFO - No progress file found at progress_ch2.json. Initializing new progress.
+2025-04-10 07:31:20,029 - ERROR - Error loading progress from progress_ch1.json: Expecting value: line 1 column 1 (char 0)
+2025-04-10 07:31:20,029 - INFO - No progress file found at progress_ch2.json. Initializing new progress.
+2025-04-10 07:31:20,093 - ERROR - Error loading progress from progress_ch1.json: Expecting value: line 1 column 1 (char 0)
+2025-04-10 07:31:20,093 - INFO - No progress file found at progress_ch2.json. Initializing new progress.
+2025-04-10 07:31:21,515 - ERROR - Error loading progress from progress_ch1.json: Expecting value: line 1 column 1 (char 0)
+2025-04-10 07:31:21,515 - INFO - No progress file found at progress_ch2.json. Initializing new progress.
+2025-04-10 07:31:23,439 - ERROR - Error loading progress from progress_ch1.json: Expecting value: line 1 column 1 (char 0)
+2025-04-10 07:31:23,439 - INFO - No progress file found at progress_ch2.json. Initializing new progress.
+2025-04-10 07:31:23,510 - ERROR - Error loading progress from progress_ch1.json: Expecting value: line 1 column 1 (char 0)
+2025-04-10 07:31:23,510 - INFO - No progress file found at progress_ch2.json. Initializing new progress.
+2025-04-10 07:31:23,515 - INFO - Progress saved successfully to progress_ch1.json.
+2025-04-10 07:33:54,077 - INFO - Progress loaded successfully from progress_ch1.json.
+2025-04-10 07:33:54,078 - INFO - No progress file found at progress_ch2.json. Initializing new progress.
+2025-04-10 07:33:56,118 - INFO - Progress loaded successfully from progress_ch1.json.
+2025-04-10 07:33:56,118 - INFO - No progress file found at progress_ch2.json. Initializing new progress.
+2025-04-10 07:33:57,833 - INFO - Progress loaded successfully from progress_ch1.json.
+2025-04-10 07:33:57,834 - INFO - No progress file found at progress_ch2.json. Initializing new progress.
+2025-04-10 07:33:57,927 - INFO - Progress loaded successfully from progress_ch1.json.
+2025-04-10 07:33:57,927 - INFO - No progress file found at progress_ch2.json. Initializing new progress.
+2025-04-10 07:33:59,436 - INFO - Progress loaded successfully from progress_ch1.json.
+2025-04-10 07:33:59,436 - INFO - No progress file found at progress_ch2.json. Initializing new progress.
+2025-04-10 07:34:01,984 - INFO - Progress loaded successfully from progress_ch1.json.
+2025-04-10 07:34:01,984 - INFO - No progress file found at progress_ch2.json. Initializing new progress.
+2025-04-10 07:34:02,065 - INFO - Progress loaded successfully from progress_ch1.json.
+2025-04-10 07:34:02,065 - INFO - No progress file found at progress_ch2.json. Initializing new progress.
+2025-04-10 07:34:02,068 - INFO - Progress saved successfully to progress_ch1.json.
+2025-04-10 07:36:52,729 - INFO - Progress loaded successfully from progress_ch1.json.
+2025-04-10 07:36:52,729 - INFO - No progress file found at progress_ch2.json. Initializing new progress.
+2025-04-10 07:36:54,812 - INFO - Progress loaded successfully from progress_ch1.json.
+2025-04-10 07:36:54,813 - INFO - No progress file found at progress_ch2.json. Initializing new progress.
+2025-04-10 07:36:56,324 - INFO - Progress loaded successfully from progress_ch1.json.
+2025-04-10 07:36:56,325 - INFO - No progress file found at progress_ch2.json. Initializing new progress.
+2025-04-10 07:36:56,410 - INFO - Progress loaded successfully from progress_ch1.json.
+2025-04-10 07:36:56,410 - INFO - No progress file found at progress_ch2.json. Initializing new progress.
+2025-04-10 07:36:56,701 - INFO - Progress loaded successfully from progress_ch1.json.
+2025-04-10 07:36:56,701 - INFO - No progress file found at progress_ch2.json. Initializing new progress.
+2025-04-10 07:36:58,843 - INFO - Progress loaded successfully from progress_ch1.json.
+2025-04-10 07:36:58,843 - INFO - No progress file found at progress_ch2.json. Initializing new progress.
+2025-04-10 07:36:58,943 - INFO - Progress loaded successfully from progress_ch1.json.
+2025-04-10 07:36:58,944 - INFO - No progress file found at progress_ch2.json. Initializing new progress.
+2025-04-10 07:36:58,948 - INFO - Progress saved successfully to progress_ch1.json.
+2025-04-10 07:50:40,300 - INFO - Progress loaded successfully from progress_ch1.json.
+2025-04-10 07:50:40,301 - INFO - No progress file found at progress_ch2.json. Initializing new progress.
+2025-04-10 07:50:52,264 - INFO - Progress loaded successfully from progress_ch1.json.
+2025-04-10 07:50:52,265 - INFO - No progress file found at progress_ch2.json. Initializing new progress.
+2025-04-10 07:50:55,142 - INFO - Progress loaded successfully from progress_ch1.json.
+2025-04-10 07:50:55,143 - INFO - No progress file found at progress_ch2.json. Initializing new progress.
+2025-04-10 07:50:56,646 - INFO - Progress loaded successfully from progress_ch1.json.
+2025-04-10 07:50:56,647 - INFO - No progress file found at progress_ch2.json. Initializing new progress.
+2025-04-10 07:50:57,806 - INFO - Progress loaded successfully from progress_ch1.json.
+2025-04-10 07:50:57,806 - INFO - No progress file found at progress_ch2.json. Initializing new progress.
+2025-04-10 07:51:00,264 - INFO - Progress loaded successfully from progress_ch1.json.
+2025-04-10 07:51:00,265 - INFO - No progress file found at progress_ch2.json. Initializing new progress.
+2025-04-10 07:51:00,328 - INFO - Progress loaded successfully from progress_ch1.json.
+2025-04-10 07:51:00,329 - INFO - No progress file found at progress_ch2.json. Initializing new progress.
+2025-04-10 07:51:00,332 - INFO - Progress saved successfully to progress_ch1.json.
+2025-04-10 07:51:00,404 - INFO - Progress loaded successfully from progress_ch1.json.
+2025-04-10 07:51:00,404 - INFO - No progress file found at progress_ch2.json. Initializing new progress.
+2025-04-10 07:54:32,204 - INFO - Progress loaded successfully from progress_ch1.json.
+2025-04-10 07:54:32,205 - INFO - No progress file found at progress_ch2.json. Initializing new progress.
+2025-04-10 07:54:32,905 - INFO - Progress loaded successfully from progress_ch1.json.
+2025-04-10 07:54:32,905 - INFO - No progress file found at progress_ch2.json. Initializing new progress.
+2025-04-10 07:54:38,914 - INFO - Progress loaded successfully from progress_ch1.json.
+2025-04-10 07:54:38,914 - INFO - No progress file found at progress_ch2.json. Initializing new progress.
+2025-04-10 07:54:41,045 - INFO - Progress loaded successfully from progress_ch1.json.
+2025-04-10 07:54:41,046 - INFO - No progress file found at progress_ch2.json. Initializing new progress.
+2025-04-10 07:54:42,428 - INFO - Progress loaded successfully from progress_ch1.json.
+2025-04-10 07:54:42,428 - INFO - No progress file found at progress_ch2.json. Initializing new progress.
+2025-04-10 07:54:43,922 - INFO - Progress loaded successfully from progress_ch1.json.
+2025-04-10 07:54:43,922 - INFO - No progress file found at progress_ch2.json. Initializing new progress.
+2025-04-10 07:54:45,664 - INFO - Progress loaded successfully from progress_ch1.json.
+2025-04-10 07:54:45,665 - INFO - No progress file found at progress_ch2.json. Initializing new progress.
+2025-04-10 07:54:45,717 - INFO - Progress loaded successfully from progress_ch1.json.
+2025-04-10 07:54:45,717 - INFO - No progress file found at progress_ch2.json. Initializing new progress.
+2025-04-10 07:54:45,722 - INFO - Progress saved successfully to progress_ch1.json.
+2025-04-10 07:54:45,785 - INFO - Progress loaded successfully from progress_ch1.json.
+2025-04-10 07:54:45,786 - INFO - No progress file found at progress_ch2.json. Initializing new progress.
+2025-04-10 07:55:00,430 - INFO - Progress loaded successfully from progress_ch1.json.
+2025-04-10 07:55:00,430 - INFO - No progress file found at progress_ch2.json. Initializing new progress.
+2025-04-10 07:55:04,705 - INFO - Progress loaded successfully from progress_ch1.json.
+2025-04-10 07:55:04,705 - INFO - No progress file found at progress_ch2.json. Initializing new progress.
+2025-04-10 07:55:04,710 - INFO - Progress saved successfully to progress_ch1.json.
+2025-04-10 07:55:07,412 - INFO - Progress loaded successfully from progress_ch1.json.
+2025-04-10 07:55:07,412 - INFO - No progress file found at progress_ch2.json. Initializing new progress.
+2025-04-10 07:55:07,416 - INFO - Progress saved successfully to progress_ch1.json.
