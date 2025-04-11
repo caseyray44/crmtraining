@@ -181,8 +181,10 @@ As a sales rep, managing leads through these 7 stages is a core part of your job
 
 **What’s Next?**  
 In the next module, we’ll learn how to create new leads in Markate, so you can start filling up that “New” bucket. You’ll practice adding 10 leads to get comfortable with the process. To make sure you understand how to create new leads, I’ve prepared a mini-quiz and a confirmation step to check that you’ve created all 10 leads. Let’s do this!
+
 """,
-        "task_type": "miniquiz"
+        "task_type": "miniquiz",
+        "navigation_button": "Submit Quiz to Continue"
     },
     {
         "title": "Chapter 2, Module 4: Creating New Leads (10 Entries)",
@@ -253,7 +255,8 @@ As a sales rep, one of your main jobs is to bring in new leads and add them to M
 **What’s Next?**  
 In the next module, we’ll learn how to create new opportunities in Markate, which are for existing customers who want a quote for an additional service. You’ll practice adding 10 opportunities to get comfortable with the process. To make sure you understand how to create new leads, I’ve prepared a mini-quiz and a confirmation step to check that you’ve created all 10 leads. Let’s do this!
 """,
-        "task_type": "miniquiz"
+        "task_type": "miniquiz",
+        "navigation_button": "Submit Quiz and Continue"
     },
     {
         "title": "Chapter 2, Module 5: Creating New Opportunities (10 Entries)",
