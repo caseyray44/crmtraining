@@ -124,67 +124,46 @@ At CC Inc., we use a specific process to manage leads in Markate, moving them th
 
 2. **Assigned**  
    - **What It Means**: This stage is for leads that need immediate attention from a sales rep (like you!). A lead moves to “Assigned” when someone at CC Inc. decides a sales rep needs to follow up.  
-   - **What You Do**: As a sales rep, you’ll be assigned leads to contact. Your goal is to act quickly—within 24 hours. For example, if a lead says, “I need a quote for house washing,” you’ll call them to set up a meeting or send them a quote. Once you take action, you’ll move the lead to the next stage (like “Scheduled” or “Attempted to Contact”). This bucket should stay empty—assigned leads need to be handled fast!  
-     - **Note**: If a lead is meant for someone else at CC Inc. (like Casey or another staff member, not a sales rep), it won’t be assigned to you. For example, if a lead needs an admin to handle paperwork, they’ll be assigned to the admin instead.  
-   - **Why It Matters**: Acting quickly on assigned leads shows the customer we’re serious about helping them. If we wait too long, they might go to a competitor, and we’ll lose the business. Keeping this bucket empty ensures leads don’t sit around waiting.
+   - **What You Do**: As a sales rep, you’ll be assigned leads to contact. Your goal is to act quickly—within 24 hours.  
+   - **Why It Matters**: Acting quickly on assigned leads shows the customer we’re serious about helping them.
 
 3. **Attempted to Contact**  
-   - **What It Means**: This stage is for leads you’ve tried to contact but couldn’t reach. For example, if you called a lead but they didn’t answer, or if there’s an issue (like a wrong number or they’re unavailable), you move them here.  
-   - **What You Do**: When you move a lead to this stage, you *must* add notes in Markate to explain what happened. For example, you might write, “Called and left voicemail at 1:30 PM on 5/12/25.” This helps everyone at CC Inc. know what’s going on with the lead. You’ll also decide what to do next—maybe try calling again at a different time or send an email.  
-   - **Why It Matters**: This stage helps you track leads that need extra effort to reach. For example, if you called at 1:30 PM and they didn’t answer, your note might remind you to try again in the evening when they’re more likely to be free. It keeps us organized and ensures no lead gets forgotten.
+   - **What It Means**: This stage is for leads you’ve tried to contact but couldn’t reach.  
+   - **What You Do**: When you move a lead here, you add notes explaining what happened.  
+   - **Why It Matters**: It helps track leads needing extra follow-up.
 
 4. **Scheduled**  
-   - **What It Means**: This stage is for leads you’ve successfully scheduled for a meeting or appointment. For example, if a lead says, “I’d like to meet to discuss pest control,” and you set up a meeting for next Tuesday, they move to “Scheduled.”  
-   - **What You Do**: Once you schedule the meeting, Markate will automatically move the lead to this stage (you’ll learn how to do this in a later module). Your job is to prepare for the meeting—get ready to talk about CC Inc.’s services, answer their questions, and make a great impression. As we like to say at CC Inc., “Show up, shake hands, kiss babies, and do your thing!” This means being friendly, professional, and ready to help the customer.  
-   - **Why It Matters**: Scheduling a meeting is a big step toward turning a lead into a customer—it means they’re serious enough to talk to you. A good meeting can convince them to choose CC Inc., so this stage is your chance to shine as a sales rep.
+   - **What It Means**: This stage is for leads you’ve successfully scheduled for a meeting or appointment.  
+   - **What You Do**: After scheduling, prepare for the meeting and continue the process.  
+   - **Why It Matters**: It shows the lead is serious about becoming a customer.
 
 5. **Estimation / Waiting for Response**  
-   - **What It Means**: This stage is for leads you’ve sent a quote (also called an estimate) to. For example, if a lead says, “I need a quote for house washing,” you’ll meet with them, figure out the cost, and send them the quote. Once you send the quote, Markate automatically moves the lead to this stage.  
-   - **What You Do**: Your job is to wait for the customer to respond—they might say yes, no, or need more time to decide. Many leads will sit in this stage for a while as they think it over. You should check this bucket often (using Pipeline View or Table View) and follow up on quotes that haven’t been accepted yet. For example, if a lead hasn’t responded after a week, you might call them to see if they have any questions.  
-   - **Why It Matters**: This stage is where leads decide whether to become customers. Following up shows the customer you care about their decision, which can make them more likely to say yes. If you don’t follow up, they might forget about the quote or choose a competitor.
+   - **What It Means**: This stage is for leads to whom you have sent a quote.  
+   - **What You Do**: Follow up if necessary and wait for a response.  
+   - **Why It Matters**: It is critical for deciding whether the lead will convert.
 
 6. **First Follow-Up**  
-   - **What It Means**: This stage is for leads you’ve followed up with for the first time after sending a quote. For example, if a lead hasn’t responded to your quote after a week, you’ll call or email them to check in, and then move them to this stage.  
-   - **What You Do**: When you follow up, you’ll ask if they’re ready to proceed with the service. For example, you might say, “Hi John, I wanted to check if you had any questions about the house washing quote I sent you. Are you ready to schedule the service?” Some customers might say yes, some might say no, and others might need more time. Add notes in Markate to keep track of what they say (e.g., “John said he needs another week to decide”). Your goal is to keep the conversation going.  
-   - **Why It Matters**: Following up shows the customer you’re interested in helping them, which can make them more likely to choose CC Inc. Many customers need a little nudge to make a decision, and this stage ensures we don’t let leads slip away.
+   - **What It Means**: This stage is for leads followed up with after sending a quote.  
+   - **What You Do**: Continue prompting the lead towards a decision.  
+   - **Why It Matters**: Persistence here can secure the sale.
 
 7. **Second Follow-Up**  
-   - **What It Means**: This stage is for leads you’ve followed up with a second time after the first follow-up. If a lead is still undecided after your first follow-up, you’ll follow up again and move them here. This is the final follow-up before the lead either becomes a customer or decides not to buy.  
-   - **What You Do**: Follow up one more time to see if the customer is ready to proceed. For example, you might say, “Hi John, I just wanted to check in one last time about the house washing quote. Are you ready to move forward, or do you have any other questions?” Add notes in Markate about their response (e.g., “John said he’s not interested right now but might need services later”).  
-   - **Why It Matters**: This stage gives the customer one last chance to say yes, which can help us close more deals. It also ensures we don’t give up on leads too early—sometimes a second follow-up is all it takes to turn a lead into a customer.
+   - **What It Means**: This stage is for the final follow-up before the lead is either converted or maintained for future opportunities.  
+   - **What You Do**: Make a last effort to get a response from the lead.  
+   - **Why It Matters**: It gives one final chance for conversion before moving on.
 
-**What Happens After the Second Follow-Up?**  
-After the second follow-up, a lead will either become a customer or decide not to buy. Here’s what happens:  
-- **If They Say Yes**: Great! You’ll create a customer account for them in Markate (like you learned in Chapter 1) and schedule the service. They’re no longer a lead—they’re now a customer.  
-- **If They Say No**: We don’t delete leads, even if they say no. Instead, they stay in the “Second Follow-Up” stage, and we convert them into a customer account in Markate. This way, we have their information for future reference and can use it for marketing other services later. For example, if John says, “I don’t need house washing right now,” we’ll keep his info and might contact him later about pest control or holiday lights.  
-  - **Note**: If a customer doesn’t want to receive marketing emails, they can opt out themselves. We don’t remove their info unless they specifically ask us to.  
-- **Why Keep Their Info?** Even if a lead says no, they might change their mind later or need a different service. Keeping their info lets us reach out in the future, which can lead to more business for CC Inc.
+**Interactive Quiz**  
+Before you move on, please answer the following quiz question:  
+**Quiz Question:** Which of the following represents the correct first stage for a new lead in Markate?  
+- A) New  
+- B) Assigned  
+- C) Attempted to Contact  
 
-**Final Notes on the 7 Stages**  
-Here are some key things to remember as you manage leads through these stages:  
-- **Every Lead Goes Through This Process**: Whether it’s a new customer or an existing one, every lead moves through these 7 stages. It’s a consistent process that helps us stay organized.  
-- **Don’t Let Leads Get Stuck**: Your job is to keep leads moving through the stages—don’t let them sit in one stage for too long. For example, if a lead is in “Waiting for Response” for weeks, follow up to see if they’re ready to decide. If they’re in “Attempted to Contact,” try again at a different time. Keeping leads moving ensures we don’t miss out on potential business.  
-- **Always Add Notes**: Whenever you move a lead to a new stage, add notes in Markate to explain what happened. For example, “Moved to Attempted to Contact—called and left voicemail at 1:30 PM on 5/12/25.” This keeps everyone at CC Inc. on the same page.  
-- **Follow-Ups Are Key**: Many leads don’t say yes right away, but persistence can close deals. Following up shows the customer you care, which can make them more likely to choose CC Inc.  
-- **Verify Who the Lead is Assigned To**: Make sure you know who’s responsible for each lead. For example, if a lead is assigned to you, act on it within 24 hours. If it’s assigned to someone else, make sure they know about it.
-
-**Why This Matters for You**  
-- **Turn Leads into Customers**: Understanding the 7 stages helps you know exactly what to do at each step, so you can turn more leads into customers. For example, following up at the right time can make the difference between a “yes” and a “no.”  
-- **Stay Organized**: The stages keep your work structured, so you always know what’s next. For example, if a lead is in “Scheduled,” you know to prepare for a meeting. If they’re in “First Follow-Up,” you know to check in.  
-- **Help CC Inc. Grow**: Every lead you turn into a customer means more business for CC Inc. By mastering this process, you’re helping our company succeed, which makes you a valuable part of the team.
-
-**How This Fits into Your Role at CC Inc.**  
-As a sales rep, managing leads through these 7 stages is a core part of your job. You’ll use this process to:  
-- **Build Relationships**: Each stage is a chance to connect with the lead and show them why CC Inc. is the best choice. For example, a friendly follow-up call can make a lead feel valued and more likely to say yes.  
-- **Close More Deals**: By following the stages, you’ll know when to follow up and how to keep the conversation going, which helps you turn more leads into customers. For example, a lead who’s been sitting in “Waiting for Response” might say yes after a well-timed follow-up.  
-- **Keep Things Moving**: The stages ensure leads don’t get stuck or forgotten. For example, if a lead is in “Attempted to Contact,” you’ll know to try again, which keeps the process moving forward.
-
-**What’s Next?**  
-In the next module, we’ll learn how to create new leads in Markate, so you can start filling up that “New” bucket. You’ll practice adding 10 leads to get comfortable with the process. To make sure you understand how to create new leads, I’ve prepared a mini-quiz and a confirmation step to check that you’ve created all 10 leads. Let’s do this!
+(Select option A)
 """,
         "task_type": "miniquiz",
         "quiz": {
-            "question": "Which of the following is the correct first stage for a new lead in Markate?",
+            "question": "Which of the following represents the correct first stage for a new lead in Markate?",
             "options": [
                 "New",
                 "Assigned",
@@ -201,7 +180,7 @@ In the next module, we’ll learn how to create new leads in Markate, so you can
 Now that you understand the 7 stages of managing leads at CC Inc., it’s time to start adding leads to Markate. In this module, you’ll learn how to create a new lead in Markate’s staging environment, which is the first step in filling up that “New” bucket we talked about. We’ll practice by adding 10 leads, and I’ll walk you through every step to make sure you feel confident doing it.
 
 **What You’ll Do in This Module**  
-You’ll learn how to add a new lead to Markate by filling out a form with their details, like their name, contact info, and what they’re interested in. You’ll practice this by creating 10 leads in the staging environment, using fake information. This will help you get comfortable with the process, so you’re ready to add real leads later. At the end, I’ll have a mini-quiz to make sure you understand the steps, plus a confirmation step to check that you’ve created all 10 leads.
+You’ll learn how to add a new lead to Markate by filling out a form with their details, like their name, contact info, and what they’re interested in. You’ll practice this by creating 10 leads in the staging environment, using fake information. This will help you get comfortable with the process, so you’re ready to add real leads later. At the end, I’ve prepared a mini-quiz and a confirmation step to check that you’ve created all 10 leads.
 
 **What is a New Lead (Again)?**  
 Just to recap from Module 1: a lead is anyone who has shown interest in CC Inc.’s services. A *new lead* is someone who has just shown that interest, and we’re adding them to Markate for the first time. For example:  
@@ -282,7 +261,7 @@ In the next module, we’ll learn how to create new opportunities in Markate, wh
 You’ve done a great job adding new leads to Markate—now it’s time to learn about a related concept: *opportunities*. In this module, you’ll learn how to create a new opportunity in Markate’s staging environment, which is something you’ll do for existing customers who want a quote for an additional service. We’ll practice by adding 10 opportunities, and I’ll walk you through every step to make sure you feel confident.
 
 **What You’ll Do in This Module**  
-You’ll learn how to create a new opportunity in Markate for an existing customer who wants a quote for a new service. You’ll practice this by adding 10 opportunities in the staging environment, using fake information. This will help you get comfortable with the process, so you’re ready to create real opportunities later. At the end, I’ll have a scenario task to make sure you understand the difference between a new lead and a new opportunity.
+You’ll learn how to create a new opportunity in Markate for an existing customer who wants a quote for a new service. You’ll practice this by adding 10 opportunities in the staging environment, using fake information. This will help you get comfortable with the process, so you’re ready to create real opportunities later. At the end, I’ve prepared a scenario task to make sure you understand the difference between a new lead and a new opportunity.
 
 **What is a New Opportunity?**  
 A *new opportunity* is a request from an existing customer for a quote on an additional service that we haven’t priced for them before. Let’s break that down:  
@@ -394,7 +373,7 @@ As a sales rep, assigning leads and opportunities is a key part of your job—it
 This is the final piece of the puzzle for managing leads—you’re almost ready to put it all together!
 
 **What’s Next?**  
-In the next module, you’ll do a final task: creating a test opportunity for yourself using the test account you made in Chapter 1. This will help you see the whole process from both the sales rep’s side and the customer’s side. To make sure you understand assigning leads and these final tips, I’ve prepared a reflection task for you. Let’s do this!
+In the next module, you’ll do a final task: creating a test opportunity for yourself using the test account you made in Chapter 1. This will help you see the whole process from both the sales rep’s side and the customer’s side. To make sure you understand assigning leads and these final tips, I’ve prepared a reflection task to help you think about what you’ve learned. Let’s do this!
 """,
         "task_type": "reflection",
         "task": "Reflection: Why do you think it’s important to keep leads even if they say ‘No’ after the second follow-up? How do you think this will help CC Inc. in the future?"
@@ -406,7 +385,7 @@ In the next module, you’ll do a final task: creating a test opportunity for yo
 You’ve made it to the final module of Chapter 2—amazing work! You’ve learned how to view leads, understand the 7 stages, create new leads, create opportunities, and assign them to employees. Now, let’s bring it all together with a final task: you’re going to create a test opportunity for yourself in Markate, using the test account you made in Chapter 1. This will help you see the whole process from both the sales rep’s side and the customer’s side. I’ll guide you through every step, as always!
 
 **What You’ll Do in This Module**  
-You’ll create a test opportunity for yourself in Markate’s staging environment, pretending you’re an existing customer asking for a new service. You’ll use the test account you created in Chapter 1 (e.g., “Damon Smith” or “Jake Smith”), assign the opportunity to yourself, and move it to the “Assigned” stage in Pipeline View. This will give you a complete picture of how leads and opportunities work, from start to finish. At the end, I’ll have a reflection task to help you think about what you’ve learned.
+You’ll create a test opportunity for yourself in Markate’s staging environment, pretending you’re an existing customer asking for a new service. You’ll use the test account you created in Chapter 1 (e.g., “Damon Smith” or “Jake Smith”), assign the opportunity to yourself, and move it to the “Assigned” stage in Pipeline View. This will give you a complete picture of how leads and opportunities work, from start to finish. At the end, I’ve prepared a reflection task to help you think about what you’ve learned.
 
 **Why Create a Test Opportunity for Yourself?**  
 Creating a test opportunity for yourself is like playing both roles in a play—you’ll be the sales rep creating the opportunity, and the customer receiving it. Here’s why this is so helpful:  
@@ -423,16 +402,11 @@ Let’s create your test opportunity together. We’ll pretend you’re an exist
    - **Opportunity Title**: Use the format “Test Opportunity - [Your Name].” For example, if your name is Damon, enter “Test Opportunity - Damon.”  
      - **Example**: Opportunity Title: Test Opportunity - Damon.  
    - **Customer**: Select your test account from the dropdown list. Look for your name (e.g., “Damon Smith” or “Jake Smith”)—this should be the account you created in Chapter 1, Module 7.  
-     - **What If I Don’t See My Account?** If you don’t see your test account in the dropdown list, make sure you created it in Chapter 1, Module 7. If you didn’t, go back to that module and create it now, then come back here.  
    - **Job Location**: Choose the service address from your test account. In Chapter 1, you used a fake address like “123 Test Street, Springfield, IL, 62704.” Select that address.  
-     - **Why This Field?** This ensures we know where to provide the service if you (as the customer) agree to the quote. For this test, we’ll use the address you entered in Chapter 1.  
    - **Lead Source (Optional)**: For practice, let’s set this to “Customer Request,” since you’re pretending to be a customer asking for a new service.  
    - **Lead Label**: Set this to “Hot,” just like we did in Module 5.  
-     - **Why Hot?** Since this is a test opportunity, we’ll assume you’re very interested (as the customer), so “Hot” makes sense.  
    - **Comments**: Add a note like “Test opportunity created for training purposes.”  
-     - **Why Add a Comment?** This helps us keep track of why this opportunity exists—it’s for your training, not a real customer request.  
    - **Assign to Employee**: Select yourself (e.g., “Damon” or “Jake”).  
-     - **Why Assign It to Yourself?** Since this is a test, you’ll handle the opportunity yourself, so you can see the whole process from both sides.  
 4. **Click “Save” to Create the Opportunity**: Click the “Save” button at the bottom of the form. This adds the opportunity to Markate, and it will appear in the “New” stage in Pipeline View.  
 5. **Drag the Opportunity to the “Assigned” Stage**: In Pipeline View, find your test opportunity (e.g., “Test Opportunity - Damon”). Click and hold the card, then drag it from the “New” column to the “Assigned” column and let go.  
    - **Why Move It to Assigned?** This simulates what you’d do if the opportunity needed immediate action (like following up within 24 hours). It also lets you practice moving leads in Pipeline View, which you learned in Module 6.
@@ -461,10 +435,7 @@ You’ve now completed all the modules for Chapter 2! You’ve learned how to ma
     }
 ]
 
-# Integrate the miniquiz questions into Module 4 (Chapter 2, Module 4)
-# The following key is added inside the Module 4 dictionary (index 3) above.
-# The redundant definition below has been removed.
-
+# Final Quiz (remains unchanged from your original structure)
 CH2_FINAL_QUIZ = [
     {
         "question": "Which view in Markate lets you drag leads from stage to stage?",
