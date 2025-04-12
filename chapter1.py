@@ -1,3 +1,14 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+chapter1.py
+
+This module contains the Chapter 1 training content for the CRM Training App, a 
+Streamlit-based training platform for CC Inc. employees learning to use the Markate CRM.
+It includes the CH1_MODULES list with modules and tasks, as well as the CH1_FINAL_QUIZ 
+list for the final quiz questions. 
+"""
+
 ################################################################
 #            CHAPTER 1 MODULES & FINAL QUIZ (DETAILED)         #
 ################################################################
@@ -13,13 +24,13 @@ A CRM stands for *Customer Relationship Management*. Think of it like a super-or
 - Who your customers are (their names, phone numbers, emails).  
 - Where they live (so you can deliver lemonade to their house).  
 - What they’ve bought before (e.g., “John likes extra sugar”).  
-- When you last talked to them (e.g., “Called Sarah last week to ask if she wants more lemonade”).  
+- When you last talked to them (e.g., “Called Sarah last week to ask if she wants more lemonade”).
 
 A CRM does all of that, but on a computer, and it’s much smarter! It can:  
 - Store customer information (like names, emails, and addresses).  
 - Send automatic messages (like reminders for a lemonade delivery).  
 - Help you schedule jobs (like delivering lemonade to 10 houses on Monday).  
-- Keep a history of everything (so you don’t forget what John ordered last time).  
+- Keep a history of everything (so you don’t forget what John ordered last time).
 
 At CC Inc., we provide services like house washing, pest control, window washing, painting, and holiday lights. A CRM helps us keep track of all our customers so we can provide great service without losing track of anyone.
 
@@ -28,13 +39,13 @@ Markate is the CRM we use at CC Inc. It’s like a digital assistant that helps 
 - **It Keeps Everything Organized**: Markate stores all our customer information in one place. For example, if a customer calls and says, “I need my windows washed,” we can quickly look up their address and schedule the job.  
 - **It Helps Us Communicate**: Markate can send emails and text messages to customers automatically. For example, if we schedule a house washing job, Markate can send the customer a message saying, “We’ll be at your house on Tuesday at 10 AM!”  
 - **It Makes Scheduling Easy**: Many of our customers have more than one house—like a primary home and a vacation home. Markate lets us keep track of all their addresses, so we know exactly where to send our service teams.  
-- **It Saves Time**: Instead of writing everything down on paper, Markate does the hard work for us. It’s like having a super-smart assistant who never forgets anything!  
+- **It Saves Time**: Instead of writing everything down on paper, Markate does the hard work for us. It’s like having a super-smart assistant who never forgets anything!
 
 **What is a Staging Environment?**  
 Before we start working with real customers, we’re going to practice in a special version of Markate called the *staging environment*. Think of it like a practice playground:  
 - It’s a safe space where you can try things without affecting real customers.  
 - If you make a mistake (like accidentally deleting a customer), it won’t cause any problems because it’s not real data.  
-- It’s like practicing a video game in “training mode” before playing the real game—you can learn the controls without any pressure.  
+- It’s like practicing a video game in “training mode” before playing the real game—you can learn the controls without any pressure.
 
 At CC Inc., we use the staging environment to help you get comfortable with Markate. For example, you’ll practice creating fake customers, so when you start working with real customers, you’ll know exactly what to do. The staging environment is at a special website: https://stg.markate.com/. We’ll learn how to log in during the next module.
 
@@ -42,7 +53,7 @@ At CC Inc., we use the staging environment to help you get comfortable with Mark
 As a sales rep at CC Inc., your job is to talk to customers, understand their needs, and set them up in Markate so our service teams can do their jobs (like washing houses or setting up holiday lights). Markate helps you:  
 - Keep track of customer information, so you don’t lose important details.  
 - Communicate with customers, so they know when we’re coming to their house.  
-- Schedule services at the right address, even if they have multiple homes.  
+- Schedule services at the right address, even if they have multiple homes.
 
 By learning Markate, you’re making sure CC Inc. can provide great service to every customer. In the next modules, we’ll learn how to log into Markate, create customer accounts, and even set up your own test account to see what it’s like to be a customer. Let’s get started!
         """,
@@ -80,7 +91,7 @@ Follow these steps exactly as I describe them. If you get stuck, don’t worry�
 **Why This Matters for You**  
 - **Access is the First Step**: You can’t do your job as a sales rep if you can’t get into Markate. Learning to log in is the first step to managing customers and leads.  
 - **Practice Makes Perfect**: The staging environment lets you practice without risking real customer data. For example, if you accidentally mess up a customer’s information, it won’t cause any problems because it’s not real.  
-- **Builds Confidence**: Logging in might feel tricky at first, but the more you do it, the easier it gets. By the time you start working with real customers, you’ll be a pro at getting into Markate!  
+- **Builds Confidence**: Logging in might feel tricky at first, but the more you do it, the easier it gets. By the time you start working with real customers, you’ll be a pro at getting into Markate!
 
 **Pro Tip**: Always double-check the website address (https://stg.markate.com/) to make sure you’re in the staging environment. If you see “https://app.markate.com/,” that’s the real system, and we don’t want to practice there. Also, write down the login credentials (Markate/crm4you and support@xecutetech.com/Windows4) somewhere safe—you’ll use them every time you log in to practice.
 
@@ -92,6 +103,7 @@ Now that you know how to log into Markate, the next module will teach you how to
 **Scenario**: You’re trying to log into Markate’s staging environment, but you typed the wrong password for the pre-prompt login. What should you do?  
 A) Keep trying random passwords until something works.  
 B) Double-check the instructions and use the correct credentials (Username: Markate, Password: crm4you).  
+
 Select the correct answer and explain why in the box below.
         """,
         "options": [
@@ -117,7 +129,7 @@ Let’s walk through this together, step-by-step:
 3. **Hover Over the “Sales” Tab**: Move your mouse cursor over the word “Sales” (don’t click yet!). When you hover over it, a dropdown menu will appear with more options. A dropdown menu is like a little list that pops up—it’s a way to show more choices without taking up too much space on the screen.  
 4. **Click on “Customers”**: In the dropdown menu, you’ll see several options, like “Customers,” “Leads,” “Estimates,” and more. Find the one that says “Customers” and click on it.  
    - **What If I Don’t See “Customers”?** If you don’t see “Customers” in the dropdown menu, make sure you’re hovering over “Sales” and not another tab like “Leads.” If you still don’t see it, try refreshing the page by pressing F5 on your keyboard, or log out and log back in.  
-5. **Welcome to the Customers Page!**: After clicking “Customers,” you’ll be taken to the Customers page. This page shows a list of all the customers in Markate (in the staging environment, these are fake customers created for practice). It’s like a big address book, but with extra features to help you manage customer information. You’ll see columns like “Name,” “Email,” “Phone,” and more, showing details for each customer.  
+5. **Welcome to the Customers Page!**: After clicking “Customers,” you’ll be taken to the Customers page. This page shows a list of all the customers in Markate (in the staging environment, these are fake customers created for practice). It’s like a big address book, but with extra features to help you manage customer information. You’ll see columns like “Name,” “Email,” “Phone,” and more, showing details for each customer.
 
 **Understanding the Customers Page**  
 Now that you’re on the Customers page, let’s talk about what you’re seeing and why it’s important:  
@@ -126,13 +138,13 @@ Now that you’re on the Customers page, let’s talk about what you’re seeing
 - **Why This Page Matters**: The Customers page is where you’ll do a lot of your work as a sales rep. You’ll use it to:  
   - Create new customer accounts (which we’ll learn in the next module).  
   - Look up existing customers to see their information.  
-  - Update customer details if something changes (like a new phone number).  
+  - Update customer details if something changes (like a new phone number).
 
 **Key Concept: Billing Address vs. Service Address**  
 Before we start creating customers, there’s an important concept you need to understand: the difference between a “Billing Address” and a “Service Address.” This will come up a lot when you create customer accounts, so let’s break it down:  
 - **Billing Address**: This is the address where a customer would get their bill (like an invoice for services). But at CC Inc., we don’t send paper bills through the mail—we send everything by email or text. Because of this, we use the “Billing Address” field in Markate to mean the same thing as the “Service Address.”  
 - **Service Address**: This is the address where we’ll actually provide services (like washing a house or setting up holiday lights). For most customers, their Billing Address and Service Address are the same—it’s the house where they live. But some customers have more than one house, like a primary home and a vacation home. In those cases, we’ll add extra Service Addresses to keep track of all their properties.  
-- **Why This Matters**: When you create a customer in Markate, you’ll enter their Billing Address, which we treat as their main Service Address. If they have more houses (like a vacation home), you’ll add those as extra Service Addresses later. This ensures our service teams know exactly where to go for each job. For example, if a customer says, “I need my vacation home cleaned,” you’ll look in Markate to find the right address for that house.  
+- **Why This Matters**: When you create a customer in Markate, you’ll enter their Billing Address, which we treat as their main Service Address. If they have more houses (like a vacation home), you’ll add those as extra Service Addresses later. This ensures our service teams know exactly where to go for each job. For example, if a customer says, “I need my vacation home cleaned,” you’ll look in Markate to find the right address for that house.
 
 **How This Fits into Your Role at CC Inc.**  
 As a sales rep, you’ll spend a lot of time on the Customers page in Markate. It’s where you’ll create new customer accounts, look up existing customers, and make sure their information is correct. Getting comfortable with this page is a big step toward doing your job well. In the next module, we’ll learn how to create a new customer account, so you’ll get to practice using this page!
@@ -252,29 +264,24 @@ Let’s create an advanced residential customer together. This builds on what yo
 2. **Add an Additional Contact**: In the customer form, scroll down until you see a section called “Additional Contacts.” This is where you’ll add a secondary person who helps manage the customer’s property, like a spouse, property manager, or assistant.  
    - Click the button to add a new contact (it might say something like “+ Add Contact”).  
    - Fill in these details:  
-     - **Name**: Use a fake name for the additional contact (e.g., Jane Doe, since John Doe is the main contact).  
+     - **Name**: Use a fake name for the additional contact (e.g., Jane Doe).  
      - **Email**: Use firstname@example.com (e.g., jane@example.com).  
      - **Phone**: Use 555-XXXXXXX (e.g., 555-987-6543).  
-     - **Notes**: Add a comment like “Spouse managing property.” This helps us know who this person is and why we’re adding them.  
-   - **Important Note About Notifications**: Additional contacts do *not* get email or text notifications automatically. Only the main contact (John Doe in this example) gets notifications, because we set “Both Email & Text” for him. However, when we send an invoice (a bill for services), we can manually choose to email the additional contact (Jane Doe) by clicking a box in Markate that suggests her email. We can’t do this for text messages—only the main contact gets texts.  
-   - **Why Add an Additional Contact?** This is useful when the main contact isn’t available. For example, if John is on vacation, we can call Jane to confirm a house washing appointment. It’s like having a backup person to reach out to, which helps us provide better service.  
-3. **Add an Additional Service Address**: Now, scroll down to the “Service Addresses” section in the form. This is where you’ll add a second address if the customer has more than one property, like a vacation home or rental property.  
+     - **Notes**: Add a comment like “Spouse managing property.”  
+   - **Important Note About Notifications**: Additional contacts do *not* get email or text notifications automatically. Only the main contact gets texts. However, when we send an invoice, we can manually choose to email the additional contact.  
+3. **Add an Additional Service Address**: Now, scroll down to the “Service Addresses” section in the form. This is where you’ll add a second address if the customer has more than one property.  
    - Click the button to add a new service address (it might say “+ New Service Address”).  
    - Fill in these details:  
-     - **Address**: Use a fake address for the second property (e.g., 456 Secondary Street, City, State, ZIP). For example, 456 Secondary Street, Springfield, IL, 62704.  
-     - **Suite/Unit**: Leave this blank unless the address is an apartment or building with a specific unit (e.g., “Apartment 3B”). For now, we’ll keep it simple.  
-     - **City, Zip, State**: Fill in as needed (e.g., Springfield, IL, 62704).  
-     - **Access Code**: If the property has a gate or door code, you’d enter it here (e.g., “Gate code: 1234”). For practice, you can add a fake code or leave it blank.  
-     - **Contact Name (Most Important!)**: This is *not* the name of a person—it’s the name of the property. Use a name like “Lakehouse,” “Shed,” or “Johnson Cabin.” For example, let’s call this property “Lakehouse.” Every service address *must* have a name.  
-   - **Why Must It Have a Name?** Naming the service address (e.g., “Lakehouse”) is critical because Markate uses this name to keep track of jobs, invoices, and other tasks. Imagine if John Doe has two houses: his main home at 123 Test Street and a vacation home at 456 Secondary Street. If we don’t name the vacation home “Lakehouse,” it’s hard to tell which house a job is for. For example, if John says, “I need pest control at my Lakehouse,” we’ll know to schedule it at 456 Secondary Street because it’s named “Lakehouse” in Markate. Without a name, we might get confused and send the team to the wrong place!  
-   - **Why Add a Second Address?** Many CC Inc. customers have more than one property—like a primary home and a vacation home. Adding extra service addresses ensures we can schedule services at the right place. For example, if John wants his vacation home cleaned, we need to know that’s at 456 Secondary Street, not his main home at 123 Test Street.  
-4. **Click “Save” to Create the Customer**: Once you’ve added the additional contact and service address, click the “Save” button at the bottom of the form. This adds the customer to Markate, and you’ll see them in the list on the Customers page with their main address (123 Test Street) and their extra service address (Lakehouse at 456 Secondary Street).  
-5. **Repeat This Process 10 Times**: To get comfortable with creating advanced customers, you’ll create 10 of them. Each time, use a different fake name, email, and address, and add a different additional contact and service address. For example:  
-   - Customer 1: John Doe, john@example.com, 555-123-4567, 123 Test Street, Additional Contact: Jane Doe (jane@example.com), Service Address: Lakehouse at 456 Secondary Street.  
-   - Customer 2: Sarah Smith, sarah@example.com, 555-234-5678, 789 Main Street, Additional Contact: Mike Smith (mike@example.com), Service Address: Beach House at 101 Ocean Drive.  
-   - Customer 3: Emily Johnson, emily@example.com, 555-345-6789, 456 Pine Road, Additional Contact: Tom Johnson (tom@example.com), Service Address: Cabin at 202 Forest Lane.  
-   And so on, until you’ve created 10 advanced customers.  
-   - **Why 10 Times?** Doing this 10 times helps you practice adding additional contacts and service addresses, which can be a bit tricky at first. By the time you’re done, you’ll be ready to handle real customers with multiple properties or extra contacts.
+     - **Address**: Use a fake address for the second property (e.g., 456 Secondary Street, City, State, ZIP).  
+     - **Suite/Unit**: Leave blank unless needed.  
+     - **City, Zip, State**: Fill in as needed.  
+     - **Access Code**: If the property has a gate or door code, add it or leave blank.  
+     - **Contact Name (Most Important!)**: This is the name of the property in Markate. For example, “Lakehouse” or “Vacation Home.”  
+   - **Why Name It?** Naming the service address is crucial so we know which location is which. If the customer says, “Clean my vacation home,” we’ll know which address to pick.  
+4. **Click “Save” to Create the Customer**: Once you’ve added the additional contact and service address, click “Save.”  
+5. **Repeat This Process 10 Times**: Create 10 advanced residential customers. For each one, add at least one additional contact and one additional service address.  
+
+By the time you’re done, you’ll be ready for commercial customers next!
         """,
         "task_type": "scenario",
         "task": """
@@ -282,6 +289,7 @@ Let’s create an advanced residential customer together. This builds on what yo
 A) Add Mike in the Billing Address field, and put the vacation home in the Comments section.  
 B) Add Mike as an Additional Contact, and create a new Service Address named “Vacation Home” for 789 Pine Lane.  
 C) Add Mike in the Service Addresses section, and create a new Billing Address for 789 Pine Lane.  
+
 Select the correct answer and explain why in the box below, thinking about how this setup helps CC Inc. provide services.
         """,
         "options": [
@@ -299,65 +307,22 @@ You’re doing great so far! You’ve learned how to create basic and advanced r
 
 **What is a Commercial Customer?**  
 A commercial customer is a business that needs services from CC Inc. Unlike residential customers (who are individual people), commercial customers are companies, and they often have more complex needs. Here are some examples:  
-- **Johnson Corp**: A property management company that needs house washing at three apartment buildings they own.  
+- **Johnson Corp**: A property management company that needs house washing at three apartment buildings.  
 - **Sunny Resort**: A resort that wants holiday lights set up at their main office and two guest buildings.  
-- **Green Lawn Co.**: A lawn care company that subcontracts CC Inc. to do pest control at a construction site.  
-At CC Inc., commercial customers are a smaller part of our business compared to residential customers, but they’re important because they often bring in bigger jobs and more revenue.
+- **Green Lawn Co.**: A lawn care company that subcontracts CC Inc. to do pest control at a construction site.
 
-**How Are Commercial Customers Different from Residential Customers?**  
-Commercial customers have a few key differences from residential customers, which affect how we set them up in Markate:  
-- **They’re Businesses, Not People**: Instead of a person’s name (like John Doe), we use the business’s name (like Johnson Corp) and a main contact person (like Sarah Smith, the facilities manager).  
-- **They Often Have Multiple Locations**: Commercial customers usually need services at more than one place. For example, a property management company might have three apartment buildings, and we need to track each building separately.  
-- **They Need More Communication**: Businesses often have specific people we need to contact (like a facilities manager), and they might change their contact info once they realize notifications go to the main contact. We need to be ready for that.  
-- **Mistakes Are More Serious**: If we make a mistake with a commercial customer—like sending a team to the wrong location—it can cause bigger problems, like delaying a project or losing a valuable client. Accuracy is really important!
+**How Are Commercial Customers Different?**  
+- They’re Businesses, Not People.  
+- They Often Have Multiple Locations.  
+- They Might Have Different Points of Contact.  
+- Mistakes Are More Serious (affects larger accounts).
 
 **How to Create a Commercial Customer in Markate**  
-Let’s create a commercial customer together. The process is similar to creating a residential customer, but with a few differences. Follow these steps carefully:  
-1. **Go to the Customers Page**: Make sure you’re logged into Markate’s staging environment (https://stg.markate.com/, Username: Markate, Password: crm4you, then Email: support@xecutetech.com, Password: Windows4). Go to the Customers page (Sales → Customers).  
-2. **Click the “+ New Customer” Button**: In the top right corner of the Customers page, click the green “+ New Customer” button to start creating a new customer.  
-3. **Set the Customer Type to “Commercial”**: At the top of the form, you’ll see the “Customer Type” dropdown menu. Click on it and select “Commercial.”  
-   - **Why Commercial?** This tells Markate that we’re creating an account for a business, not an individual person. It changes the form slightly to include fields like “Company Name,” which we don’t need for residential customers.  
-4. **Fill in the Required Information**: Now you’ll enter the business’s details. Since we’re in the staging environment, we’ll use fake information to practice. Here’s what to enter:  
-   - **Company Name**: Use a fake business name (e.g., Johnson Corp). This is the name of the company we’re working with.  
-     - **Example**: Johnson Corp.  
-   - **Job Title (Optional)**: If you know the job title of the main contact person, you can enter it here (e.g., “Facilities Manager”). For practice, you can leave it blank or use a fake title like “Manager.”  
-     - **Why Is This Field Here?** The job title helps us understand the role of the person we’re contacting. For example, if we’re working with a facilities manager, they might be in charge of scheduling services for the business.  
-   - **Contact Name**: Enter the name of the main person we’ll communicate with (e.g., Sarah Smith). This is the primary contact for the business.  
-     - **Example**: Sarah Smith.  
-   - **Email**: Use the format firstname@example.com (e.g., sarah@example.com).  
-     - **Why This Format?** Just like with residential customers, we use firstname@example.com for all fake emails in the staging environment to keep things consistent. In the real system, you’d use the actual email of the contact person.  
-   - **Mobile Phone**: Use the format 555-XXXXXXX (e.g., 555-123-4567).  
-     - **Why This Format?** We use 555-XXXXXXX for all fake phone numbers in the staging environment, just like with residential customers. In the real system, you’d use the actual phone number of the contact person.  
-   - **Preferred Notification Method**: Select “Both Email & Text.”  
-     - **Why Both Email & Text?** This ensures the business gets all important updates, like scheduling confirmations, estimates, and invoices. Businesses often have specific people we need to contact, and they might change the contact info once they realize notifications go to the main contact. For example, if Sarah Smith gets a text about a job but wants her assistant to handle it, she might ask us to change the contact info. We start with both to make sure they don’t miss anything.  
-   - **Additional Contacts (If Needed)**: You can add a secondary contact if the business provides one (e.g., an assistant). For now, let’s keep it simple and leave this blank—we’ll practice this more in Chapter 2 when we learn about leads.  
-   - **Billing Address**: Enter the company’s main business address (e.g., 101 Business Ave, City, State, ZIP). For example, 101 Business Ave, Springfield, IL, 62704.  
-     - **What’s the Billing Address for a Business?** For commercial customers, the Billing Address is usually the company’s main office or headquarters—the place where they handle their bills. This is *not* where we’ll provide services (we’ll add those addresses next). For example, Johnson Corp might have their main office at 101 Business Ave, but they need services at three apartment buildings elsewhere.  
-5. **Add Service Addresses**: Commercial customers often need services at multiple locations, so we’ll add each location as a separate service address.  
-   - Click the “+ New Service Address” button in the “Service Addresses” section of the form.  
-   - Fill in these details for each location:  
-     - **Address**: Use a fake address for the service location (e.g., 202 Industrial Rd, City, State, ZIP). For example, 202 Industrial Rd, Springfield, IL, 62704.  
-     - **Suite/Unit**: Add if applicable (e.g., “Building A”). For practice, let’s say this location is “Building A.”  
-     - **City, Zip, State**: Fill in as needed (e.g., Springfield, IL, 62704).  
-     - **Access Code**: If the location has a gate or door code, you’d enter it here (e.g., “Gate code: 5678”). For practice, you can add a fake code or leave it blank.  
-     - **Contact Name (Most Important!)**: This is *not* the name of a person—it’s the name of the location. Use a name like “Johnson Warehouse,” “Building A,” or “Office #4.” For example, let’s call this location “Johnson Warehouse.” Every service address *must* have a name.  
-   - **Why Must It Have a Name?** Just like with residential customers, naming the service address is critical because Markate uses this name to keep track of jobs, invoices, and other tasks. For example, if Johnson Corp has three locations—Johnson Warehouse, Building A, and Building B—we need to name each one so we know where to send our service teams. If a job is for “Johnson Warehouse,” we’ll know to go to 202 Industrial Rd. Without a name, we might get confused and send the team to the wrong place, which could cause big problems for a business!  
-   - **Add Multiple Locations**: For practice, let’s add two more service addresses for Johnson Corp:  
-     - Location 2: 303 Office Lane, Springfield, IL, 62704, named “Building B.”  
-     - Location 3: 404 Corporate Blvd, Springfield, IL, 62704, named “Office #4.”  
-   - **Why Multiple Locations?** Commercial customers often need services at more than one place. For example, a property management company might need house washing at three apartment buildings, or a resort might need holiday lights at their main office and guest buildings. Adding each location as a separate service address ensures we can schedule services at the right place.  
-6. **Leave These Fields Blank or Off**: Just like with residential customers, there are some fields we don’t use:  
-   - **Customer Source**: Leave this blank. We don’t use this field at CC Inc. because our sources don’t match Markate’s options.  
-   - **Group Option**: Don’t select anything—we don’t use groups in this training.  
-   - **Exclude Online Payment Fees**: Leave this OFF. CC Inc. charges a 2.99% fee for online payments, which is in our terms and conditions, so customers are responsible for it.  
-7. **Additional Comments**: Add a note like “Test commercial account for training.” This helps us keep track of which accounts are fake and created for practice.  
-8. **Click “Save” to Create the Customer**: Click the “Save” button at the bottom of the form. This adds the commercial customer to Markate, and you’ll see them in the list on the Customers page with their main billing address (101 Business Ave) and their service addresses (Johnson Warehouse, Building A, Office #4).  
-9. **Repeat This Process 15 Times**: To get comfortable with creating commercial customers, you’ll create 15 of them. Each time, use a different fake business name, contact person, and service addresses. For example:  
-   - Customer 1: Johnson Corp, Contact: Sarah Smith (sarah@example.com, 555-123-4567), Billing Address: 101 Business Ave, Service Addresses: Johnson Warehouse (202 Industrial Rd), Building A (303 Office Lane), Office #4 (404 Corporate Blvd).  
-   - Customer 2: Sunny Resort, Contact: Mark Jones (mark@example.com, 555-234-5678), Billing Address: 505 Resort Rd, Service Addresses: Main Office (606 Beach Dr), Guest Building 1 (707 Ocean Ave), Guest Building 2 (808 Sea St).  
-   - Customer 3: Green Lawn Co., Contact: Emily Brown (emily@example.com, 555-345-6789), Billing Address: 909 Lawn St, Service Addresses: Site A (1010 Green Rd), Site B (1111 Field Ln).  
-   And so on, until you’ve created 15 commercial customers.  
-   - **Why 15 Times?** Doing this 15 times helps you practice creating commercial customers, which are more complicated than residential customers because of the multiple locations. By the time you’re done, you’ll be ready to handle real businesses with confidence.
+Follow the steps below, similar to residential, but choose “Commercial” for the Customer Type. Remember to add service addresses for each business location.
+
+**Practice**: Create 15 commercial customers. For each one, add multiple service addresses if needed, and use a fake business name (e.g., “Johnson Corp”).  
+
+By the time you’re done, you’ll be an expert at creating customers in Markate!
         """,
         "task_type": "scenario",
         "task": """
@@ -365,6 +330,7 @@ Let’s create a commercial customer together. The process is similar to creatin
 A) Select Residential, to keep it simple, and put all addresses in the Comments section.  
 B) Select Commercial, and create separate Service Addresses named “Building A,” “Building B,” and “Building C” for each location.  
 C) Select Group, to organize by region, and use the same address for all locations.  
+
 Select the correct answer and explain why in the box below, thinking about how this setup helps CC Inc. deliver services to a business.
         """,
         "options": [
@@ -378,53 +344,16 @@ Select the correct answer and explain why in the box below, thinking about how t
         "title": "Chapter 1, Module 7: Creating Your Own Test Account",
         "content": """
 **Let’s See Markate from the Customer’s Side!**  
-You’ve done an amazing job so far! You’ve learned how to log into Markate, navigate to the Customers page, and create both residential and commercial customers. Now, let’s do something a little different: you’re going to create a test account for *yourself* in Markate. This will let you see what it’s like to be a customer, which will help you understand how Markate works from their perspective. I’ll guide you through every step, just like always!
+You’ve done an amazing job so far! You’ve learned how to log into Markate, create residential and commercial customers, and even add advanced details like extra contacts and service addresses. Now, let’s do something a little different: you’re going to create a test account for *yourself* in Markate. This will let you see what it’s like to be a customer, which will help you understand how Markate works from their perspective. Let’s go!
 
-**What You’ll Do in This Module**  
-You’ll create a test account for yourself in Markate’s staging environment, using your own name and a test address. This will be a residential customer account, similar to the basic residential customers you created in Module 4, but this time it’s for you! By setting up this account, you’ll get a better understanding of how Markate works for customers, which will make you better at your job as a sales rep.
+**Steps**:  
+1. Go to Customers page.  
+2. Click “+ New Customer” -> Choose Residential.  
+3. Enter your own name (or a test version of it).  
+4. Use a fake phone/email (or your actual if you want, but it won’t really send in staging).  
+5. Save.  
 
-**Why Create a Test Account for Yourself?**  
-Creating a test account for yourself is like putting on the customer’s shoes—it lets you see Markate from their side. Here’s why this is so helpful:  
-- **See the Customer’s Experience**: You’ll understand what a customer sees and feels when we add them to Markate. For example, you’ll see how their information is stored and how notifications would work (though in the staging environment, no real emails or texts will be sent).  
-- **Test Notifications**: By setting your notification method to “Both Email & Text,” you’ll see how Markate would send updates to a customer. For example, if we scheduled a house washing job for you, you’d get a message saying, “We’ll be at your house on Tuesday at 10 AM!” This helps you understand what customers experience, so you can make sure they’re getting the right information.  
-- **Build Empathy**: Knowing what it’s like to be a customer in Markate helps you anticipate their needs and questions. For example, if a customer says, “I didn’t get a text about my appointment,” you’ll know how notifications work and can help them fix the problem.  
-- **Practice with Real Details**: Using your own name (or a test version of your details) makes the exercise more realistic. It’s like practicing a play with your own character—you’ll feel more connected to the process, which helps you learn better.
-
-**How to Create Your Test Account in Markate**  
-Let’s create your test account together. This will be a basic residential customer account, just like the ones you created in Module 4, but with your own details. Follow these steps carefully:  
-1. **Go to the Customers Page**: Make sure you’re logged into Markate’s staging environment (https://stg.markate.com/, Username: Markate, Password: crm4you, then Email: support@xecutetech.com, Password: Windows4). Go to the Customers page (Sales → Customers).  
-2. **Click the “+ New Customer” Button**: In the top right corner of the Customers page, click the green “+ New Customer” button to start creating a new customer.  
-3. **Set the Customer Type to “Residential”**: At the top of the form, set the “Customer Type” to “Residential.” We’re creating a test account for you as if you were a regular customer, not a business.  
-4. **Fill in Your Details**: This time, you’ll use your own name (or a test version of your details) to make the account feel personal. Here’s what to enter:  
-   - **First Name & Last Name**: Use your actual name. For example, if your name is Damon, enter First Name: Damon, Last Name: [Your Last Name].  
-     - **Example**: First Name: Damon, Last Name: Smith.  
-   - **Email**: Use your real work email if you’re comfortable with it (e.g., damon@ccinc.me). If you don’t want to use your real email in the staging environment, use a test email like damon@example.com.  
-     - **Why Use Your Email?** In the real system, this is where notifications would be sent. In the staging environment, no real emails will be sent, so it’s safe to use your email if you want to. Using a test email like damon@example.com is fine too—it’s up to you!  
-   - **Mobile Phone**: Use your work phone number if you’re comfortable with it, or use a test number like 555-555-5555.  
-     - **Why Use Your Phone Number?** Just like with the email, this is where notifications would be sent in the real system. In the staging environment, no real texts will be sent, so it’s safe to use your number if you want to. A test number is fine too.  
-   - **Preferred Notification Method**: Select “Both Email & Text.”  
-     - **Why Both?** This lets you see how notifications would work from a customer’s perspective. In a real scenario, you’d get emails and texts about scheduling, estimates, and invoices. In the staging environment, you won’t actually get these messages, but you’ll see how they’re set up in Markate.  
-   - **Billing Address**: Use a fake address for practice (e.g., 123 Test Street, City, State, ZIP). For example, 123 Test Street, Springfield, IL, 62704. Since this is a test account, we don’t need your real address.  
-     - **Why a Fake Address?** In the staging environment, we use fake addresses to keep things safe and simple. In the real system, you’d use the customer’s actual address, but since this is practice, we’ll use a pretend one.  
-   - **Comments**: Add a note: “Test account for training.” This helps us keep track of why this account exists—it’s for your training, not a real customer.  
-5. **Click “Save” to Create Your Test Account**: Click the “Save” button at the bottom of the form. This adds your test account to Markate, and you’ll see it in the list on the Customers page with your name (e.g., Damon Smith), email, phone number, and address.
-
-**What Happens Next?**  
-Now that your test account is in Markate, you’re officially a “customer” in the system (at least in the staging environment)! Here’s what that means:  
-- **You’re in the System**: Your account is now part of the Customers page, just like the other fake customers you created. You can look yourself up in the list and see your details, like your name, email, phone number, and address.  
-- **Notifications (in Theory)**: If this were the real system, you’d start getting notifications (emails and texts) about any services scheduled for your account. For example, if we scheduled a house washing job for “123 Test Street,” you’d get a message saying, “We’ll be at your house on Tuesday at 10 AM!” In the staging environment, no real messages are sent, but you can imagine what it would be like.  
-- **You Can Use This Later**: In Chapter 2, when we learn about leads and opportunities, you’ll use this test account to practice creating an opportunity for yourself. This will help you see how Markate works for customers who need additional services.
-
-**Why This Matters for You**  
-- **Understand the Customer’s Side**: Seeing Markate from the customer’s perspective helps you understand what they experience. For example, you’ll see how their information is stored and how notifications are set up, which makes you better at helping real customers.  
-- **Build Empathy**: If a customer says, “I didn’t get a notification,” you’ll know how notifications work and can help them fix the problem. For example, you might check if their notification method is set to “Both Email & Text” or if their email address is correct.  
-- **Practice Makes Perfect**: Creating your own account is another chance to practice the process of adding a customer to Markate. The more you practice, the more confident you’ll be when working with real customers.
-
-**How This Fits into Your Role at CC Inc.**  
-As a sales rep, you’re not just entering data into Markate—you’re setting up the foundation for the customer’s experience with CC Inc. By creating your own test account, you’ll see firsthand how your actions in Markate affect the customer. For example, you’ll understand why it’s important to set “Both Email & Text” for notifications, because you’ll see how it would work for you as a customer. This understanding will help you set up real accounts more effectively, ensuring customers have a smooth experience with CC Inc.
-
-**What’s Next?**  
-You’ve now completed all the modules for Chapter 1! You’ve learned how to log into Markate, create residential and commercial customers, and even set up your own test account. To finish Chapter 1, you’ll take a final quiz to test your understanding of everything we’ve covered. The quiz has 5 questions, and you need to get at least 4 correct (80%) to pass. If you don’t pass, you’ll need to review the modules and try again. I’ve prepared a reflection task to help you think about what you’ve learned in this module. Let’s do this!
+Then you’ll see yourself in the Customers list! This helps you see how customers appear in Markate. 
         """,
         "task_type": "reflection",
         "task": "Reflection: Why do you think it’s useful to create a test account with your own details? How do you think seeing Markate from the customer’s side will help you as a sales rep at CC Inc.?"
