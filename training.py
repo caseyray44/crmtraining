@@ -113,6 +113,7 @@ def show_chapter(chapter_name: str, modules, final_quiz):
             # Move to next module automatically
             next_module_index = module_index + 1
             if next_module_index < len(module_titles):
+                # If next_module_index == len(module_titles)-1, that means Final Quiz
                 st.session_state[f"{chapter_name}_module_index"] = next_module_index
                 rerun_app()
 
