@@ -13,32 +13,6 @@ logging.basicConfig(level=logging.INFO, filename="training.log", filemode="a",
                     format="%(asctime)s - %(levelname)s - %(message)s")
 
 ################################################################
-#              REMOVED PROGRESS FILE FUNCTIONS                 #
-# (We no longer use file-based progress; session_state only)   #
-################################################################
-# def load_progress(file_path):
-#     try:
-#         if os.path.exists(file_path):
-#             with open(file_path, "r") as f:
-#                 data = json.load(f)
-#                 logging.info(f"Progress loaded successfully from {file_path}.")
-#                 return data
-#         logging.info(f"No progress file found at {file_path}. Initializing new progress.")
-#         return {}
-#     except (json.JSONDecodeError, IOError) as e:
-#         logging.error(f"Error loading progress from {file_path}: {e}")
-#         return {}
-#
-# def save_progress(data, file_path):
-#     try:
-#         with open(file_path, "w") as f:
-#             json.dump(data, f)
-#         logging.info(f"Progress saved successfully to {file_path}.")
-#     except IOError as e:
-#         logging.error(f"Error saving progress to {file_path}: {e}")
-#         st.error("Error saving progress. Progress may not be saved.")
-
-################################################################
 #                     USER CREDENTIALS                         #
 ################################################################
 USERS = {
@@ -48,7 +22,7 @@ USERS = {
 }
 
 ################################################################
-#            FALLBACK FUNCTION FOR RE-RUN BEHAVIOR              #
+#            FALLBACK FUNCTION FOR RE-RUN BEHAVIOR             #
 ################################################################
 def rerun_app():
     """
@@ -60,7 +34,7 @@ def rerun_app():
         st.warning("st.experimental_rerun() is not available. Please manually select the next module in the sidebar.")
 
 ################################################################
-#         UNIVERSAL show_chapter() FUNCTION                      #
+#         UNIVERSAL show_chapter() FUNCTION                    #
 ################################################################
 def show_chapter(chapter_name: str, modules, final_quiz):
     """
@@ -89,97 +63,104 @@ def show_chapter(chapter_name: str, modules, final_quiz):
         st.markdown(f"# {chapter_name} Final Quiz")
         quiz_score = 0
         user_answers = {}
+        total_questions = len(final_quiz)
+
         for i, q in enumerate(final_quiz):
             st.markdown(f"**Question {i+1}:** {q['question']}")
-            user_answers[i] = st.radio("Select an option:", q["options"], key=f"final_q_{i}")
+            user_answers[i] = st.radio("Select an option:", q["options"], key=f"{chapter_name}_final_q_{i}")
+
         if st.button("Submit Final Quiz"):
+            # Score the quiz
             for i, q in enumerate(final_quiz):
                 correct_index = q["answer"]
                 correct_answer = q["options"][correct_index]
                 if user_answers.get(i) == correct_answer:
                     quiz_score += 1
-            st.success(f"You scored {quiz_score} out of {len(final_quiz)}!")
+
+            st.info(f"You scored {quiz_score} out of {total_questions}!")
+
+            # Pass/fail logic
+            if quiz_score >= 4:
+                st.success(f"Great job! You have completed {chapter_name}.")
+                st.info("Please click the top left to proceed to the next chapter.")
+            else:
+                st.error("You did not reach the passing score (4 correct). Please review the modules and try again.")
+
         return  # End final quiz processing
 
     # --- Regular Module Handling ---
-    # Get the current module based on the selected title.
     module_index = module_titles.index(selected_module)
     mod = modules[module_index]
-    
-    # Always display the module "content".
+
     st.markdown(f"# {mod['title']}")
     st.markdown(mod["content"])
 
-    # If there's a 'task' field (the question/prompt), display it.
+    # If there's a 'task' field, display it.
     if "task" in mod and mod["task"]:
         st.markdown(mod["task"])
 
     task_type = mod.get("task_type", "")
 
-    # --- Reflection Task (no right/wrong) ---
+    # --- Reflection Task ---
     if task_type == "reflection":
         response = st.text_area("Your Reflection:")
         if st.button("Submit Reflection"):
             st.success("Reflection submitted!")
-            # Automatically navigate to next module.
+            # Automatically navigate to next module
             next_module_index = module_index + 1
-            if next_module_index < len(module_titles) - 1:  # Do not skip Final Quiz
+            if next_module_index < len(module_titles):
                 st.session_state[f"{chapter_name}_module_index"] = next_module_index
                 rerun_app()
 
     # --- Scenario Task (single correct answer) ---
     elif task_type == "scenario":
         options = mod.get("options", [])
-        answer = st.radio("Select the correct answer:", options, key=f"scenario_{module_index}")
+        answer = st.radio("Select the correct answer:", options, key=f"{chapter_name}_scenario_{module_index}")
         if st.button("Submit Scenario Answer"):
             if "correct_answer" in mod and mod["correct_answer"] < len(options):
                 if options[mod["correct_answer"]] == answer:
                     st.success("Correct answer!")
-                    # Auto-navigate only if the answer is correct.
                     next_module_index = module_index + 1
-                    if next_module_index < len(module_titles) - 1:
+                    if next_module_index < len(module_titles):
                         st.session_state[f"{chapter_name}_module_index"] = next_module_index
                         rerun_app()
                 else:
-                    st.error("Incorrect answer. Please review the module content and try again.")
+                    st.error("Incorrect answer. Please review the module and try again.")
 
     # --- Miniquiz Task (multiple questions) ---
     elif task_type == "miniquiz":
         if "miniquiz_questions" in mod:
             user_answers = {}
             score = 0
-            total_questions = len(mod["miniquiz_questions"])
-            for i, q in enumerate(mod["miniquiz_questions"]):
+            quiz_qs = mod["miniquiz_questions"]
+            total = len(quiz_qs)
+
+            for i, q in enumerate(quiz_qs):
                 st.markdown(f"**Question {i+1}:** {q['question']}")
-                user_answers[i] = st.radio("Select an option:", q["options"], key=f"miniquiz_{module_index}_{i}")
+                user_answers[i] = st.radio("Select an option:", q["options"], key=f"{chapter_name}_miniquiz_{module_index}_{i}")
+
             if st.button("Submit Mini Quiz"):
-                for i, q in enumerate(mod["miniquiz_questions"]):
+                for i, q in enumerate(quiz_qs):
                     correct_index = q["correct_answer"]
                     correct_answer = q["options"][correct_index]
                     if user_answers.get(i) == correct_answer:
                         score += 1
-                st.success(f"You scored {score} out of {total_questions}!")
-                # Auto-navigate if the mini quiz is answered perfectly.
-                if score == total_questions:
-                    st.info("Great job! Moving to the next module.")
+
+                st.info(f"You scored {score} out of {total}!")
+
+                # If all answers are correct, auto-advance
+                if score == total:
+                    st.success("Great job! Moving on to the next module.")
                     next_module_index = module_index + 1
-                    if next_module_index < len(module_titles) - 1:
+                    if next_module_index < len(module_titles):
                         st.session_state[f"{chapter_name}_module_index"] = next_module_index
                         rerun_app()
                 else:
                     st.error("Not all answers are correct. Please review your answers and try again.")
-
+        else:
+            st.warning("No miniquiz questions found for this module.")
     else:
         st.info("No task available for this module.")
-
-################################################################
-#             OPTIONAL: SCALABLE CHAPTER SELECTION             #
-################################################################
-CHAPTERS = {
-    "Chapter 1": {"modules": CH1_MODULES, "final_quiz": CH1_FINAL_QUIZ},
-    "Chapter 2": {"modules": CH2_MODULES, "final_quiz": CH2_FINAL_QUIZ},
-    "Chapter 3": {"modules": CH3_MODULES, "final_quiz": CH3_FINAL_QUIZ}
-}
 
 ################################################################
 #                     MAIN APP LOGIC                           #
@@ -187,7 +168,7 @@ CHAPTERS = {
 def main():
     st.title("CC Inc. Training App")
     
-    # Initialize session_state for user and role if not present.
+    # Initialize session_state for user and role if not present
     if "user" not in st.session_state:
         st.session_state.user = ""
     if "role" not in st.session_state:
@@ -205,17 +186,23 @@ def main():
                 st.success(f"Welcome, {username}!")
             else:
                 st.error("Incorrect username or password.")
-        return  # Do not proceed until login is successful.
+        return
 
-    # Allow the user to choose a chapter from the scalable CHAPTERS dictionary.
-    chapter = st.sidebar.selectbox("Select Chapter", list(CHAPTERS.keys()))
-    
-    # Dynamically display the selected chapter's content.
-    if chapter in CHAPTERS:
-        try:
-            show_chapter(chapter, CHAPTERS[chapter]["modules"], CHAPTERS[chapter]["final_quiz"])
-        except Exception as e:
-            st.error(f"Error displaying {chapter}: {e}")
+    # Let the user select a chapter from a dictionary
+    chapter_options = {
+        "Chapter 1": {"modules": CH1_MODULES, "quiz": CH1_FINAL_QUIZ},
+        "Chapter 2": {"modules": CH2_MODULES, "quiz": CH2_FINAL_QUIZ},
+        "Chapter 3": {"modules": CH3_MODULES, "quiz": CH3_FINAL_QUIZ},
+    }
+
+    chapter = st.sidebar.selectbox("Select Chapter", list(chapter_options.keys()))
+
+    if chapter in chapter_options:
+        show_chapter(
+            chapter_name=chapter,
+            modules=chapter_options[chapter]["modules"],
+            final_quiz=chapter_options[chapter]["quiz"]
+        )
     else:
         st.warning("Please select a chapter to begin.")
 
