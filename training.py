@@ -3,10 +3,11 @@ import json
 import os
 import logging
 
-# Import chapter modules and final quizzes from chapter1, chapter2, and chapter3
+# Import chapter modules and final quizzes from chapter1, chapter2, chapter3, and now chapter4
 from chapter1 import CH1_MODULES, CH1_FINAL_QUIZ
 from chapter2 import CH2_MODULES, CH2_FINAL_QUIZ
 from chapter3 import CH3_MODULES, CH3_FINAL_QUIZ
+from chapter4 import CH4_MODULES, CH4_FINAL_QUIZ
 
 # Set up logging for debugging
 logging.basicConfig(level=logging.INFO, filename="training.log", filemode="a",
@@ -41,7 +42,7 @@ def show_chapter(chapter_name: str, modules, final_quiz):
     Unified function to present module content (and tasks) for a chapter.
     Uses only session_state to save the current module index.
     
-    chapter_name: "Chapter 1", "Chapter 2", or "Chapter 3"
+    chapter_name: "Chapter 1", "Chapter 2", "Chapter 3", or "Chapter 4"
     modules: list of dicts (with keys: title, content, task_type, task, etc.)
     final_quiz: list of quiz questions for the chapter
     """
@@ -200,6 +201,7 @@ def main():
         "Chapter 1": {"modules": CH1_MODULES, "quiz": CH1_FINAL_QUIZ},
         "Chapter 2": {"modules": CH2_MODULES, "quiz": CH2_FINAL_QUIZ},
         "Chapter 3": {"modules": CH3_MODULES, "quiz": CH3_FINAL_QUIZ},
+        "Chapter 4": {"modules": CH4_MODULES, "quiz": CH4_FINAL_QUIZ}
     }
 
     chapter = st.sidebar.selectbox("Select Chapter", list(chapter_options.keys()))
