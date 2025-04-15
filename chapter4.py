@@ -51,7 +51,7 @@ CH4_MODULES = [
         "content": (
             "You’re on a roll! Let’s dive into earning those juicy 10% commissions from new customers—these are your bread and butter!\n\n"
             "**What’s this module about?**\n"
-            "We’re walking you through how to close deals with new leads and get yourpath commission automatically. You’ve done some of this in Chapters 2 and 3, but now it’s all about the payoff.\n\n"
+            "We’re walking you through how to close deals with new leads and get your commission automatically. You’ve done some of this in Chapters 2 and 3, but now it’s all about the payoff.\n\n"
             "**Steps to earn 10% commissions:**\n"
             "1. **Log into Markate:** Head to https://stg.markate.com (Username: Markate, Password: crm4you, then Email: support@xecutetech.com, Password: Windows4).\n"
             "2. **Find your leads:** Go to 'Sales' > 'Leads' and check the 'New' or 'Assigned' buckets—these are your golden tickets!\n"
