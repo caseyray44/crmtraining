@@ -10,11 +10,11 @@ CH4_MODULES = [
     {
         "title": "Module 1: Commission Basics—Your Path to Earnings",
         "content": (
-            "Hey, sales rockstar! You’ve mastered creating customers, chasing leads, and sending estimates. Now, let’s talk about the best part: *making money*! This chapter is all about how commissions work in Markate so you can fill your wallet with every deal you close.\n\n"
+            "Hey, sales rockstar! You’ve mastered creating customers, chasing leads, and sending estimates. Now, let’s talk about the best part: making money! This chapter is all about how commissions work in Markate so you can fill your wallet with every deal you close.\n\n"
             "**What’s this module about?**\n"
             "We’re laying out the simple rules of commissions. Get these down, and you’ll know exactly how to earn your share!\n\n"
             "**The big rules:**\n"
-            "- You *must* create and send the estimate yourself to get any commission. If someone else does it, they get the cash—not you!\n"
+            "- You must create and send the estimate yourself to get any commission. If someone else does it, they get the cash—not you!\n"
             "- **New customers:** You earn 10% of the estimate total (before taxes) when it’s accepted. Markate tracks this automatically.\n"
             "- **Existing customers:** You earn 5% for upselling them, but you’ll need to submit a special form (don’t worry, we’ll show you how).\n"
             "- Your commissions go to payroll, so you’ll see them in your paycheck. If you’re ever curious, check with the office manager.\n\n"
@@ -51,12 +51,12 @@ CH4_MODULES = [
         "content": (
             "You’re on a roll! Let’s dive into earning those juicy 10% commissions from new customers—these are your bread and butter!\n\n"
             "**What’s this module about?**\n"
-            "We’re walking you through how to close deals with new leads and get your commission automatically. You’ve done some of this in Chapters 2 and 3, but now it’s all about the payoff.\n\n"
+            "We’re walking you through how to close deals with new leads and get yourpath commission automatically. You’ve done some of this in Chapters 2 and 3, but now it’s all about the payoff.\n\n"
             "**Steps to earn 10% commissions:**\n"
             "1. **Log into Markate:** Head to https://stg.markate.com (Username: Markate, Password: crm4you, then Email: support@xecutetech.com, Password: Windows4).\n"
             "2. **Find your leads:** Go to 'Sales' > 'Leads' and check the 'New' or 'Assigned' buckets—these are your golden tickets!\n"
             "3. **Call them up:** Chat with the lead, get to know their needs, and schedule a meeting (move them to 'Scheduled').\n"
-            "4. **Send your estimate:** Go to 'Sales' > 'Estimates,' click '+ New Estimate,' fill it out (like in Chapter 3), and hit 'Submit.' Make sure *you’re* the one sending it!\n"
+            "4. **Send your estimate:** Go to 'Sales' > 'Estimates,' click '+ New Estimate,' fill it out (like in Chapter 3), and hit 'Submit.' Make sure you’re the one sending it!\n"
             "5. **Wait for the win:** When the customer accepts, Markate turns the lead into a customer and creates a work order. Your 10% commission is automatically sent to payroll.\n\n"
             "**Checking your commission:**\n"
             "You don’t have access to fancy reports, but no stress—your commissions are tracked by the office and show up in your paycheck. If you’re curious, just ask the office manager, and they’ll confirm what’s been logged.\n\n"
@@ -182,7 +182,7 @@ CH4_MODULES = [
     {
         "title": "Module 5: Boosting Your Commission Game",
         "content": (
-            "You’re basically a commission wizard now! Let’s finish by learning how to track your earnings and make them *even bigger*.\n\n"
+            "You’re basically a commission wizard now! Let’s finish by learning how to track your earnings and make them even bigger.\n\n"
             "**What’s this module about?**\n"
             "We’re sharing tips to grow your commissions and how to keep an eye on what you’ve earned without fancy reports.\n\n"
             "**How to track your commissions:**\n"
@@ -215,7 +215,7 @@ CH4_MODULES = [
                 "options": [
                     "A. Skip calling old customers",
                     "B. Follow up on estimates within a day",
-                    "C. Send fewer work order sheets",
+                    "C. Submit work order sheets late",
                     "D. Only work on new leads"
                 ],
                 "correct_answer": 1
