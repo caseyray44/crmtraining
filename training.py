@@ -7,15 +7,10 @@ import logging
 from chapter1 import CH1_MODULES, CH1_FINAL_QUIZ
 from chapter2 import CH2_MODULES, CH2_FINAL_QUIZ
 from chapter3 import CH3_MODULES, CH3_FINAL_QUIZ
-# Chapter4 has been deleted, so we no longer import it.
 
 # Set up logging for debugging
-logging.basicConfig(
-    level=logging.INFO,
-    filename="training.log",
-    filemode="a",
-    format="%(asctime)s - %(levelname)s - %(message)s"
-)
+logging.basicConfig(level=logging.INFO, filename="training.log", filemode="a",
+                    format="%(asctime)s - %(levelname)s - %(message)s")
 
 ################################################################
 #                     USER CREDENTIALS                         #
@@ -57,15 +52,11 @@ def show_chapter(chapter_name: str, modules, final_quiz):
     if f"{chapter_name}_module_index" not in st.session_state:
         st.session_state[f"{chapter_name}_module_index"] = 0
 
-    # Show a selectbox for modules, with default coming from session_state if present
-    chapter_keys = list(chapter_options.keys())
-    if "selected_chapter" in st.session_state and st.session_state["selected_chapter"] in chapter_keys:
-        default_index = chapter_keys.index(st.session_state["selected_chapter"])
-        # We don't preselect the module here; that's handled in the next line.
+    # Show a selectbox for modules
     selected_module = st.sidebar.selectbox(
         f"Select {chapter_name} Module",
         module_titles,
-        index=st.session_state.get(f"{chapter_name}_module_index", 0)
+        index=st.session_state[f"{chapter_name}_module_index"]
     )
 
     # ---------- If user chose "Final Quiz" ----------
@@ -94,7 +85,7 @@ def show_chapter(chapter_name: str, modules, final_quiz):
             # Pass if user got 4 or more correct out of 5
             if quiz_score >= 4:
                 st.success(f"Great job! You have completed {chapter_name}.")
-                st.info("Please click top left for the next chapter.")
+                st.info("Please click top left for next chapter.")
             else:
                 st.error("You did not reach the passing score (4/5). Please review the modules and try again.")
         return
@@ -122,6 +113,7 @@ def show_chapter(chapter_name: str, modules, final_quiz):
             # Move to next module automatically
             next_module_index = module_index + 1
             if next_module_index < len(module_titles):
+                # If next_module_index == len(module_titles)-1, that means Final Quiz
                 st.session_state[f"{chapter_name}_module_index"] = next_module_index
                 rerun_app()
 
@@ -133,7 +125,7 @@ def show_chapter(chapter_name: str, modules, final_quiz):
             if "correct_answer" in mod and mod["correct_answer"] < len(options):
                 if options[mod["correct_answer"]] == answer:
                     st.success("Correct answer!")
-                    # Advance to next module
+                    # Advance to next
                     next_module_index = module_index + 1
                     if next_module_index < len(module_titles):
                         st.session_state[f"{chapter_name}_module_index"] = next_module_index
@@ -182,39 +174,13 @@ def show_chapter(chapter_name: str, modules, final_quiz):
 ################################################################
 def main():
     st.title("CC Inc. Training App")
-
+    
     # Initialize user login in session_state
     if "user" not in st.session_state:
         st.session_state.user = ""
     if "role" not in st.session_state:
         st.session_state.role = ""
-
-    # ----- Search Bar in the Sidebar -----
-    search_query = st.sidebar.text_input("Search Training Content", "")
-    if search_query:
-        st.sidebar.markdown("### Search Results")
-        # Search only among available chapters (1-3)
-        search_chapters = {
-            "Chapter 1": CH1_MODULES,
-            "Chapter 2": CH2_MODULES,
-            "Chapter 3": CH3_MODULES
-        }
-        search_results = []
-        for chap_name, modules in search_chapters.items():
-            for idx, mod in enumerate(modules):
-                # Search in both title and content
-                if (search_query.lower() in mod["title"].lower()) or (search_query.lower() in mod["content"].lower()):
-                    search_results.append((chap_name, idx, mod["title"]))
-        if search_results:
-            for result in search_results:
-                chap, idx, title = result
-                if st.sidebar.button(f"{chap} - {title}", key=f"search_{chap}_{idx}"):
-                    st.session_state["selected_chapter"] = chap
-                    st.session_state[f"{chap}_module_index"] = idx
-                    st.experimental_rerun()
-        else:
-            st.sidebar.write("No results found.")
-
+    
     # If not logged in, show login
     if not st.session_state.user:
         st.sidebar.header("Login")
@@ -229,20 +195,14 @@ def main():
                 st.error("Incorrect username or password.")
         return
 
-    # Let user pick a chapter (only Chapters 1-3 available)
+    # Let user pick a chapter
     chapter_options = {
         "Chapter 1": {"modules": CH1_MODULES, "quiz": CH1_FINAL_QUIZ},
         "Chapter 2": {"modules": CH2_MODULES, "quiz": CH2_FINAL_QUIZ},
-        "Chapter 3": {"modules": CH3_MODULES, "quiz": CH3_FINAL_QUIZ}
+        "Chapter 3": {"modules": CH3_MODULES, "quiz": CH3_FINAL_QUIZ},
     }
-    
-    # Preselect chapter if one was chosen from search
-    chapter_keys = list(chapter_options.keys())
-    if "selected_chapter" in st.session_state and st.session_state["selected_chapter"] in chapter_keys:
-        default_index = chapter_keys.index(st.session_state["selected_chapter"])
-        chapter = st.sidebar.selectbox("Select Chapter", chapter_keys, index=default_index)
-    else:
-        chapter = st.sidebar.selectbox("Select Chapter", chapter_keys)
+
+    chapter = st.sidebar.selectbox("Select Chapter", list(chapter_options.keys()))
 
     if chapter in chapter_options:
         show_chapter(
