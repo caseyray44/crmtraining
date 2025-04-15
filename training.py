@@ -3,7 +3,7 @@ import json
 import os
 import logging
 
-# Import chapter modules and final quizzes from chapter1, chapter2, chapter3, and now chapter4
+# Import chapter modules and final quizzes from chapter1, chapter2, chapter3, and new chapter4
 from chapter1 import CH1_MODULES, CH1_FINAL_QUIZ
 from chapter2 import CH2_MODULES, CH2_FINAL_QUIZ
 from chapter3 import CH3_MODULES, CH3_FINAL_QUIZ
