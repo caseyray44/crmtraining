@@ -7,7 +7,7 @@ import logging
 from chapter1 import CH1_MODULES, CH1_FINAL_QUIZ
 from chapter2 import CH2_MODULES, CH2_FINAL_QUIZ
 from chapter3 import CH3_MODULES, CH3_FINAL_QUIZ
-from chapter4 import CH4_MODULES, CH4_FINAL_QUIZ
+from chapter4 import CH4_MODULES, CH4_FINAL_QUIZ  # <-- New import for Chapter 4
 
 # Set up logging for debugging
 logging.basicConfig(level=logging.INFO, filename="training.log", filemode="a",
@@ -114,7 +114,6 @@ def show_chapter(chapter_name: str, modules, final_quiz):
             # Move to next module automatically
             next_module_index = module_index + 1
             if next_module_index < len(module_titles):
-                # If next_module_index == len(module_titles)-1, that means Final Quiz
                 st.session_state[f"{chapter_name}_module_index"] = next_module_index
                 rerun_app()
 
@@ -175,13 +174,41 @@ def show_chapter(chapter_name: str, modules, final_quiz):
 ################################################################
 def main():
     st.title("CC Inc. Training App")
-    
+
     # Initialize user login in session_state
     if "user" not in st.session_state:
         st.session_state.user = ""
     if "role" not in st.session_state:
         st.session_state.role = ""
-    
+
+    # ----- Add a Search Bar in the Sidebar -----
+    search_query = st.sidebar.text_input("Search Training Content", "")
+    if search_query:
+        st.sidebar.markdown("### Search Results")
+        # Gather modules from all chapters
+        chapters = {
+            "Chapter 1": CH1_MODULES,
+            "Chapter 2": CH2_MODULES,
+            "Chapter 3": CH3_MODULES,
+            "Chapter 4": CH4_MODULES
+        }
+        search_results = []
+        for chap_name, modules in chapters.items():
+            for idx, mod in enumerate(modules):
+                # Search in both title and content
+                if (search_query.lower() in mod["title"].lower()) or (search_query.lower() in mod["content"].lower()):
+                    search_results.append((chap_name, idx, mod["title"]))
+        if search_results:
+            for result in search_results:
+                chap, idx, title = result
+                # Each result is a button. When clicked, set the session state to that chapter and module.
+                if st.sidebar.button(f"{chap} - {title}", key=f"search_{chap}_{idx}"):
+                    st.session_state["selected_chapter"] = chap
+                    st.session_state[f"{chap}_module_index"] = idx
+                    st.experimental_rerun()
+        else:
+            st.sidebar.write("No results found.")
+
     # If not logged in, show login
     if not st.session_state.user:
         st.sidebar.header("Login")
