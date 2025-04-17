@@ -183,9 +183,7 @@ def show_chapter(chapter_name: str, modules, final_quiz):
 
                 st.info(f"You scored {score} out of {total}!")
 
-                # If
-
- all answers correct, auto-advance
+                # If all answers correct, auto-advance
                 if score == total:
                     st.success("Great job! Moving to the next module.")
                     # Add module to completed_modules
