@@ -3,11 +3,12 @@ import json
 import os
 import logging
 
-# Import chapter modules and final quizzes from chapter1, chapter2, chapter3, and new chapter4
+# Import chapter modules and final quizzes
 from chapter1 import CH1_MODULES, CH1_FINAL_QUIZ
 from chapter2 import CH2_MODULES, CH2_FINAL_QUIZ
 from chapter3 import CH3_MODULES, CH3_FINAL_QUIZ
 from chapter4 import CH4_MODULES, CH4_FINAL_QUIZ
+from chapter5 import CH5_MODULES, CH5_FINAL_QUIZ
 
 # Set up logging for debugging
 logging.basicConfig(level=logging.INFO, filename="training.log", filemode="a",
@@ -42,7 +43,7 @@ def show_chapter(chapter_name: str, modules, final_quiz):
     Unified function to present module content (and tasks) for a chapter.
     Uses only session_state to save the current module index.
     
-    chapter_name: "Chapter 1", "Chapter 2", "Chapter 3", or "Chapter 4"
+    chapter_name: "Chapter 1", "Chapter 2", "Chapter 3", "Chapter 4", or "Chapter 5"
     modules: list of dicts (with keys: title, content, task_type, task, etc.)
     final_quiz: list of quiz questions for the chapter
     """
@@ -158,6 +159,10 @@ def show_chapter(chapter_name: str, modules, final_quiz):
                 # If all answers correct, auto-advance
                 if score == total:
                     st.success("Great job! Moving to the next module.")
+                    # Add module to completed_modules
+                    module_id = f"{chapter_name.lower().replace(' ', '_')}_m{module_index + 1}"
+                    if module_id not in st.session_state.get('completed_modules', []):
+                        st.session_state.completed_modules = st.session_state.get('completed_modules', []) + [module_id]
                     next_module_index = module_index + 1
                     if next_module_index < len(module_titles):
                         st.session_state[f"{chapter_name}_module_index"] = next_module_index
@@ -176,12 +181,20 @@ def show_chapter(chapter_name: str, modules, final_quiz):
 def main():
     st.title("CC Inc. Training App")
     
-    # Initialize user login in session_state
+    # Initialize user login and progress in session_state
     if "user" not in st.session_state:
         st.session_state.user = ""
     if "role" not in st.session_state:
         st.session_state.role = ""
-    
+    if "completed_modules" not in st.session_state:
+        st.session_state.completed_modules = []
+
+    # Show progress bar in sidebar
+    total_modules = 25  # 5 (Ch1) + 5 (Ch2) + 5 (Ch3) + 6 (Ch4) + 4 (Ch5)
+    progress = len(st.session_state.completed_modules) / total_modules
+    st.sidebar.progress(progress)
+    st.sidebar.write(f"Progress: {int(progress * 100)}%")
+
     # If not logged in, show login
     if not st.session_state.user:
         st.sidebar.header("Login")
@@ -201,7 +214,8 @@ def main():
         "Chapter 1": {"modules": CH1_MODULES, "quiz": CH1_FINAL_QUIZ},
         "Chapter 2": {"modules": CH2_MODULES, "quiz": CH2_FINAL_QUIZ},
         "Chapter 3": {"modules": CH3_MODULES, "quiz": CH3_FINAL_QUIZ},
-        "Chapter 4": {"modules": CH4_MODULES, "quiz": CH4_FINAL_QUIZ}
+        "Chapter 4": {"modules": CH4_MODULES, "quiz": CH4_FINAL_QUIZ},
+        "Chapter 5": {"modules": CH5_MODULES, "quiz": CH5_FINAL_QUIZ}
     }
 
     chapter = st.sidebar.selectbox("Select Chapter", list(chapter_options.keys()))
