@@ -320,21 +320,116 @@ def show_admin_view():
         st.progress(progress)
         st.write(f"Progress: {int(progress * 100)}% ({len(completed_modules)}/{total_modules} completed)")
 
-        # Display detailed progress
-        st.subheader("Detailed Progress")
-        for module_id in completed_modules:
-            score = quiz_scores.get(module_id, "N/A")
-            date = completion_dates.get(module_id, "Unknown")
-            st.write(f"- {module_id}: Score {score}, Completed on {date}")
+        # Define chapter metadata for friendly names
+        chapter_metadata = {
+            "chapter_1": {
+                "name": "Chapter 1: Customer Basics",
+                "total_modules": 7,  # 6 modules + final quiz
+                "modules": {
+                    "chapter_1_m1": "Module 1: What is a CRM?",
+                    "chapter_1_m2": "Module 2: Logging into Markate",
+                    "chapter_1_m3": "Module 3: Navigating to Customers",
+                    "chapter_1_m4": "Module 4: Creating Basic Customers",
+                    "chapter_1_m5": "Module 5: Creating Advanced Customers",
+                    "chapter_1_m6": "Module 6: Creating Commercial Customers",
+                    "chapter_1_m7": "Module 7: Creating Your Test Account",
+                    "chapter_1_final": "Final Quiz"
+                }
+            },
+            "chapter_2": {
+                "name": "Chapter 2: Leads",
+                "total_modules": 7,  # 6 modules + final quiz
+                "modules": {
+                    "chapter_2_m1": "Module 1: Understanding Leads",
+                    "chapter_2_m2": "Module 2: Viewing Leads",
+                    "chapter_2_m3": "Module 3: The 7 Stages of Leads",
+                    "chapter_2_m4": "Module 4: Creating New Leads",
+                    "chapter_2_m5": "Module 5: Creating New Opportunities",
+                    "chapter_2_m6": "Module 6: Assigning Employees",
+                    "chapter_2_m7": "Module 7: Create Your Test Opportunity",
+                    "chapter_2_final": "Final Quiz"
+                }
+            },
+            "chapter_3": {
+                "name": "Chapter 3: Estimates",
+                "total_modules": 6,  # 5 modules + final quiz
+                "modules": {
+                    "chapter_3_m1": "Module 1: Introduction to Estimates",
+                    "chapter_3_m2": "Module 2: Estimate Types",
+                    "chapter_3_m3": "Module 3: Creating a Standard Estimate",
+                    "chapter_3_m4": "Module 4: Creating an Options Estimate",
+                    "chapter_3_m5": "Module 5: Managing Estimates",
+                    "chapter_3_m6": "Module 6: Create Estimates for Yourself",
+                    "chapter_3_final": "Final Quiz"
+                }
+            },
+            "chapter_4": {
+                "name": "Chapter 4: Work Orders",
+                "total_modules": 7,  # 6 modules + final quiz
+                "modules": {
+                    "chapter_4_m1": "Module 1: Our Five Divisions",
+                    "chapter_4_m2": "Module 2: What Are Work Orders?",
+                    "chapter_4_m3": "Module 3: Navigating Work Orders",
+                    "chapter_4_m4": "Module 4: Creating a Work Order (Method 1)",
+                    "chapter_4_m5": "Module 5: Creating a Work Order (Method 2)",
+                    "chapter_4_m6": "Module 6: Practice and Tips",
+                    "chapter_4_final": "Final Quiz"
+                }
+            }
+        }
 
-        # Display written answers
+        # Group completed modules by chapter
+        progress_by_chapter = {}
+        for module_id in completed_modules:
+            chapter_key = "_".join(module_id.split("_")[:2])  # e.g., "chapter_1"
+            if chapter_key not in progress_by_chapter:
+                progress_by_chapter[chapter_key] = []
+            progress_by_chapter[chapter_key].append(module_id)
+
+        # Display detailed progress by chapter
+        st.subheader("Detailed Progress by Chapter")
+        for chapter_key, chapter_info in chapter_metadata.items():
+            chapter_name = chapter_info["name"]
+            total_modules = chapter_info["total_modules"]
+            completed_in_chapter = progress_by_chapter.get(chapter_key, [])
+            num_completed = len(completed_in_chapter)
+            is_completed = num_completed == total_modules
+
+            # Display chapter summary with expander
+            status_icon = "✅" if is_completed else "⏳"
+            with st.expander(f"{status_icon} {chapter_name} ({num_completed}/{total_modules} completed)", expanded=False):
+                if not completed_in_chapter:
+                    st.write("No modules completed in this chapter yet.")
+                else:
+                    for module_id in completed_in_chapter:
+                        module_name = chapter_info["modules"].get(module_id, module_id)
+                        score = quiz_scores.get(module_id, "N/A")
+                        date = completion_dates.get(module_id, "Unknown")
+                        # Simplify score display
+                        if "N/A" in score:
+                            score_display = "Passed (Reflection)"
+                        elif "Final Quiz" in module_name:
+                            score_display = f"Score: {score}"
+                        else:
+                            score_display = "Passed"
+                        st.write(f"- {module_name}: {score_display} (Completed on {date})")
+
+        # Display written answers with full question context
         st.subheader("Written Answers")
         answers = load_user_answers(selected_trainee)
         if answers:
-            for question, answer in answers.items():
-                st.write(f"**{question}:** {answer}")
+            # Define questions for context
+            written_questions = {
+                "Chapter 4 Final Quiz Q6": "Jane Doe calls and asks if she’s been scheduled for her pest control yet. How can you check that information?"
+                # Add more questions here if other chapters get written questions
+            }
+            for question_key, answer in answers.items():
+                question_text = written_questions.get(question_key, "Unknown question")
+                st.write(f"**Question: {question_text}**")
+                st.write(f"Answer: {answer}")
+                st.write("---")
         else:
-            st.write("No written answers submitted yet.")
+            st.write("No written answers submitted by this trainee.")
 
         # Reset progress button
         if st.button(f"Reset Progress for {selected_trainee}"):
