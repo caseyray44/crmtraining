@@ -201,7 +201,7 @@ def main():
         st.session_state.completed_modules = []
 
     # Show progress bar in sidebar
-    total_modules = 21  # 5 (Ch1) + 5 (Ch2) + 5 (Ch3) + 6 (Ch4)
+    total_modules = 25  # 6 (Ch1) + 6 (Ch2) + 6 (Ch3) + 7 (Ch4)
     progress = len(st.session_state.completed_modules) / total_modules
     st.sidebar.progress(progress)
     st.sidebar.write(f"Progress: {int(progress * 100)}%")
