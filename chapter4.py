@@ -1,303 +1,245 @@
-"""
-chapter4.py
+import streamlit as st
 
-Chapter 4: Understanding Work Orders in Markate
+def display_chapter():
+    st.header("Chapter 4: Understanding Work Orders in Markate")
 
-This file is your guide to mastering work orders in Markate, perfect for sales reps learning the ropes. We’ll walk you through what work orders are, how to navigate them, and how to create them two different ways. Each module includes examples and quizzes to make sure you’ve got it down!
-"""
+    # Module 1: Our Five Divisions and Why Work Orders Are Division-Specific
+    st.subheader("Module 1: Our Five Divisions and Why Work Orders Are Division-Specific")
+    st.markdown("""
+    Welcome, sales rep! Our business has five divisions: House Washing, Pest Control, Window Washing, Painting/Staining, and Holiday Lights. Each division has its own truck and trained technicians. This keeps us organized but means work orders must be specific to one division.
 
-CH4_MODULES = [
-    {
-        "title": "Module 1: What Are Work Orders and Why Do They Matter?",
-        "content": (
-            "Hey there, awesome sales rep! You’ve learned a lot about Markate so far, and now we’re diving into something super important: work orders. Let’s break it down.\n\n"
-            "**What’s this module about?**\n"
-            "We’re starting with the basics—what a work order is, why it’s a big deal, and how it fits into your sales role.\n\n"
-            "**So, what’s a work order?**\n"
-            "A work order is like a to-do list for a specific job that needs to get done for a customer. It tells the team what work to do, where to do it, and when. In Markate, work orders are created after a customer agrees to a service—like window washing or pest control—and they help schedule technicians to get the job done.\n\n"
-            "**Why should you care?**\n"
-            "Even though you’re a sales rep and might not schedule work orders every day, understanding them helps you see the big picture. Work orders make sure the services you sell actually happen, keeping customers happy. Plus, knowing how they work can help you answer customer questions, like 'When will my windows be cleaned?' You’re part of the team that keeps things running smoothly!\n\n"
-            "**Real-life example:**\n"
-            "You sold a $300 window washing job to Sarah. After she accepts your estimate, a work order is created in Markate to schedule a technician to her house on Monday. The work order includes all the details—Sarah’s address, the service, and the date—so the job gets done right. Sarah’s thrilled, and you look like a rockstar!\n\n"
-            "Let’s make sure you’ve got the basics with a quick quiz!"
-        ),
-        "task_type": "miniquiz",
-        "miniquiz_questions": [
-            {
-                "question": "What is a work order in Markate?",
-                "options": [
-                    "A. A list of all your leads",
-                    "B. A job assignment with details like what, where, and when",
-                    "C. An email to a customer",
-                    "D. A report of your sales"
-                ],
-                "correct_answer": 1
-            },
-            {
-                "question": "Why is it helpful for sales reps to understand work orders?",
-                "options": [
-                    "A. So they can do the technician’s job",
-                    "B. To answer customer questions and ensure services happen",
-                    "C. To create more leads",
-                    "D. To skip scheduling"
-                ],
-                "correct_answer": 1
-            }
-        ]
-    },
-    {
-        "title": "Module 2: Navigating Work Orders in Markate",
-        "content": (
-            "Great job on the basics! Now, let’s explore how to find and understand work orders in Markate. Don’t worry—it’s easier than it sounds!\n\n"
-            "**What’s this module about?**\n"
-            "We’re learning how to access work orders in Markate and what the different views and statuses mean, so you can see what’s happening with all the jobs.\n\n"
-            "**How to find work orders:**\n"
-            "1. Log into Markate (https://stg.markate.com, Username: Markate, Password: crm4you, Email: support@xecutetech.com, Password: Windows4).\n"
-            "2. Hover over 'Sales' at the top.\n"
-            "3. Click 'Work Orders' from the dropdown menu.\n\n"
-            "**Choosing your view:**\n"
-            "Once you’re on the Work Orders page, you’ll see two view options at the top left: 'Table' and 'Pipeline.' We’re focusing on Table View because it’s easier to see everything at once. Click 'Table' to select it.\n\n"
-            "**Understanding statuses in Table View:**\n"
-            "Table View shows all work orders in a list, with different categories you can click on:\n"
-            "- **All Work Orders:** Every work order created, no matter the status.\n"
-            "- **New:** Jobs that haven’t been scheduled yet—these need attention!\n"
-            "- **Scheduled:** Jobs with a set date and technician.\n"
-            "- **Started:** Jobs the technician has begun.\n"
-            "- **Paused:** Jobs on hold (maybe the customer wasn’t home).\n"
-            "- **Completed:** Jobs finished but not yet invoiced.\n"
-            "- **Invoiced:** Jobs billed to the customer.\n"
-            "- **Withdrawn:** Jobs canceled before starting.\n"
-            "- **Closed:** Jobs fully done and paid.\n"
-            "- **Archive:** Old or irrelevant work orders.\n\n"
-            "**Extra tip:**\n"
-            "You can also filter by 'Job Type' (like window washing or pest control) to see only certain kinds of jobs. Feel free to click around and explore—you won’t break anything!\n\n"
-            "**Real-life example:**\n"
-            "Jake checks the Work Orders page and clicks 'New' in Table View. He sees 10 jobs waiting to be scheduled, including a pest control job for Mike. He clicks it to see the details: Mike’s address and the scope of work. Now Jake knows it’s ready for the office admin to schedule!\n\n"
-            "Let’s test your navigation skills with a quiz!"
-        ),
-        "task_type": "miniquiz",
-        "miniquiz_questions": [
-            {
-                "question": "How do you access the Work Orders page in Markate?",
-                "options": [
-                    "A. Sales > Customers",
-                    "B. Sales > Work Orders",
-                    "C. Reports > Work Orders",
-                    "D. Leads > New"
-                ],
-                "correct_answer": 1
-            },
-            {
-                "question": "What does the 'New' status mean in Table View?",
-                "options": [
-                    "A. Jobs that are finished",
-                    "B. Jobs that haven’t been scheduled yet",
-                    "C. Jobs that are paused",
-                    "D. Jobs that are invoiced"
-                ],
-                "correct_answer": 1
-            }
-        ]
-    },
-    {
-        "title": "Module 3: Creating a Work Order – Method 1 (From Work Orders Page)",
-        "content": (
-            "You’re doing awesome! Now, let’s learn how to create a work order in Markate using the first method—straight from the Work Orders page.\n\n"
-            "**What’s this module about?**\n"
-            "We’re walking through the steps to create a work order from scratch, making sure every detail is perfect for the technician and customer.\n\n"
-            "**Steps to create a work order (Method 1):**\n"
-            "1. **Go to Work Orders:** Hover over 'Sales' > 'Work Orders.'\n"
-            "2. **Start a new work order:** On the top right, click 'New Work Order.'\n"
-            "3. **Select a customer:** Type the customer’s name (e.g., 'John Doe') or pick from the list.\n"
-            "4. **Choose job location:** Pick their billing address or another service address—this is where the technician will go.\n"
-            "5. **Add work order items:** This is the scope of work—type what the job is (e.g., 'Window Washing - Exterior Only').\n"
-            "6. **Assign an employee:** Scroll down and pick a technician to do the job.\n"
-            "7. **Schedule it:** Set the start and end date. Most of our jobs start and finish on the same day (e.g., April 20, 2025).\n"
-            "8. **Set customer notification:** Choose how to notify the customer (e.g., email or text) and when (e.g., 24 hours before the job).\n"
-            "9. **Add job details:**\n"
-            "   - **Date Issued:** This auto-fills as today’s date for reference.\n"
-            "   - **Job Type:** Pick the type (e.g., Window Washing, Pest Control)—this helps the office know who to assign.\n"
-            "   - **Job Name:** Always use the format 'Customer Name - Job Description' (e.g., 'John Doe - Window Washing'). This shows up on the calendar and notifications.\n"
-            "   - **Job Description:** Add public notes the customer can see (e.g., 'Please ensure windows are accessible').\n"
-            "   - **Technician Instructions:** Add private notes just for the technician (e.g., 'Bring extra ladders—tall windows').\n"
-            "10. **Save it:** Click 'Save' to create the work order—it’ll now show up in Table View under 'New' until it’s scheduled.\n\n"
-            "**Real-life example:**\n"
-            "Sarah creates a work order for John Doe from the Work Orders page. She selects John, sets the job location as his home address, adds 'Window Washing' as the scope, and assigns it to a technician for April 20, 2025. She names it 'John Doe - Window Washing,' adds a note for John to clear the window area, and a private note for the technician to bring a specific cleaner. John gets a text notification, and the job is ready to go!\n\n"
-            "Let’s see if you’ve got the steps down with a quiz!"
-        ),
-        "task_type": "miniquiz",
-        "miniquiz_questions": [
-            {
-                "question": "What’s the correct format for a job name in Markate?",
-                "options": [
-                    "A. Window Washing - John Doe",
-                    "B. John Doe - Window Washing",
-                    "C. Job Type - Customer Name",
-                    "D. John Doe - 2025"
-                ],
-                "correct_answer": 1
-            },
-            {
-                "question": "Who can see the Technician Instructions on a work order?",
-                "options": [
-                    "A. The customer",
-                    "B. Only the technician",
-                    "C. Everyone",
-                    "D. The sales rep only"
-                ],
-                "correct_answer": 1
-            }
-        ]
-    },
-    {
-        "title": "Module 4: Creating a Work Order – Method 2 (From Customer Profile)",
-        "content": (
-            "You’re a pro at creating work orders one way—now let’s try a faster method! This one’s a game-changer when you’re already looking at a customer’s info.\n\n"
-            "**What’s this module about?**\n"
-            "We’re learning a second way to create a work order in Markate, starting from the customer’s profile, which saves you time.\n\n"
-            "**Steps to create a work order (Method 2):**\n"
-            "1. **Find the customer:** Hover over 'Sales' > 'Customers.'\n"
-            "2. **Search for them:** Type the customer’s name (e.g., 'Jane Smith') or scroll to find them, then click their name to open their profile.\n"
-            "3. **Create a work order:** At the top of their profile, you’ll see a 'Work Orders' section. Click 'Create Work Order.'\n"
-            "4. **Fill in the details:** Markate will auto-fill the customer’s name and info—nice, right? Now, just like Method 1:\n"
-            "   - **Job Location:** Confirm or change the address.\n"
-            "   - **Work Order Items:** Add the scope (e.g., 'Pest Control - 2x Treatment').\n"
-            "   - **Assign Employee:** Pick a technician.\n"
-            "   - **Schedule:** Set the start and end date (e.g., April 22, 2025).\n"
-            "   - **Customer Notification:** Choose how to notify Jane.\n"
-            "   - **Job Details:** Add Job Type (e.g., Pest Control), Job Name (e.g., 'Jane Smith - Pest Control 2x'), Job Description, and Technician Instructions.\n"
-            "5. **Save it:** Click 'Save'—it’ll show up in the Work Orders page under 'New.'\n\n"
-            "**Why this method rocks:**\n"
-            "This way is faster because you’re already on the customer’s profile, so Markate pre-fills their info. It’s perfect when you’re following up with a customer and want to set up a job right away!\n\n"
-            "**Real-life example:**\n"
-            "Jake is checking Jane Smith’s profile after she calls to ask about pest control. Right there, he clicks 'Create Work Order,' adds the details for a $200 job, names it 'Jane Smith - Pest Control 2x,' and schedules it for April 22, 2025. Jane gets a notification, and Jake saved a few clicks by not starting from the Work Orders page!\n\n"
-            "Let’s test this method with a quiz!"
-        ),
-        "task_type": "miniquiz",
-        "miniquiz_questions": [
-            {
-                "question": "What’s the first step to create a work order from a customer’s profile?",
-                "options": [
-                    "A. Go to Sales > Work Orders",
-                    "B. Go to Sales > Customers",
-                    "C. Go to Reports > Customers",
-                    "D. Go to Leads > New"
-                ],
-                "correct_answer": 1
-            },
-            {
-                "question": "Why is Method 2 faster for creating a work order?",
-                "options": [
-                    "A. It skips scheduling",
-                    "B. Markate pre-fills the customer’s info",
-                    "C. It doesn’t need a job name",
-                    "D. It auto-assigns a technician"
-                ],
-                "correct_answer": 1
-            }
-        ]
-    },
-    {
-        "title": "Module 5: Practice and Tips for Work Orders",
-        "content": (
-            "You’re almost a work order expert! Let’s wrap up by practicing what you’ve learned and sharing some handy tips to make your life easier.\n\n"
-            "**What’s this module about?**\n"
-            "We’re putting your skills to the test by creating a work order for yourself, plus giving you tips to use work orders like a pro.\n\n"
-            "**Practice time! Create a work order for yourself:**\n"
-            "1. Use Method 2 (it’s faster!): Go to 'Sales' > 'Customers,' search for your own name (you should have an account from earlier chapters), and click your profile.\n"
-            "2. Click 'Create Work Order.'\n"
-            "3. Fill it out:\n"
-            "   - **Job Location:** Use your own address.\n"
-            "   - **Work Order Items:** Add something simple, like 'Window Washing - Test Job.'\n"
-            "   - **Assign Employee:** Pick a technician (or yourself if you’re listed).\n"
-            "   - **Schedule:** Set it for tomorrow (e.g., April 16, 2025).\n"
-            "   - **Customer Notification:** Choose email or text to see what the customer gets.\n"
-            "   - **Job Details:** Name it 'Your Name - Window Washing Test,' set Job Type as Window Washing, add a Job Description ('Test job for training'), and Technician Instructions ('This is a test—bring a small ladder').\n"
-            "4. Save it and check your email or phone for the notification—now you know what customers see!\n\n"
-            "**Pro tips for work orders:**\n"
-            "- **Use filters:** On the Work Orders page, filter by Job Type to quickly find all pest control jobs, for example.\n"
-            "- **Check statuses often:** Keep an eye on 'New' work orders to see what needs scheduling, so jobs don’t get delayed.\n"
-            "- **Be clear in notes:** Make Job Descriptions customer-friendly (e.g., 'Please move patio furniture') and Technician Instructions specific (e.g., 'Use eco-friendly cleaner').\n"
-            "- **Double-check notifications:** Always test notifications on your own account to understand the customer experience.\n\n"
-            "**Real-life example:**\n"
-            "Lisa created a test work order for herself and set a notification for 24 hours before the job. She got a text saying 'Lisa - Window Washing Test scheduled for April 16, 2025,' and realized how helpful it is for customers to get a heads-up. She also used the Job Type filter to find all window washing jobs, making her follow-ups easier!\n\n"
-            "Let’s finish with a quiz to see how you’ll use work orders!"
-        ),
-        "task_type": "miniquiz",
-        "miniquiz_questions": [
-            {
-                "question": "Why should you test a work order on your own account?",
-                "options": [
-                    "A. To do the job yourself",
-                    "B. To see the customer notification experience",
-                    "C. To skip scheduling",
-                    "D. To change the job type"
-                ],
-                "correct_answer": 1
-            },
-            {
-                "question": "What’s a good tip for managing work orders in Markate?",
-                "options": [
-                    "A. Ignore the 'New' status",
-                    "B. Use filters to find specific job types",
-                    "C. Skip technician instructions",
-                    "D. Don’t set notifications"
-                ],
-                "correct_answer": 1
-            }
-        ]
-    }
-]
+    **Why separate work orders?**
+    - Each truck carries tools for one service. A window washing truck can’t do pest control.
+    - Technicians are trained for one division. A house washing tech can’t paint.
+    - Combining services on one work order causes confusion. For example:
+      - If a customer wants window washing and pest control, create two work orders: one for each division. A window washing tech can’t spray for pests!
+      - If a work order says “John Doe - House Washing and Holiday Lights,” the house washing truck won’t have lights, and the tech won’t know what to do.
 
-CH4_FINAL_QUIZ = [
-    {
-        "question": "What’s the main purpose of a work order in Markate?",
-        "options": [
-            "A. To track your sales leads",
-            "B. To schedule and detail a job for a customer",
-            "C. To send an invoice",
-            "D. To create a new customer"
-        ],
-        "answer": 1
-    },
-    {
-        "question": "You’re on the Work Orders page and want to see unscheduled jobs. What status do you click?",
-        "options": [
-            "A. Completed",
-            "B. Invoiced",
-            "C. New",
-            "D. Closed"
-        ],
-        "answer": 2
-    },
-    {
-        "question": "You’re creating a work order for Tom Brown for pest control. What should the Job Name be?",
-        "options": [
-            "A. Pest Control - Tom Brown",
-            "B. Tom Brown - Pest Control",
-            "C. Pest Control - 2025",
-            "D. Tom Brown - Job Type"
-        ],
-        "answer": 1
-    },
-    {
-        "question": "You’re on Jane Doe’s profile and want to create a work order. What’s your first step?",
-        "options": [
-            "A. Go to Sales > Work Orders",
-            "B. Click 'Create Work Order' on her profile",
-            "C. Schedule the job first",
-            "D. Filter by Job Type"
-        ],
-        "answer": 1
-    },
-    {
-        "question": "You created a work order and want to see what the customer sees. What should you do?",
-        "options": [
-            "A. Delete the work order",
-            "B. Create a test work order for yourself and check the notification",
-            "C. Ignore the notification settings",
-            "D. Ask the technician"
-        ],
-        "answer": 1
-    }
-]
+    **Real-life example:**
+    Sarah books a job for Jane, who wants house washing and window washing. Sarah creates two work orders: “Jane Smith - House Washing” and “Jane Smith - Window Washing.” This ensures the right trucks and techs are sent, keeping Jane happy.
+
+    Let’s check your understanding with a quiz!
+    """)
+    st.markdown("**Quiz: Our Five Divisions**")
+    q1 = st.radio("Why must work orders be specific to one division?",
+                  ["A. To save time", "B. Each division has its own truck and techs", "C. To increase prices", "D. To skip scheduling"],
+                  key="q4_1")
+    if st.button("Submit Module 1 Quiz", key="submit_4_1"):
+        if q1 == "B. Each division has its own truck and techs":
+            st.success("Correct! Separate work orders match our trucks and techs.")
+            if "ch4_m1" not in st.session_state.get('completed_modules', []):
+                st.session_state.completed_modules = st.session_state.get('completed_modules', []) + ["ch4_m1"]
+        else:
+            st.error("Not quite. Each division has its own truck and techs. Review Module 1!")
+
+    # Module 2: What Are Work Orders and Why Do They Matter?
+    st.subheader("Module 2: What Are Work Orders and Why Do They Matter?")
+    st.markdown("""
+    Great start! Work orders are job assignments in Markate. They list what to do, where, and when. They’re created after a customer accepts an estimate, like for window washing.
+
+    **Why care?**
+    Work orders ensure the services you sell happen. They help schedule techs and keep customers happy. You can answer questions like “When’s my pest control job?”
+
+    **Example:**
+    You sell a $300 window washing job to Tom. A work order schedules a tech for Monday. It includes Tom’s address and service details. Tom’s thrilled!
+
+    Try a quick quiz!
+    """)
+    st.markdown("**Quiz: What Are Work Orders?**")
+    q2 = st.radio("What is a work order in Markate?",
+                  ["A. A list of leads", "B. A job assignment with details", "C. An email", "D. A sales report"],
+                  key="q4_2")
+    if st.button("Submit Module 2 Quiz", key="submit_4_2"):
+        if q2 == "B. A job assignment with details":
+            st.success("Correct! Work orders assign jobs with details.")
+            if "ch4_m2" not in st.session_state.get('completed_modules', []):
+                st.session_state.completed_modules = st.session_state.get('completed_modules', []) + ["ch4_m2"]
+        else:
+            st.error("Not quite. Work orders are job assignments. Review Module 2!")
+
+    # Module 3: Navigating Work Orders in Markate
+    st.subheader("Module 3: Navigating Work Orders in Markate")
+    st.markdown("""
+    Nice work! Let’s find work orders in Markate. It’s easy!
+
+    **Steps:**
+    1. Log into Markate (stg.markate.com, Username: Markate, Password: crm4you).
+    2. Click “Sales” at the top.
+    3. Select “Work Orders.”
+
+    **Table View:**
+    Choose “Table” view. It shows all work orders. Statuses include:
+    - **New:** Unscheduled jobs.
+    - **Scheduled:** Jobs with a tech and date.
+    - **Completed:** Finished jobs.
+    - **Closed:** Paid jobs.
+
+    **Tip:**
+    Filter by Job Type (e.g., Pest Control) to see specific jobs.
+
+    **Example:**
+    Jake checks “New” in Table View. He sees a house washing job for Mike. He clicks to see Mike’s address and details.
+
+    Test your skills!
+    """)
+    st.markdown("**Quiz: Navigating Work Orders**")
+    q3 = st.radio("How do you access Work Orders in Markate?",
+                  ["A. Sales > Customers", "B. Sales > Work Orders", "C. Reports > Work Orders", "D. Leads > New"],
+                  key="q4_3")
+    if st.button("Submit Module 3 Quiz", key="submit_4_3"):
+        if q3 == "B. Sales > Work Orders":
+            st.success("Correct! Go to Sales > Work Orders.")
+            if "ch4_m3" not in st.session_state.get('completed_modules', []):
+                st.session_state.completed_modules = st.session_state.get('completed_modules', []) + ["ch4_m3"]
+        else:
+            st.error("Not quite. It’s Sales > Work Orders. Review Module 3!")
+
+    # Module 4: Creating a Work Order – Method 1 (From Work Orders Page)
+    st.subheader("Module 4: Creating a Work Order – Method 1 (From Work Orders Page)")
+    st.markdown("""
+    You’re rocking it! Let’s create a work order from the Work Orders page.
+
+    **Steps:**
+    1. Go to “Sales” > “Work Orders.”
+    2. Click “New Work Order.”
+    3. Pick a customer (e.g., John Doe).
+    4. Set job location (e.g., John’s home).
+    5. Add scope (e.g., “Window Washing”).
+    6. Assign a tech.
+    7. Schedule (e.g., April 18, 2025).
+    8. Choose notification (email or text).
+    9. Add details:
+       - **Job Type:** E.g., Window Washing.
+       - **Job Name:** E.g., “John Doe - Window Washing.”
+       - **Job Description:** Public note (e.g., “Clear windows”).
+       - **Technician Instructions:** Private note (e.g., “Bring tall ladder”).
+    10. Click “Save.”
+
+    **Example:**
+    Sarah creates a work order for John’s window washing. She names it “John Doe - Window Washing” and schedules it. John gets a text. The tech gets clear instructions.
+
+    Try a quiz!
+    """)
+    st.markdown("**Quiz: Creating a Work Order (Method 1)**")
+    q4 = st.radio("What’s the correct job name format?",
+                  ["A. Window Washing - John Doe", "B. John Doe - Window Washing", "C. Job Type - Customer", "D. John Doe - 2025"],
+                  key="q4_4")
+    if st.button("Submit Module 4 Quiz", key="submit_4_4"):
+        if q4 == "B. John Doe - Window Washing":
+            st.success("Correct! Use Customer Name - Job Description.")
+            if "ch4_m4" not in st.session_state.get('completed_modules', []):
+                st.session_state.completed_modules = st.session_state.get('completed_modules', []) + ["ch4_m4"]
+        else:
+            st.error("Not quite. It’s Customer Name - Job Description. Review Module 4!")
+
+    # Module 5: Creating a Work Order – Method 2 (From Customer Profile)
+    st.subheader("Module 5: Creating a Work Order – Method 2 (From Customer Profile)")
+    st.markdown("""
+    Awesome! Now, create a work order from a customer’s profile. It’s faster!
+
+    **Steps:**
+    1. Go to “Sales” > “Customers.”
+    2. Search for a customer (e.g., Jane Smith).
+    3. Click their name.
+    4. Click “Create Work Order.”
+    5. Markate auto-fills customer info.
+    6. Add scope (e.g., “Pest Control”).
+    7. Assign a tech.
+    8. Schedule (e.g., April 18, 2025).
+    9. Set notification.
+    10. Add details:
+        - **Job Type:** E.g., Pest Control.
+        - **Job Name:** E.g., “Jane Smith - Pest Control.”
+        - **Job Description:** Public note.
+        - **Technician Instructions:** Private note.
+    11. Click “Save.”
+
+    **Example:**
+    Jake’s on Jane’s profile. He creates a pest control work order named “Jane Smith - Pest Control.” It’s fast because Jane’s info is pre-filled.
+
+    Quiz time!
+    """)
+    st.markdown("**Quiz: Creating a Work Order (Method 2)**")
+    q5 = st.radio("Why is Method 2 faster?",
+                  ["A. It skips scheduling", "B. Markate pre-fills customer info", "C. No job name needed", "D. Auto-assigns tech"],
+                  key="q4_5")
+    if st.button("Submit Module 5 Quiz", key="submit_4_5"):
+        if q5 == "B. Markate pre-fills customer info":
+            st.success("Correct! Pre-filled info saves time.")
+            if "ch4_m5" not in st.session_state.get('completed_modules', []):
+                st.session_state.completed_modules = st.session_state.get('completed_modules', []) + ["ch4_m5"]
+        else:
+            st.error("Not quite. Markate pre-fills customer info. Review Module 5!")
+
+    # Module 6: Practice and Tips for Work Orders
+    st.subheader("Module 6: Practice and Tips for Work Orders")
+    st.markdown("""
+    You’re almost a pro! Let’s practice creating work orders for yourself to see what customers see.
+
+    **Practice 1: Method 1 (Work Orders Page):**
+    1. Go to “Sales” > “Work Orders.”
+    2. Click “New Work Order.”
+    3. Select yourself as the customer (from Chapter 1).
+    4. Set your address.
+    5. Add scope: “Window Washing - Test.”
+    6. Assign a tech.
+    7. Schedule for April 18, 2025.
+    8. Choose email notification.
+    9. Set Job Type: Window Washing, Job Name: “Your Name - Window Washing Test,” Job Description: “Test job,” Technician Instructions: “Test—bring small ladder.”
+    10. Save and check your email.
+
+    **Practice 2: Method 2 (Customer Profile):**
+    1. Go to “Sales” > “Customers.”
+    2. Find your profile.
+    3. Click “Create Work Order.”
+    4. Add scope: “Pest Control - Test.”
+    5. Assign a tech.
+    6. Schedule for April 18, 2025.
+    7. Choose text notification.
+    8. Set Job Type: Pest Control, Job Name: “Your Name - Pest Control Test,” Job Description: “Test job,” Technician Instructions: “Test—check sprayer.”
+    9. Save and check your phone.
+
+    **Tips:**
+    - Use filters to find jobs (e.g., Window Washing).
+    - Check “New” status often.
+    - Keep Job Descriptions clear for customers.
+    - Test notifications to understand customer experience.
+
+    **Example:**
+    Lisa creates two test work orders: one for window washing (Method 1) and one for pest control (Method 2). She gets an email and text, seeing how customers are notified.
+
+    Final quiz!
+    """)
+    st.markdown("**Quiz: Practice and Tips**")
+    q6 = st.radio("Why test a work order on your account?",
+                  ["A. To do the job", "B. To see customer notifications", "C. To skip scheduling", "D. To change job type"],
+                  key="q4_6")
+    if st.button("Submit Module 6 Quiz", key="submit_4_6"):
+        if q6 == "B. To see customer notifications":
+            st.success("Correct! Testing shows what customers see.")
+            if "ch4_m6" not in st.session_state.get('completed_modules', []):
+                st.session_state.completed_modules = st.session_state.get('completed_modules', []) + ["ch4_m6"]
+        else:
+            st.error("Not quite. Testing shows notifications. Review Module 6!")
+
+    # Final Quiz
+    st.subheader("Chapter 4 Final Quiz")
+    st.markdown("Let’s wrap up with a final quiz!")
+    final_questions = [
+        {"q": "Why create separate work orders for each service?", "opts": ["A. To save time", "B. To match division-specific trucks and techs", "C. To increase prices", "D. To skip notifications"], "ans": 1},
+        {"q": "What’s the main purpose of a work order?", "opts": ["A. Track leads", "B. Schedule a job", "C. Send invoice", "D. Create customer"], "ans": 1},
+        {"q": "To see unscheduled jobs, which status do you check?", "opts": ["A. Completed", "B. Invoiced", "C. New", "D. Closed"], "ans": 2},
+        {"q": "What’s the job name for Tom Brown’s pest control?", "opts": ["A. Pest Control - Tom Brown", "B. Tom Brown - Pest Control", "C. Pest Control - 2025", "D. Tom Brown - Job Type"], "ans": 1},
+        {"q": "How do you start a work order from Jane Doe’s profile?", "opts": ["A. Sales > Work Orders", "B. Click 'Create Work Order' on profile", "C. Schedule first", "D. Filter Job Type"], "ans": 1}
+    ]
+    for i, q in enumerate(final_questions, 1):
+        st.markdown(f"**Question {i}: {q['q']}**")
+        ans = st.radio("", q["opts"], key=f"final_q{i}")
+        if st.button(f"Submit Question {i}", key=f"submit_final_q{i}"):
+            if ans == q["opts"][q["ans"]]:
+                st.success("Correct!")
+            else:
+                st.error(f"Not quite. Review the relevant module!")
+
+if __name__ == "__main__":
+    display_chapter()
