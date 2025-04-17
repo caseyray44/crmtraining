@@ -3,12 +3,11 @@ import json
 import os
 import logging
 
-# Import chapter modules and quizzes for Chapters 1-3 (old structure)
+# Import chapter modules and quizzes for Chapters 1-4
 from chapter1 import CH1_MODULES, CH1_FINAL_QUIZ
 from chapter2 import CH2_MODULES, CH2_FINAL_QUIZ
 from chapter3 import CH3_MODULES, CH3_FINAL_QUIZ
-# Import display_chapter for Chapter 4 (new structure)
-from chapter4 import display_chapter as display_chapter4
+from chapter4 import CH4_MODULES, CH4_FINAL_QUIZ
 
 # Set up logging for debugging
 logging.basicConfig(level=logging.INFO, filename="training.log", filemode="a",
@@ -36,14 +35,14 @@ def rerun_app():
         st.warning("st.experimental_rerun() is not available. Please manually select the next module in the sidebar.")
 
 ################################################################
-#         UNIVERSAL show_chapter() FUNCTION (for Chapters 1-3) #
+#         UNIVERSAL show_chapter() FUNCTION (for Chapters 1-4) #
 ################################################################
 def show_chapter(chapter_name: str, modules, final_quiz):
     """
     Unified function to present module content (and tasks) for a chapter.
     Uses only session_state to save the current module index.
     
-    chapter_name: "Chapter 1", "Chapter 2", "Chapter 3"
+    chapter_name: "Chapter 1", "Chapter 2", "Chapter 3", "Chapter 4"
     modules: list of dicts (with keys: title, content, task_type, task, etc.)
     final_quiz: list of quiz questions for the chapter
     """
@@ -67,25 +66,39 @@ def show_chapter(chapter_name: str, modules, final_quiz):
 
         quiz_score = 0
         user_answers = {}
-        total_questions = len(final_quiz)
+        total_questions = len(final_quiz) - 1  # Exclude written question from score
+        written_answer = ""
 
         # Display final quiz questions
         for i, q in enumerate(final_quiz):
             st.markdown(f"**Question {i+1}:** {q['question']}")
-            user_answers[i] = st.radio("Select an option:", q["options"], key=f"{chapter_name}_final_q_{i}")
+            if "is_written" in q and q["is_written"]:
+                user_answers[i] = st.text_area("Your Answer:", key=f"{chapter_name}_final_q_{i}")
+            else:
+                user_answers[i] = st.radio("Select an option:", q["options"], key=f"{chapter_name}_final_q_{i}")
 
         if st.button("Submit Final Quiz"):
-            # Grade the final quiz
+            # Grade the final quiz (excluding written question)
             for i, q in enumerate(final_quiz):
-                correct_index = q["answer"]
-                correct_answer = q["options"][correct_index]
-                if user_answers.get(i) == correct_answer:
-                    quiz_score += 1
+                if "is_written" in q and q["is_written"]:
+                    written_answer = user_answers[i].strip()
+                else:
+                    correct_index = q["answer"]
+                    correct_answer = q["options"][correct_index]
+                    if user_answers.get(i) == correct_answer:
+                        quiz_score += 1
 
-            st.info(f"You scored {quiz_score} out of {total_questions}!")
+            # Check written answer for non-empty response
+            written_complete = bool(written_answer)
 
-            # Pass if user got 4 or more correct out of 5
-            if quiz_score >= 4:
+            st.info(f"You scored {quiz_score} out of {total_questions} on the multiple-choice questions!")
+            if written_complete:
+                st.success("Written answer submitted! Check with your trainer for feedback.")
+            else:
+                st.error("Please provide an answer for the written question.")
+
+            # Pass if user got 4 or more correct out of 5 MCQs and completed written answer
+            if quiz_score >= 4 and written_complete:
                 st.success(f"Great job! You have completed {chapter_name}.")
                 st.info("Please click top left for next chapter.")
                 # Add final quiz completion to progress
@@ -93,7 +106,10 @@ def show_chapter(chapter_name: str, modules, final_quiz):
                 if final_quiz_id not in st.session_state.get('completed_modules', []):
                     st.session_state.completed_modules = st.session_state.get('completed_modules', []) + [final_quiz_id]
             else:
-                st.error("You did not reach the passing score (4/5). Please review the modules and try again.")
+                if quiz_score < 4:
+                    st.error("You did not reach the passing score (4/5) on the multiple-choice questions. Please review the modules and try again.")
+                if not written_complete:
+                    st.error("You need to provide a written answer to complete the quiz.")
         return
 
     # ---------- Otherwise, user selected a normal module ----------
@@ -167,7 +183,9 @@ def show_chapter(chapter_name: str, modules, final_quiz):
 
                 st.info(f"You scored {score} out of {total}!")
 
-                # If all answers correct, auto-advance
+                # If
+
+ all answers correct, auto-advance
                 if score == total:
                     st.success("Great job! Moving to the next module.")
                     # Add module to completed_modules
@@ -225,22 +243,18 @@ def main():
         "Chapter 1": {"type": "module_list", "modules": CH1_MODULES, "quiz": CH1_FINAL_QUIZ},
         "Chapter 2": {"type": "module_list", "modules": CH2_MODULES, "quiz": CH2_FINAL_QUIZ},
         "Chapter 3": {"type": "module_list", "modules": CH3_MODULES, "quiz": CH3_FINAL_QUIZ},
-        "Chapter 4": {"type": "display_function", "display": display_chapter4}
+        "Chapter 4": {"type": "module_list", "modules": CH4_MODULES, "quiz": CH4_FINAL_QUIZ}
     }
 
     chapter = st.sidebar.selectbox("Select Chapter", list(chapter_options.keys()))
 
     if chapter in chapter_options:
         chapter_data = chapter_options[chapter]
-        if chapter_data["type"] == "module_list":
-            show_chapter(
-                chapter_name=chapter,
-                modules=chapter_data["modules"],
-                final_quiz=chapter_data["quiz"]
-            )
-        else:
-            # For Chapter 4, call the display_chapter function directly
-            chapter_data["display"]()
+        show_chapter(
+            chapter_name=chapter,
+            modules=chapter_data["modules"],
+            final_quiz=chapter_data["quiz"]
+        )
     else:
         st.warning("Please select a chapter to begin.")
 
