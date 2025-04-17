@@ -20,17 +20,19 @@ Great job making it to Chapter 5! So far, you’ve learned how to create custome
 
 **What Are Commissions?**  
 Commissions are the money you earn for booking jobs with CC Inc. They’re a percentage of the job’s total cost, and they reward you for bringing in new customers and growing business with existing ones. Think of commissions as a "thank you" for your sales efforts—the more jobs you book, the more you earn! At CC Inc., we have two types of commissions:  
-- Commission on new sales. This is for new customers, people who have never worked with CC Inc. before. You earn 10 percent of the job’s total cost before taxes. For example, if a new customer books a $1,000 house washing job, you earn $100.  
-- Commission on existing customers. This is for customers who have worked with us before, like someone who had window washing last year and now wants pest control. You earn 5 percent of the job’s total cost before taxes. For example, if they book a $500 job, you earn $25.  
+- Commission on new sales. This is for new customers. These are people who have never worked with CC Inc. before.  
+- Commission on existing customers. This is for customers who have worked with us before. For example, someone who had window washing last year and now wants pest control.  
+For new sales, you earn 10 percent of the job’s total cost before taxes. For example, if a new customer books a $1,000 house washing job, you earn $100. For existing customers, you earn 5 percent of the job’s total cost before taxes. For example, if they book a $500 job, you earn $25.
 
 **Why Are Commissions Important?**  
 Commissions motivate you to find new customers and keep existing ones coming back for more services. They’re a big part of your income at CC Inc., and understanding how to track and earn them ensures you get paid for all your hard work. Here’s why this matters:  
-- Earning potential. The more sales you make, the more you earn. For example, a big $10,000 job with a new customer could mean $1,000 in your pocket.  
-- Motivation to grow. Commissions encourage you to find new leads and upsell existing customers. For example, if a past customer books a new service, the 5 percent you earn adds up over time.  
+- Earning potential. The more sales you make, the more you earn.  
+- Motivation to grow. Commissions encourage you to find new leads and upsell existing customers.  
 - Fairness. CC Inc. wants to reward you for your efforts, and commissions make sure you’re paid for every job you book.  
+For example, a big $10,000 job with a new customer could mean $1,000 in your pocket. Or if a past customer books a new service, the 5 percent you earn adds up over time.
 
 **How Does Markate Help with Commissions?**  
-Markate CRM makes tracking commissions easier, especially for new sales, because it logs who sends the estimate and calculates your commission automatically. For new sales, you earn 10 percent, and Markate tracks this for you. For existing customers, where you earn 5 percent, you’ll use a manual process with work order sheets, which we’ll cover in later modules. By the end of this chapter, you’ll know exactly how to earn, track, and get paid your commissions using Markate and our payroll process.
+Markate CRM makes tracking commissions easier, especially for new sales, because it logs who sends the estimate and calculates your commission automatically. For new sales, Markate tracks your commission, which is 10 percent of the job’s total cost before taxes. For existing customers, you’ll use a manual process with work order sheets, which we’ll cover in later modules. By the end of this chapter, you’ll know exactly how to earn, track, and get paid your commissions using Markate and our payroll process.
 
 **What’s Next?**  
 We’ll start by diving into the commission for new sales—how it works, how to track it in Markate, and what you need to do to make sure you get paid. Let’s make sure you understand the basics with a quick quiz!
@@ -59,26 +61,26 @@ Now that you understand what commissions are, let’s dive into the first type: 
 A new sale is when you book a job for a new customer—someone who has never worked with CC Inc. before. This could be:  
 - A new lead who calls and says, "I need house washing for my home."  
 - Someone you meet at a community event who wants pest control and has never heard of CC Inc. before.  
-For these new customers, you earn 10 percent of the job’s total cost before taxes. For example, if a new customer books a $2,000 window washing job, your commission is $200. Or if they book a $500 pest control job, your commission is $50.  
+For these new customers, you earn a commission on the job’s total cost before taxes. The commission is 10 percent. For example, if a new customer books a $2,000 window washing job, your commission is $200. Or if they book a $500 pest control job, your commission is $50.  
 
 **How to Earn Your Commission on New Sales in Markate**  
 Markate tracks your commission automatically, but there’s one very important rule you need to follow: you must send the estimate yourself, from your own Markate account. Here’s how it works, step-by-step:  
 - Log into your Markate account. Every sales rep at CC Inc. has their own login for Markate. This is not the staging environment you used in Chapter 1, Module 2—this is your personal account for real customer work. Make sure you’re logged in with your personal account—not someone else’s.  
   - Why? Markate tracks who sends the estimate based on your login. If you’re not logged in to your account, or if someone else sends the estimate (like Casey or an office admin), you won’t get the commission.  
-- Create and send the estimate. When a new customer asks for a quote, create an estimate in Markate (you learned how in Chapter 3). For example, if a new customer named Sarah Jones wants house washing, you’ll:  
+- Create and send the estimate. When a new customer asks for a quote, create an estimate in Markate (you learned how in Chapter 3). For example, if a new customer named Sarah Jones wants house washing, you’ll do this:  
   - Go to Sales > Estimates.  
   - Click "+ New Estimate," select the type (Standard or Options), and fill in the details (e.g., "House Washing: $1,000").  
   - Send the estimate to Sarah from your account.  
 - Customer accepts the estimate. If Sarah accepts the estimate (or part of it), Markate logs that you sent it and calculates your commission.  
-  - Important note. You only earn commission on the accepted amount. For example, if you send a $10,000 estimate with multiple services (like house washing and pest control), but Sarah only accepts $1,000 worth of services, your commission is $100 (10 percent of $1,000, before taxes).  
-- Markate tracks your commission. Once the job is accepted by the customer, Markate automatically calculates your commission and adds it to your payroll. You earn 10 percent of the accepted amount before taxes. You’ll see this on your biweekly pay statement (we’ll cover payroll in a later module).  
+  - Important note. You only earn commission on the accepted amount. For example, if you send a $10,000 estimate with multiple services (like house washing and pest control), but Sarah only accepts $1,000 worth of services, your commission is $100.  
+- Markate tracks your commission. Once the job is accepted by the customer, Markate automatically calculates your commission and adds it to your payroll. The commission is 10 percent of the accepted amount before taxes. You’ll see this on your biweekly pay statement (we’ll cover payroll in a later module).  
 
 **Example in Action**  
 Let’s say you meet a new customer, Mike Brown, at a local event. He’s never worked with CC Inc. before and wants window washing. Here’s what happens:  
 - You log into your Markate account, create a new lead for Mike, and schedule and assign it to yourself since you’re talking with him in person.  
 - You then create an estimate for "Window Washing: $800" and send the quote from your account.  
 - Mike accepts it, and the job is booked.  
-- Markate logs that you sent the estimate from your account and calculates your commission, which is $80 (10 percent of $800).  
+- Markate logs that you sent the estimate from your account and calculates your commission, which is $80.  
 - That $80 will show up in your next biweekly paycheck—nice work!  
 
 **Key Tip: Always Use Your Account!**  
@@ -108,12 +110,12 @@ In the next module, we’ll learn about the commission for existing customers, w
 Now that you know how to earn your commission on new sales, let’s talk about the second type: the commission you earn on sales to existing customers. This process is a bit different because Markate doesn’t track these commissions automatically—you’ll use a manual process with work order sheets. I’ll walk you through every step with examples, so you’ll know exactly what to do. Let’s dive in!
 
 **What Are Existing Customer Sales?**  
-An existing customer is someone who has worked with CC Inc. before—they already have a customer account in Markate, and they might have past invoices or estimates, which could be 3 to 4 years old. As long as they’re an existing customer, you earn 5 percent of the job’s total cost before taxes on any new jobs you book with them. For example, if an existing customer books a $1,000 house washing job, your commission is $50. Or if they book a $500 pest control job, your commission is $25.  
+An existing customer is someone who has worked with CC Inc. before—they already have a customer account in Markate, and they might have past invoices or estimates, which could be 3 to 4 years old. As long as they’re an existing customer, you earn a commission on any new jobs you book with them. The commission is 5 percent of the job’s total cost before taxes. For example, if an existing customer books a $1,000 house washing job, your commission is $50. Or if they book a $500 pest control job, your commission is $25.  
 
 **How to Find Opportunities with Existing Customers**  
 To earn your commission, you’ll need to reach out to existing customers and offer them new services. Markate makes this easy by letting you look up their past jobs or estimates. Here’s how:  
 - Look up the customer in Markate. Go to Sales > Customers, search for the customer (e.g., John Doe), and open their profile.  
-- Check past invoices or estimates. In John’s profile, look at:  
+- Check past invoices or estimates. In John’s profile, look at these:  
   - Past invoices. These show jobs we’ve done for John before (e.g., "Window Washing: $500 last year").  
   - Past estimates. These show quotes we sent that John didn’t accept (e.g., "House Washing: $850, not accepted").  
   This information helps you start the conversation—John might want to repeat a past service or try something new.  
@@ -136,7 +138,7 @@ Since Markate doesn’t track this commission automatically, you’ll use a work
   - Customer name. John Doe.  
   - Services booked. House Washing $850, Window Washing $500.  
   - Total before taxes. $1,350.  
-  You don’t need to calculate your commission—the payroll team will do that for you (5 percent of $1,350 = $67.50).  
+  You don’t need to calculate your commission—the payroll team will do that for you. Your commission will be $67.50, which is 5 percent of $1,350.  
 - Submit the work order sheet. Place the sheet in the work order bins in the shop. These bins are where all commission sheets go to be processed for payroll (we’ll cover the full payroll process in the next module).  
 
 **Key Tip: Always Submit Your Work Order Sheet!**  
@@ -186,7 +188,7 @@ Your hourly pay follows the same payroll process as your commissions on existing
 Let’s say in one pay period:  
 - You earned $800 in commissions from new sales.  
 - You earned $450 in commissions from an existing customer (John Doe).  
-- You worked 3 hours in the field at $20 per hour ($60).  
+- You worked 3 hours in the field at $20 per hour, earning $60.  
 Your total earnings for that paycheck would be $1,310 ($800 + $450 + $60), all listed on your pay statement. Great work!
 
 **Key Tip: Be Detailed on Your Work Order Sheet!**  
@@ -224,7 +226,7 @@ At CC Inc., we process payroll biweekly—that means you get paid every two week
 
 **Step-by-Step: How Your Commissions Get Paid**  
 Here’s how the payroll process works for your commissions:  
-- New sales. Markate automatically tracks your commission for new sales (as you learned in Module 2). When the customer accepts the job, Markate logs your commission and sends it to the payroll team. For example, if you earned $800 on an $8,000 new sale, that $800 is automatically added to your next paycheck. You’ll see this amount on your biweekly pay statement—no extra work needed! For new sales, you earn 10 percent of the accepted amount before taxes.  
+- New sales. Markate automatically tracks your commission for new sales (as you learned in Module 2). When the customer accepts the job, Markate logs your commission and sends it to the payroll team. You’ll see this amount on your biweekly pay statement—no extra work needed! For new sales, you earn 10 percent of the accepted amount before taxes. For example, if you earned $800 on an $8,000 new sale, that $800 is automatically added to your next paycheck.  
 - Existing customer sales and hourly rates. For these sales and hourly work, you submit a work order sheet to the work order bins in the shop (as you learned in Modules 3 and 4). For example, if you booked a $1,350 job with John Doe, you’d submit a sheet listing the services and total. If you worked 3 hours in the field, you’d submit another sheet for that. Here’s what happens next:  
   - Step 1. Work order bins. Your sheet stays in the work order bins in the shop until payroll is processed. These bins are where all commission sheets are collected.  
   - Step 2. Payroll processing. When the biweekly payroll period ends, the payroll team collects all sheets from the bins and moves them to the office. They calculate your commission or your hourly pay and add it to your paycheck. For example, for John Doe’s $1,350 job, you earn $67.50 (5 percent of $1,350). For 3 hours in the field at $20 per hour, you earn $60.  
