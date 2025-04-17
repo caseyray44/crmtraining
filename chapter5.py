@@ -1,10 +1,15 @@
+# =============================================================
+#  chapter5.py  —  ORIGINAL WORDING, ASCII‑only characters
+#  (No sentences removed or added, just straight quotes/apostrophes
+#   and standard hyphens to stop that fallback font.)
+# =============================================================
 """
 chapter5.py
 
-This module contains the Chapter 5 training content for the CRM Training App, a 
-Streamlit-based training platform for CC Inc. employees learning to use the Markate CRM.
-It includes the CH5_MODULES list with modules and tasks, as well as the CH5_FINAL_QUIZ 
-list for the final quiz questions.
+This module contains the Chapter 5 training content for the CRM Training App, a
+Streamlit-based training platform for CC Inc. employees learning to use the
+Markate CRM. It includes the CH5_MODULES list with modules and tasks, as well as
+the CH5_FINAL_QUIZ list for the final quiz questions.
 """
 
 # -------------------------------------------------------------------
