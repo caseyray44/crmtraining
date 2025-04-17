@@ -384,8 +384,8 @@ def show_admin_view():
                     "chapter_5_m1": "Module 1: Introduction to Commissions",
                     "chapter_5_m2": "Module 2: Earning 10% Commission",
                     "chapter_5_m3": "Module 3: Earning 5% Commission",
-                    "chapter_5_m4": "Module 4: The Payroll Process",
-                    "chapter_5_m5": "Module 5: Hourly Rates",
+                    "chapter_5_m4": "Module 4: Hourly Rates",
+                    "chapter_5_m5": "Module 5: The Payroll Process",
                     "chapter_5_final": "Final Quiz"
                 }
             }
