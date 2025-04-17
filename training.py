@@ -7,9 +7,8 @@ import logging
 from chapter1 import CH1_MODULES, CH1_FINAL_QUIZ
 from chapter2 import CH2_MODULES, CH2_FINAL_QUIZ
 from chapter3 import CH3_MODULES, CH3_FINAL_QUIZ
-# Import display_chapter for Chapters 4-5 (new structure)
+# Import display_chapter for Chapter 4 (new structure)
 from chapter4 import display_chapter as display_chapter4
-from chapter5 import display_chapter as display_chapter5
 
 # Set up logging for debugging
 logging.basicConfig(level=logging.INFO, filename="training.log", filemode="a",
@@ -202,7 +201,7 @@ def main():
         st.session_state.completed_modules = []
 
     # Show progress bar in sidebar
-    total_modules = 25  # 5 (Ch1) + 5 (Ch2) + 5 (Ch3) + 6 (Ch4) + 4 (Ch5)
+    total_modules = 21  # 5 (Ch1) + 5 (Ch2) + 5 (Ch3) + 6 (Ch4)
     progress = len(st.session_state.completed_modules) / total_modules
     st.sidebar.progress(progress)
     st.sidebar.write(f"Progress: {int(progress * 100)}%")
@@ -226,8 +225,7 @@ def main():
         "Chapter 1": {"type": "module_list", "modules": CH1_MODULES, "quiz": CH1_FINAL_QUIZ},
         "Chapter 2": {"type": "module_list", "modules": CH2_MODULES, "quiz": CH2_FINAL_QUIZ},
         "Chapter 3": {"type": "module_list", "modules": CH3_MODULES, "quiz": CH3_FINAL_QUIZ},
-        "Chapter 4": {"type": "display_function", "display": display_chapter4},
-        "Chapter 5": {"type": "display_function", "display": display_chapter5}
+        "Chapter 4": {"type": "display_function", "display": display_chapter4}
     }
 
     chapter = st.sidebar.selectbox("Select Chapter", list(chapter_options.keys()))
@@ -241,7 +239,7 @@ def main():
                 final_quiz=chapter_data["quiz"]
             )
         else:
-            # For Chapters 4 and 5, call the display_chapter function directly
+            # For Chapter 4, call the display_chapter function directly
             chapter_data["display"]()
     else:
         st.warning("Please select a chapter to begin.")
