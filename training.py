@@ -2,6 +2,7 @@ import streamlit as st
 import json
 import os
 import logging
+from datetime import datetime
 
 # Import chapter modules and quizzes for Chapters 1-4
 from chapter1 import CH1_MODULES, CH1_FINAL_QUIZ
@@ -21,6 +22,78 @@ USERS = {
     "jake123":  {"password": "pass123", "role": "trainee"},
     "Admin":    {"password": "admin123", "role": "admin"}
 }
+
+################################################################
+#            PROGRESS AND ANSWER FILE MANAGEMENT               #
+################################################################
+def load_user_progress(username):
+    """Load user's progress from their progress file."""
+    progress_file = f"progress_{username}.json"
+    if os.path.exists(progress_file):
+        try:
+            with open(progress_file, "r") as f:
+                data = json.load(f)
+                return data.get("completed_modules", []), data.get("quiz_scores", {}), data.get("completion_dates", {})
+        except Exception as e:
+            logging.error(f"Error loading progress for {username}: {e}")
+            return [], {}, {}
+    return [], {}, {}
+
+def save_user_progress(username, completed_modules, quiz_scores, completion_dates):
+    """Save user's progress to their progress file."""
+    progress_file = f"progress_{username}.json"
+    data = {
+        "completed_modules": completed_modules,
+        "quiz_scores": quiz_scores,
+        "completion_dates": completion_dates
+    }
+    try:
+        with open(progress_file, "w") as f:
+            json.dump(data, f, indent=4)
+    except Exception as e:
+        logging.error(f"Error saving progress for {username}: {e}")
+
+def load_user_answers(username):
+    """Load user's written answers from their answers file."""
+    answers_file = f"answers_{username}.json"
+    if os.path.exists(answers_file):
+        try:
+            with open(answers_file, "r") as f:
+                return json.load(f)
+        except Exception as e:
+            logging.error(f"Error loading answers for {username}: {e}")
+            return {}
+    return {}
+
+def save_user_answer(username, question, answer):
+    """Save user's written answer to their answers file."""
+    answers_file = f"answers_{username}.json"
+    answers = load_user_answers(username)
+    answers[question] = answer
+    try:
+        with open(answers_file, "w") as f:
+            json.dump(answers, f, indent=4)
+    except Exception as e:
+        logging.error(f"Error saving answer for {username}: {e}")
+
+def reset_user_progress(username):
+    """Reset user's progress and answers by deleting their files."""
+    progress_file = f"progress_{username}.json"
+    answers_file = f"answers_{username}.json"
+    try:
+        if os.path.exists(progress_file):
+            os.remove(progress_file)
+        if os.path.exists(answers_file):
+            os.remove(answers_file)
+        # Clear in-memory progress if user is currently logged in
+        if st.session_state.user == username:
+            st.session_state.completed_modules = []
+            st.session_state.quiz_scores = {}
+            st.session_state.completion_dates = {}
+        return True
+    except Exception as e:
+        logging.error(f"Error resetting progress for {username}: {e}")
+        return False
 
 ################################################################
 #            FALLBACK FUNCTION FOR RE-RUN BEHAVIOR             #
@@ -82,6 +155,8 @@ def show_chapter(chapter_name: str, modules, final_quiz):
             for i, q in enumerate(final_quiz):
                 if "is_written" in q and q["is_written"]:
                     written_answer = user_answers[i].strip()
+                    if written_answer:
+                        save_user_answer(st.session_state.user, f"{chapter_name} Final Quiz Q{i+1}", written_answer)
                 else:
                     correct_index = q["answer"]
                     correct_answer = q["options"][correct_index]
@@ -104,7 +179,11 @@ def show_chapter(chapter_name: str, modules, final_quiz):
                 # Add final quiz completion to progress
                 final_quiz_id = f"{chapter_name.lower().replace(' ', '_')}_final"
                 if final_quiz_id not in st.session_state.get('completed_modules', []):
-                    st.session_state.completed_modules = st.session_state.get('completed_modules', []) + [final_quiz_id]
+                    st.session_state.completed_modules.append(final_quiz_id)
+                    st.session_state.quiz_scores[final_quiz_id] = f"{quiz_score}/{total_questions}"
+                    st.session_state.completion_dates[final_quiz_id] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                    save_user_progress(st.session_state.user, st.session_state.completed_modules,
+                                      st.session_state.quiz_scores, st.session_state.completion_dates)
             else:
                 if quiz_score < 4:
                     st.error("You did not reach the passing score (4/5) on the multiple-choice questions. Please review the modules and try again.")
@@ -139,7 +218,11 @@ def show_chapter(chapter_name: str, modules, final_quiz):
                 # Add module to completed_modules
                 module_id = f"{chapter_name.lower().replace(' ', '_')}_m{module_index + 1}"
                 if module_id not in st.session_state.get('completed_modules', []):
-                    st.session_state.completed_modules = st.session_state.get('completed_modules', []) + [module_id]
+                    st.session_state.completed_modules.append(module_id)
+                    st.session_state.quiz_scores[module_id] = "N/A (Reflection)"
+                    st.session_state.completion_dates[module_id] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                    save_user_progress(st.session_state.user, st.session_state.completed_modules,
+                                      st.session_state.quiz_scores, st.session_state.completion_dates)
                 rerun_app()
 
     # ---------- Scenario Tasks (single correct answer) ----------
@@ -157,7 +240,11 @@ def show_chapter(chapter_name: str, modules, final_quiz):
                         # Add module to completed_modules
                         module_id = f"{chapter_name.lower().replace(' ', '_')}_m{module_index + 1}"
                         if module_id not in st.session_state.get('completed_modules', []):
-                            st.session_state.completed_modules = st.session_state.get('completed_modules', []) + [module_id]
+                            st.session_state.completed_modules.append(module_id)
+                            st.session_state.quiz_scores[module_id] = "1/1"
+                            st.session_state.completion_dates[module_id] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                            save_user_progress(st.session_state.user, st.session_state.completed_modules,
+                                              st.session_state.quiz_scores, st.session_state.completion_dates)
                         rerun_app()
                 else:
                     st.error("Incorrect answer. Please review the module and try again.")
@@ -189,7 +276,11 @@ def show_chapter(chapter_name: str, modules, final_quiz):
                     # Add module to completed_modules
                     module_id = f"{chapter_name.lower().replace(' ', '_')}_m{module_index + 1}"
                     if module_id not in st.session_state.get('completed_modules', []):
-                        st.session_state.completed_modules = st.session_state.get('completed_modules', []) + [module_id]
+                        st.session_state.completed_modules.append(module_id)
+                        st.session_state.quiz_scores[module_id] = f"{score}/{total}"
+                        st.session_state.completion_dates[module_id] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                        save_user_progress(st.session_state.user, st.session_state.completed_modules,
+                                          st.session_state.quiz_scores, st.session_state.completion_dates)
                     next_module_index = module_index + 1
                     if next_module_index < len(module_titles):
                         st.session_state[f"{chapter_name}_module_index"] = next_module_index
@@ -201,6 +292,54 @@ def show_chapter(chapter_name: str, modules, final_quiz):
 
     else:
         st.info("No task available for this module.")
+
+################################################################
+#                     ADMIN VIEW FUNCTION                      #
+################################################################
+def show_admin_view():
+    """Display the admin view to track trainee progress."""
+    st.title("Admin Dashboard - CC Inc. Training App")
+
+    # Get list of trainees (non-admin users)
+    trainees = [username for username, info in USERS.items() if info["role"] != "admin"]
+    
+    # Dropdown to select a trainee
+    selected_trainee = st.selectbox("Select Trainee to View Progress", trainees)
+
+    if selected_trainee:
+        # Load trainee's progress
+        completed_modules, quiz_scores, completion_dates = load_user_progress(selected_trainee)
+        total_modules = 25  # 6 (Ch1) + 6 (Ch2) + 6 (Ch3) + 7 (Ch4)
+        progress = len(completed_modules) / total_modules
+
+        # Display progress bar
+        st.subheader(f"Progress for {selected_trainee}")
+        st.progress(progress)
+        st.write(f"Progress: {int(progress * 100)}% ({len(completed_modules)}/{total_modules} completed)")
+
+        # Display detailed progress
+        st.subheader("Detailed Progress")
+        for module_id in completed_modules:
+            score = quiz_scores.get(module_id, "N/A")
+            date = completion_dates.get(module_id, "Unknown")
+            st.write(f"- {module_id}: Score {score}, Completed on {date}")
+
+        # Display written answers
+        st.subheader("Written Answers")
+        answers = load_user_answers(selected_trainee)
+        if answers:
+            for question, answer in answers.items():
+                st.write(f"**{question}:** {answer}")
+        else:
+            st.write("No written answers submitted yet.")
+
+        # Reset progress button
+        if st.button(f"Reset Progress for {selected_trainee}"):
+            if reset_user_progress(selected_trainee):
+                st.success(f"Progress for {selected_trainee} has been reset.")
+                rerun_app()
+            else:
+                st.error(f"Failed to reset progress for {selected_trainee}. Check logs for details.")
 
 ################################################################
 #                     MAIN APP LOGIC                           #
@@ -215,12 +354,10 @@ def main():
         st.session_state.role = ""
     if "completed_modules" not in st.session_state:
         st.session_state.completed_modules = []
-
-    # Show progress bar in sidebar
-    total_modules = 25  # 6 (Ch1) + 6 (Ch2) + 6 (Ch3) + 7 (Ch4)
-    progress = len(st.session_state.completed_modules) / total_modules
-    st.sidebar.progress(progress)
-    st.sidebar.write(f"Progress: {int(progress * 100)}%")
+    if "quiz_scores" not in st.session_state:
+        st.session_state.quiz_scores = {}
+    if "completion_dates" not in st.session_state:
+        st.session_state.completion_dates = {}
 
     # If not logged in, show login
     if not st.session_state.user:
@@ -231,12 +368,40 @@ def main():
             if username in USERS and USERS[username]["password"] == password:
                 st.session_state.user = username
                 st.session_state.role = USERS[username]["role"]
+                # Load progress from file
+                completed_modules, quiz_scores, completion_dates = load_user_progress(username)
+                st.session_state.completed_modules = completed_modules
+                st.session_state.quiz_scores = quiz_scores
+                st.session_state.completion_dates = completion_dates
                 st.success(f"Welcome, {username}!")
+                rerun_app()
             else:
                 st.error("Incorrect username or password.")
         return
 
-    # Let user pick a chapter
+    # Show progress bar in sidebar
+    total_modules = 25  # 6 (Ch1) + 6 (Ch2) + 6 (Ch3) + 7 (Ch4)
+    progress = len(st.session_state.completed_modules) / total_modules
+    st.sidebar.progress(progress)
+    st.sidebar.write(f"Progress: {int(progress * 100)}%")
+
+    # Logout button
+    if st.sidebar.button("Logout"):
+        # Clear session state
+        st.session_state.user = ""
+        st.session_state.role = ""
+        st.session_state.completed_modules = []
+        st.session_state.quiz_scores = {}
+        st.session_state.completion_dates = {}
+        st.success("You have been logged out.")
+        rerun_app()
+
+    # Admin view
+    if st.session_state.role == "admin":
+        show_admin_view()
+        return
+
+    # Trainee view: Let user pick a chapter
     chapter_options = {
         "Chapter 1": {"type": "module_list", "modules": CH1_MODULES, "quiz": CH1_FINAL_QUIZ},
         "Chapter 2": {"type": "module_list", "modules": CH2_MODULES, "quiz": CH2_FINAL_QUIZ},
