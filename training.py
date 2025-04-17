@@ -457,26 +457,6 @@ def show_admin_view():
 #                     MAIN APP LOGIC                           #
 ################################################################
 def main():
-    # Inject custom CSS to fix font rendering
-    st.markdown("""
-        <style>
-        body, div, p, h1, h2, h3, h4, h5, h6, li, ul, ol {
-            font-family: "Source Sans Pro", sans-serif !important;
-            font-weight: 400 !important;
-            font-style: normal !important;
-        }
-        strong, b {
-            font-weight: 700 !important;
-        }
-        ul, ol {
-            padding-left: 20px !important;
-        }
-        li {
-            margin-bottom: 5px !important;
-        }
-        </style>
-    """, unsafe_allow_html=True)
-
     st.title("CC Inc. Training App")
     
     # Initialize user login and progress in session_state
