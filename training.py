@@ -3,12 +3,13 @@ import json
 import os
 import logging
 
-# Import chapter modules and final quizzes
+# Import chapter modules and quizzes for Chapters 1-3 (old structure)
 from chapter1 import CH1_MODULES, CH1_FINAL_QUIZ
 from chapter2 import CH2_MODULES, CH2_FINAL_QUIZ
 from chapter3 import CH3_MODULES, CH3_FINAL_QUIZ
-from chapter4 import CH4_MODULES, CH4_FINAL_QUIZ
-from chapter5 import CH5_MODULES, CH5_FINAL_QUIZ
+# Import display_chapter for Chapters 4-5 (new structure)
+from chapter4 import display_chapter as display_chapter4
+from chapter5 import display_chapter as display_chapter5
 
 # Set up logging for debugging
 logging.basicConfig(level=logging.INFO, filename="training.log", filemode="a",
@@ -36,14 +37,14 @@ def rerun_app():
         st.warning("st.experimental_rerun() is not available. Please manually select the next module in the sidebar.")
 
 ################################################################
-#         UNIVERSAL show_chapter() FUNCTION                    #
+#         UNIVERSAL show_chapter() FUNCTION (for Chapters 1-3) #
 ################################################################
 def show_chapter(chapter_name: str, modules, final_quiz):
     """
     Unified function to present module content (and tasks) for a chapter.
     Uses only session_state to save the current module index.
     
-    chapter_name: "Chapter 1", "Chapter 2", "Chapter 3", "Chapter 4", or "Chapter 5"
+    chapter_name: "Chapter 1", "Chapter 2", "Chapter 3"
     modules: list of dicts (with keys: title, content, task_type, task, etc.)
     final_quiz: list of quiz questions for the chapter
     """
@@ -88,6 +89,10 @@ def show_chapter(chapter_name: str, modules, final_quiz):
             if quiz_score >= 4:
                 st.success(f"Great job! You have completed {chapter_name}.")
                 st.info("Please click top left for next chapter.")
+                # Add final quiz completion to progress
+                final_quiz_id = f"{chapter_name.lower().replace(' ', '_')}_final"
+                if final_quiz_id not in st.session_state.get('completed_modules', []):
+                    st.session_state.completed_modules = st.session_state.get('completed_modules', []) + [final_quiz_id]
             else:
                 st.error("You did not reach the passing score (4/5). Please review the modules and try again.")
         return
@@ -115,8 +120,11 @@ def show_chapter(chapter_name: str, modules, final_quiz):
             # Move to next module automatically
             next_module_index = module_index + 1
             if next_module_index < len(module_titles):
-                # If next_module_index == len(module_titles)-1, that means Final Quiz
                 st.session_state[f"{chapter_name}_module_index"] = next_module_index
+                # Add module to completed_modules
+                module_id = f"{chapter_name.lower().replace(' ', '_')}_m{module_index + 1}"
+                if module_id not in st.session_state.get('completed_modules', []):
+                    st.session_state.completed_modules = st.session_state.get('completed_modules', []) + [module_id]
                 rerun_app()
 
     # ---------- Scenario Tasks (single correct answer) ----------
@@ -131,6 +139,10 @@ def show_chapter(chapter_name: str, modules, final_quiz):
                     next_module_index = module_index + 1
                     if next_module_index < len(module_titles):
                         st.session_state[f"{chapter_name}_module_index"] = next_module_index
+                        # Add module to completed_modules
+                        module_id = f"{chapter_name.lower().replace(' ', '_')}_m{module_index + 1}"
+                        if module_id not in st.session_state.get('completed_modules', []):
+                            st.session_state.completed_modules = st.session_state.get('completed_modules', []) + [module_id]
                         rerun_app()
                 else:
                     st.error("Incorrect answer. Please review the module and try again.")
@@ -211,21 +223,26 @@ def main():
 
     # Let user pick a chapter
     chapter_options = {
-        "Chapter 1": {"modules": CH1_MODULES, "quiz": CH1_FINAL_QUIZ},
-        "Chapter 2": {"modules": CH2_MODULES, "quiz": CH2_FINAL_QUIZ},
-        "Chapter 3": {"modules": CH3_MODULES, "quiz": CH3_FINAL_QUIZ},
-        "Chapter 4": {"modules": CH4_MODULES, "quiz": CH4_FINAL_QUIZ},
-        "Chapter 5": {"modules": CH5_MODULES, "quiz": CH5_FINAL_QUIZ}
+        "Chapter 1": {"type": "module_list", "modules": CH1_MODULES, "quiz": CH1_FINAL_QUIZ},
+        "Chapter 2": {"type": "module_list", "modules": CH2_MODULES, "quiz": CH2_FINAL_QUIZ},
+        "Chapter 3": {"type": "module_list", "modules": CH3_MODULES, "quiz": CH3_FINAL_QUIZ},
+        "Chapter 4": {"type": "display_function", "display": display_chapter4},
+        "Chapter 5": {"type": "display_function", "display": display_chapter5}
     }
 
     chapter = st.sidebar.selectbox("Select Chapter", list(chapter_options.keys()))
 
     if chapter in chapter_options:
-        show_chapter(
-            chapter_name=chapter,
-            modules=chapter_options[chapter]["modules"],
-            final_quiz=chapter_options[chapter]["quiz"]
-        )
+        chapter_data = chapter_options[chapter]
+        if chapter_data["type"] == "module_list":
+            show_chapter(
+                chapter_name=chapter,
+                modules=chapter_data["modules"],
+                final_quiz=chapter_data["quiz"]
+            )
+        else:
+            # For Chapters 4 and 5, call the display_chapter function directly
+            chapter_data["display"]()
     else:
         st.warning("Please select a chapter to begin.")
 
