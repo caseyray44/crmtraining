@@ -139,8 +139,9 @@ def show_chapter(chapter_name: str, modules, final_quiz):
 
         quiz_score = 0
         user_answers = {}
-        total_questions = len(final_quiz) - 1  # Exclude written question from score
+        total_questions = sum(1 for q in final_quiz if not q.get("is_written", False))  # Count only non-written questions
         written_answer = ""
+        has_written_question = any(q.get("is_written", False) for q in final_quiz)  # Check if there's a written question
 
         # Display final quiz questions
         for i, q in enumerate(final_quiz):
@@ -163,31 +164,33 @@ def show_chapter(chapter_name: str, modules, final_quiz):
                     if user_answers.get(i) == correct_answer:
                         quiz_score += 1
 
-            # Check written answer for non-empty response
-            written_complete = bool(written_answer)
+            # Check written answer for non-empty response if applicable
+            written_complete = not has_written_question or bool(written_answer)
 
             st.info(f"You scored {quiz_score} out of {total_questions} on the multiple-choice questions!")
-            if written_complete:
-                st.success("Written answer submitted! Check with your trainer for feedback.")
-            else:
-                st.error("Please provide an answer for the written question.")
+            if has_written_question:
+                if written_complete:
+                    st.success("Written answer submitted! Check with your trainer for feedback.")
+                else:
+                    st.error("Please provide an answer for the written question.")
 
-            # Pass if user got 4 or more correct out of 5 MCQs and completed written answer
-            if quiz_score >= 4 and written_complete:
+            # Pass if user got 4 or more correct out of 5 MCQs (if applicable) and completed written answer (if applicable)
+            mcq_passing_threshold = 4 if total_questions >= 5 else total_questions  # Adjust threshold for smaller quizzes
+            if (total_questions == 0 or quiz_score >= mcq_passing_threshold) and written_complete:
                 st.success(f"Great job! You have completed {chapter_name}.")
                 st.info("Please click top left for next chapter.")
                 # Add final quiz completion to progress
                 final_quiz_id = f"{chapter_name.lower().replace(' ', '_')}_final"
                 if final_quiz_id not in st.session_state.get('completed_modules', []):
                     st.session_state.completed_modules.append(final_quiz_id)
-                    st.session_state.quiz_scores[final_quiz_id] = f"{quiz_score}/{total_questions}"
+                    st.session_state.quiz_scores[final_quiz_id] = f"{quiz_score}/{total_questions}" if total_questions > 0 else "N/A"
                     st.session_state.completion_dates[final_quiz_id] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                     save_user_progress(st.session_state.user, st.session_state.completed_modules,
                                       st.session_state.quiz_scores, st.session_state.completion_dates)
             else:
-                if quiz_score < 4:
-                    st.error("You did not reach the passing score (4/5) on the multiple-choice questions. Please review the modules and try again.")
-                if not written_complete:
+                if total_questions > 0 and quiz_score < mcq_passing_threshold:
+                    st.error(f"You did not reach the passing score ({mcq_passing_threshold}/{total_questions}) on the multiple-choice questions. Please review the modules and try again.")
+                if has_written_question and not written_complete:
                     st.error("You need to provide a written answer to complete the quiz.")
         return
 
