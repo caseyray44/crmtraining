@@ -124,6 +124,10 @@ def show_chapter(chapter_name: str, modules, final_quiz):
         key=f"{chapter_name}_module_select"
     )
 
+    # Update the module index
+    module_index = module_titles.index(selected_module)
+    st.session_state[f"{chapter_name}_module_index"] = module_index
+
     # ---------- If user chose "Final Quiz" ----------
     if selected_module == "Final Quiz":
         st.markdown(f"# {chapter_name} Final Quiz")
@@ -138,7 +142,7 @@ def show_chapter(chapter_name: str, modules, final_quiz):
         for i, q in enumerate(final_quiz):
             st.markdown(f"**Question {i+1}:** {q['question']}")
             if "is_written" in q and q["is_written"]:
-                user_answers[i] = st.text_area("Your Answer:", key=f"{chapter_name}_final_q_{i}")
+                user_answers[i] = st.text_area("Your Answer:", value="", key=f"{chapter_name}_final_q_{i}")
             else:
                 user_answers[i] = st.radio("Select an option:", q["options"], key=f"{chapter_name}_final_q_{i}")
 
@@ -186,7 +190,6 @@ def show_chapter(chapter_name: str, modules, final_quiz):
         return
 
     # ---------- Otherwise, user selected a normal module ----------
-    module_index = module_titles.index(selected_module)
     mod = modules[module_index]
 
     # Display module title and content
@@ -207,13 +210,12 @@ def show_chapter(chapter_name: str, modules, final_quiz):
 
     # ---------- Reflection Tasks ----------
     if task_type == "reflection":
-        response = st.text_area("Your Reflection:", key=f"{chapter_name}_reflection_{module_index}")
+        response = st.text_area("Your Reflection:", value="", key=f"{chapter_name}_reflection_{module_index}")
         if st.button("Submit Reflection", key=f"{chapter_name}_submit_reflection_{module_index}"):
             st.success("Reflection submitted!")
             # Move to next module automatically
             next_module_index = module_index + 1
             if next_module_index < len(module_titles):
-                st.session_state[f"{chapter_name}_module_index"] = next_module_index
                 # Add module to completed_modules
                 module_id = f"{chapter_name.lower().replace(' ', '_')}_m{module_index + 1}"
                 if module_id not in st.session_state.get('completed_modules', []):
@@ -222,6 +224,7 @@ def show_chapter(chapter_name: str, modules, final_quiz):
                     st.session_state.completion_dates[module_id] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                     save_user_progress(st.session_state.user, st.session_state.completed_modules,
                                       st.session_state.quiz_scores, st.session_state.completion_dates)
+                st.session_state[f"{chapter_name}_module_index"] = next_module_index
 
     # ---------- Scenario Tasks (single correct answer) ----------
     elif task_type == "scenario":
@@ -234,7 +237,6 @@ def show_chapter(chapter_name: str, modules, final_quiz):
                     # Advance to next
                     next_module_index = module_index + 1
                     if next_module_index < len(module_titles):
-                        st.session_state[f"{chapter_name}_module_index"] = next_module_index
                         # Add module to completed_modules
                         module_id = f"{chapter_name.lower().replace(' ', '_')}_m{module_index + 1}"
                         if module_id not in st.session_state.get('completed_modules', []):
@@ -243,6 +245,7 @@ def show_chapter(chapter_name: str, modules, final_quiz):
                             st.session_state.completion_dates[module_id] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                             save_user_progress(st.session_state.user, st.session_state.completed_modules,
                                               st.session_state.quiz_scores, st.session_state.completion_dates)
+                        st.session_state[f"{chapter_name}_module_index"] = next_module_index
                 else:
                     st.error("Incorrect answer. Please review the module and try again.")
 
@@ -468,11 +471,9 @@ def main():
         st.session_state.quiz_scores = {}
     if "completion_dates" not in st.session_state:
         st.session_state.completion_dates = {}
-    if "logged_in" not in st.session_state:
-        st.session_state.logged_in = False
 
     # If not logged in, show login
-    if not st.session_state.logged_in:
+    if not st.session_state.user:
         st.sidebar.header("Login")
         username = st.sidebar.text_input("Username:", key="login_username")
         password = st.sidebar.text_input("Password:", type="password", key="login_password")
@@ -485,10 +486,7 @@ def main():
                 st.session_state.completed_modules = completed_modules
                 st.session_state.quiz_scores = quiz_scores
                 st.session_state.completion_dates = completion_dates
-                st.session_state.logged_in = True
                 st.success(f"Welcome, {username}!")
-            else:
-                st.error("Incorrect username or password.")
         return
 
     # Show progress bar in sidebar
@@ -505,8 +503,8 @@ def main():
         st.session_state.completed_modules = []
         st.session_state.quiz_scores = {}
         st.session_state.completion_dates = {}
-        st.session_state.logged_in = False
         st.success("You have been logged out.")
+        return
 
     # Admin view
     if st.session_state.role == "admin":
