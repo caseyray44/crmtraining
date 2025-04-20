@@ -88,7 +88,7 @@ def reset_user_progress(username):
         if os.path.exists(answers_file):
             os.remove(answers_file)
         # Clear in-memory progress if user is currently logged in
-        if st.session_state.user == username:
+        if "user" in st.session_state and st.session_state.user == username:
             st.session_state.completed_modules = []
             st.session_state.quiz_scores = {}
             st.session_state.completion_dates = {}
@@ -96,13 +96,6 @@ def reset_user_progress(username):
     except Exception as e:
         logging.error(f"Error resetting progress for {username}: {e}")
         return False
-
-################################################################
-#            FUNCTION FOR RE-RUN BEHAVIOR                      #
-################################################################
-def rerun_app():
-    """Rerun the Streamlit app."""
-    st.rerun()
 
 ################################################################
 #         UNIVERSAL show_chapter() FUNCTION (for Chapters 1-5) #
@@ -127,7 +120,8 @@ def show_chapter(chapter_name: str, modules, final_quiz):
     selected_module = st.sidebar.selectbox(
         f"Select {chapter_name} Module",
         module_titles,
-        index=st.session_state[f"{chapter_name}_module_index"]
+        index=st.session_state[f"{chapter_name}_module_index"],
+        key=f"{chapter_name}_module_select"
     )
 
     # ---------- If user chose "Final Quiz" ----------
@@ -148,7 +142,7 @@ def show_chapter(chapter_name: str, modules, final_quiz):
             else:
                 user_answers[i] = st.radio("Select an option:", q["options"], key=f"{chapter_name}_final_q_{i}")
 
-        if st.button("Submit Final Quiz"):
+        if st.button("Submit Final Quiz", key=f"{chapter_name}_submit_final_quiz"):
             # Grade the final quiz (excluding written question)
             for i, q in enumerate(final_quiz):
                 if "is_written" in q and q["is_written"]:
@@ -213,8 +207,8 @@ def show_chapter(chapter_name: str, modules, final_quiz):
 
     # ---------- Reflection Tasks ----------
     if task_type == "reflection":
-        response = st.text_area("Your Reflection:")
-        if st.button("Submit Reflection"):
+        response = st.text_area("Your Reflection:", key=f"{chapter_name}_reflection_{module_index}")
+        if st.button("Submit Reflection", key=f"{chapter_name}_submit_reflection_{module_index}"):
             st.success("Reflection submitted!")
             # Move to next module automatically
             next_module_index = module_index + 1
@@ -228,13 +222,12 @@ def show_chapter(chapter_name: str, modules, final_quiz):
                     st.session_state.completion_dates[module_id] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                     save_user_progress(st.session_state.user, st.session_state.completed_modules,
                                       st.session_state.quiz_scores, st.session_state.completion_dates)
-                rerun_app()
 
     # ---------- Scenario Tasks (single correct answer) ----------
     elif task_type == "scenario":
         options = mod.get("options", [])
         answer = st.radio("Select the correct answer:", options, key=f"{chapter_name}_scenario_{module_index}")
-        if st.button("Submit Scenario Answer"):
+        if st.button("Submit Scenario Answer", key=f"{chapter_name}_submit_scenario_{module_index}"):
             if "correct_answer" in mod and mod["correct_answer"] < len(options):
                 if options[mod["correct_answer"]] == answer:
                     st.success("Correct answer!")
@@ -250,7 +243,6 @@ def show_chapter(chapter_name: str, modules, final_quiz):
                             st.session_state.completion_dates[module_id] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                             save_user_progress(st.session_state.user, st.session_state.completed_modules,
                                               st.session_state.quiz_scores, st.session_state.completion_dates)
-                        rerun_app()
                 else:
                     st.error("Incorrect answer. Please review the module and try again.")
 
@@ -266,7 +258,7 @@ def show_chapter(chapter_name: str, modules, final_quiz):
                 st.markdown(f"**Question {i+1}:** {q['question']}")
                 user_answers[i] = st.radio("Select an option:", q["options"], key=f"{chapter_name}_miniquiz_{module_index}_{i}")
 
-            if st.button("Submit Mini Quiz"):
+            if st.button("Submit Mini Quiz", key=f"{chapter_name}_submit_miniquiz_{module_index}"):
                 for i, q in enumerate(quiz_qs):
                     correct_index = q["correct_answer"]
                     correct_answer = q["options"][correct_index]
@@ -289,7 +281,6 @@ def show_chapter(chapter_name: str, modules, final_quiz):
                     next_module_index = module_index + 1
                     if next_module_index < len(module_titles):
                         st.session_state[f"{chapter_name}_module_index"] = next_module_index
-                        rerun_app()
                 else:
                     st.error("Not all answers are correct. Please review and try again.")
         else:
@@ -309,7 +300,7 @@ def show_admin_view():
     trainees = [username for username, info in USERS.items() if info["role"] != "admin"]
     
     # Dropdown to select a trainee
-    selected_trainee = st.selectbox("Select Trainee to View Progress", trainees)
+    selected_trainee = st.selectbox("Select Trainee to View Progress", trainees, key="admin_trainee_select")
 
     if selected_trainee:
         # Load trainee's progress
@@ -454,10 +445,9 @@ def show_admin_view():
             st.write("No written answers submitted by this trainee.")
 
         # Reset progress button
-        if st.button(f"Reset Progress for {selected_trainee}"):
+        if st.button(f"Reset Progress for {selected_trainee}", key=f"reset_progress_{selected_trainee}"):
             if reset_user_progress(selected_trainee):
                 st.success(f"Progress for {selected_trainee} has been reset.")
-                rerun_app()
             else:
                 st.error(f"Failed to reset progress for {selected_trainee}. Check logs for details.")
 
@@ -478,13 +468,15 @@ def main():
         st.session_state.quiz_scores = {}
     if "completion_dates" not in st.session_state:
         st.session_state.completion_dates = {}
+    if "logged_in" not in st.session_state:
+        st.session_state.logged_in = False
 
     # If not logged in, show login
-    if not st.session_state.user:
+    if not st.session_state.logged_in:
         st.sidebar.header("Login")
-        username = st.sidebar.text_input("Username:")
-        password = st.sidebar.text_input("Password:", type="password")
-        if st.sidebar.button("Login"):
+        username = st.sidebar.text_input("Username:", key="login_username")
+        password = st.sidebar.text_input("Password:", type="password", key="login_password")
+        if st.sidebar.button("Login", key="login_button"):
             if username in USERS and USERS[username]["password"] == password:
                 st.session_state.user = username
                 st.session_state.role = USERS[username]["role"]
@@ -493,8 +485,8 @@ def main():
                 st.session_state.completed_modules = completed_modules
                 st.session_state.quiz_scores = quiz_scores
                 st.session_state.completion_dates = completion_dates
+                st.session_state.logged_in = True
                 st.success(f"Welcome, {username}!")
-                rerun_app()
             else:
                 st.error("Incorrect username or password.")
         return
@@ -506,15 +498,15 @@ def main():
     st.sidebar.write(f"Progress: {int(progress * 100)}%")
 
     # Logout button
-    if st.sidebar.button("Logout"):
+    if st.sidebar.button("Logout", key="logout_button"):
         # Clear session state
         st.session_state.user = ""
         st.session_state.role = ""
         st.session_state.completed_modules = []
         st.session_state.quiz_scores = {}
         st.session_state.completion_dates = {}
+        st.session_state.logged_in = False
         st.success("You have been logged out.")
-        rerun_app()
 
     # Admin view
     if st.session_state.role == "admin":
@@ -531,7 +523,7 @@ def main():
         "Chapter 6": {"type": "module_list", "modules": CH6_MODULES, "quiz": CH6_FINAL_QUIZ}
     }
 
-    chapter = st.sidebar.selectbox("Select Chapter", list(chapter_options.keys()))
+    chapter = st.sidebar.selectbox("Select Chapter", list(chapter_options.keys()), key="chapter_select")
 
     if chapter in chapter_options:
         chapter_data = chapter_options[chapter]
