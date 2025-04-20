@@ -4,9 +4,6 @@ import json
 import os
 from datetime import datetime
 
-# Import save_user_progress from training.py
-from training import save_user_progress
-
 # Chapter 6 Scenarios
 CH6_SCENARIOS = [
     # Scenario 1: Susan Hicks
@@ -94,6 +91,9 @@ def save_scenario_results(username, results):
 
 def show_chapter_6():
     """Display Chapter 6: Speed Test with Live Markate."""
+    # Import save_user_progress inside the function to avoid circular import
+    from training import save_user_progress
+
     st.markdown("# Chapter 6: Speed Test with Live Markate")
     
     # Initialize session state variables
