@@ -4,6 +4,9 @@ import json
 import os
 from datetime import datetime
 
+# Import save_user_progress from training.py
+from training import save_user_progress
+
 # Chapter 6 Scenarios
 CH6_SCENARIOS = [
     # Scenario 1: Susan Hicks
@@ -193,7 +196,7 @@ def show_chapter_6():
             if is_correct:
                 st.session_state.ch6_correct_answers += 1
                 st.session_state.ch6_current_question += 1
-                if "ch6_explanation_{st.session_state.ch6_current_scenario}_{st.session_state.ch6_current_question}" in st.session_state:
+                if f"ch6_explanation_{st.session_state.ch6_current_scenario}_{st.session_state.ch6_current_question}" in st.session_state:
                     del st.session_state[f"ch6_explanation_{st.session_state.ch6_current_scenario}_{st.session_state.ch6_current_question}"]
                 if st.session_state.ch6_current_question < len(current_scenario):
                     st.rerun()
