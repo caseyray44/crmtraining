@@ -97,6 +97,8 @@ def show_chapter_6():
     st.markdown("# Chapter 6: Speed Test with Live Markate")
     
     # Initialize session state variables
+    if "ch6_quiz_started" not in st.session_state:
+        st.session_state.ch6_quiz_started = False
     if "ch6_current_scenario" not in st.session_state:
         st.session_state.ch6_current_scenario = 0
     if "ch6_current_question" not in st.session_state:
@@ -111,9 +113,13 @@ def show_chapter_6():
         st.session_state.ch6_correct_answers = 0
     if "ch6_scenario_results" not in st.session_state:
         st.session_state.ch6_scenario_results = load_scenario_results(st.session_state.user)
+    if "ch6_show_results" not in st.session_state:
+        st.session_state.ch6_show_results = False
+    if "ch6_show_history" not in st.session_state:
+        st.session_state.ch6_show_history = False
 
     # Intro page
-    if st.session_state.ch6_current_scenario == 0 and st.session_state.ch6_current_question == 0 and not st.session_state.ch6_start_time:
+    if not st.session_state.ch6_quiz_started:
         st.markdown("""
         Welcome to Chapter 6 of your CRM training! 🎉 In this exciting challenge, you’ll be working with real-life scenarios using the **live Markate account** (not staging). Your goal? Answer customer questions as quickly and accurately as possible while navigating the Markate dashboard.
 
@@ -121,11 +127,87 @@ def show_chapter_6():
 
         This quiz is timed, and the goal is to keep your time as short as possible. If you’re stuck, you can use the “I Give Up, Teach Me” button to see the answer and learn how to find it, but this will add a 5-minute penalty to your time. Ready to test your speed and skills? Let’s get started!
         """)
-        if st.button("Start Chapter 6 Quiz"):
+        if st.button("Start Chapter 6 Quiz", key="start_quiz"):
+            st.session_state.ch6_quiz_started = True
             st.session_state.ch6_start_time = time.time()
             st.session_state.ch6_total_time = 0
             st.session_state.ch6_attempts = []
             st.session_state.ch6_correct_answers = 0
+            st.session_state.ch6_current_scenario = 0
+            st.session_state.ch6_current_question = 0
+            st.session_state.ch6_show_results = False
+            st.session_state.ch6_show_history = False
+            st.rerun()
+        return
+
+    # Results page
+    if st.session_state.ch6_show_results:
+        scenario_time = st.session_state.ch6_scenario_results[-1]["time"]
+        st.markdown(f"## Scenario Completed!")
+        st.write(f"**Scenario {st.session_state.ch6_current_scenario + 1} Time:** {format_time(scenario_time)}")
+        st.write(f"**Correct Answers:** {st.session_state.ch6_correct_answers}/{len(CH6_SCENARIOS[st.session_state.ch6_current_scenario])}")
+        st.write(f"**Total Attempts:** {len([a for a in st.session_state.ch6_attempts if a['scenario'] == st.session_state.ch6_current_scenario])}")
+
+        if st.session_state.ch6_current_scenario < len(CH6_SCENARIOS) - 1:
+            if st.button("Next Scenario", key="next_scenario"):
+                st.session_state.ch6_current_scenario += 1
+                st.session_state.ch6_current_question = 0
+                st.session_state.ch6_start_time = time.time()
+                st.session_state.ch6_total_time = 0
+                st.session_state.ch6_attempts = []
+                st.session_state.ch6_correct_answers = 0
+                st.session_state.ch6_show_results = False
+                st.rerun()
+        else:
+            st.success("You have completed all scenarios in Chapter 6!")
+            # Mark Chapter 6 as completed
+            module_id = "chapter_6_final"
+            if module_id not in st.session_state.get('completed_modules', []):
+                st.session_state.completed_modules.append(module_id)
+                st.session_state.quiz_scores[module_id] = "N/A (Speed Test)"
+                st.session_state.completion_dates[module_id] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                save_user_progress(st.session_state.user, st.session_state.completed_modules,
+                                  st.session_state.quiz_scores, st.session_state.completion_dates)
+            if st.button("Restart Chapter 6", key="restart_quiz"):
+                st.session_state.ch6_quiz_started = False
+                st.session_state.ch6_current_scenario = 0
+                st.session_state.ch6_current_question = 0
+                st.session_state.ch6_start_time = None
+                st.session_state.ch6_total_time = 0
+                st.session_state.ch6_attempts = []
+                st.session_state.ch6_correct_answers = 0
+                st.session_state.ch6_show_results = False
+                st.session_state.ch6_show_history = False
+                st.rerun()
+
+        if st.button("View Past Results", key="view_history"):
+            st.session_state.ch6_show_history = True
+            st.session_state.ch6_show_results = False
+            st.rerun()
+        return
+
+    # History page
+    if st.session_state.ch6_show_history:
+        st.markdown("## Past Results")
+        if st.session_state.ch6_scenario_results:
+            for result in st.session_state.ch6_scenario_results:
+                st.markdown(f"### Attempt ({result['timestamp']}) - Scenario {result['scenario']}")
+                st.write(f"Time: {format_time(result['time'])}")
+                st.write(f"Correct: {result['correct']}/{result['total_questions']}")
+                st.write(f"Attempts: {result['attempts']}")
+                st.markdown("---")
+        else:
+            st.write("No past results available.")
+        if st.button("Back to Start", key="back_to_start"):
+            st.session_state.ch6_quiz_started = False
+            st.session_state.ch6_current_scenario = 0
+            st.session_state.ch6_current_question = 0
+            st.session_state.ch6_start_time = None
+            st.session_state.ch6_total_time = 0
+            st.session_state.ch6_attempts = []
+            st.session_state.ch6_correct_answers = 0
+            st.session_state.ch6_show_results = False
+            st.session_state.ch6_show_history = False
             st.rerun()
         return
 
@@ -166,12 +248,12 @@ def show_chapter_6():
     # Buttons
     col1, col2 = st.columns(2)
     with col1:
-        if st.button("I Give Up, Teach Me"):
+        if st.button("I Give Up, Teach Me", key=f"give_up_{st.session_state.ch6_current_scenario}_{st.session_state.ch6_current_question}"):
             st.session_state[f"ch6_explanation_{st.session_state.ch6_current_scenario}_{st.session_state.ch6_current_question}"] = True
             st.session_state.ch6_total_time += 300  # 5-minute penalty
             st.rerun()
     with col2:
-        if st.button("Submit"):
+        if st.button("Submit", key=f"submit_{st.session_state.ch6_current_scenario}_{st.session_state.ch6_current_question}"):
             is_correct = False
             if current_question["type"] == "multiple_choice":
                 if not selected:
@@ -212,59 +294,8 @@ def show_chapter_6():
                         "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                     })
                     save_scenario_results(st.session_state.user, st.session_state.ch6_scenario_results)
-
-                    st.markdown(f"## Scenario Completed!")
-                    st.write(f"**Scenario {st.session_state.ch6_current_scenario + 1} Time:** {format_time(scenario_time)}")
-                    st.write(f"**Correct Answers:** {st.session_state.ch6_correct_answers}/{len(current_scenario)}")
-                    st.write(f"**Total Attempts:** {len([a for a in st.session_state.ch6_attempts if a['scenario'] == st.session_state.ch6_current_scenario])}")
-
-                    if st.session_state.ch6_current_scenario < len(CH6_SCENARIOS) - 1:
-                        if st.button("Next Scenario"):
-                            st.session_state.ch6_current_scenario += 1
-                            st.session_state.ch6_current_question = 0
-                            st.session_state.ch6_start_time = time.time()
-                            st.session_state.ch6_total_time = 0
-                            st.session_state.ch6_attempts = []
-                            st.session_state.ch6_correct_answers = 0
-                            st.rerun()
-                    else:
-                        st.success("You have completed all scenarios in Chapter 6!")
-                        # Mark Chapter 6 as completed
-                        module_id = "chapter_6_final"
-                        if module_id not in st.session_state.get('completed_modules', []):
-                            st.session_state.completed_modules.append(module_id)
-                            st.session_state.quiz_scores[module_id] = "N/A (Speed Test)"
-                            st.session_state.completion_dates[module_id] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                            save_user_progress(st.session_state.user, st.session_state.completed_modules,
-                                              st.session_state.quiz_scores, st.session_state.completion_dates)
-                        if st.button("Restart Chapter 6"):
-                            st.session_state.ch6_current_scenario = 0
-                            st.session_state.ch6_current_question = 0
-                            st.session_state.ch6_start_time = None
-                            st.session_state.ch6_total_time = 0
-                            st.session_state.ch6_attempts = []
-                            st.session_state.ch6_correct_answers = 0
-                            st.rerun()
-
-                    if st.button("View Past Results"):
-                        st.markdown("## Past Results")
-                        if st.session_state.ch6_scenario_results:
-                            for result in st.session_state.ch6_scenario_results:
-                                st.markdown(f"### Attempt ({result['timestamp']}) - Scenario {result['scenario']}")
-                                st.write(f"Time: {format_time(result['time'])}")
-                                st.write(f"Correct: {result['correct']}/{result['total_questions']}")
-                                st.write(f"Attempts: {result['attempts']}")
-                                st.markdown("---")
-                        else:
-                            st.write("No past results available.")
-                        if st.button("Back to Start"):
-                            st.session_state.ch6_current_scenario = 0
-                            st.session_state.ch6_current_question = 0
-                            st.session_state.ch6_start_time = None
-                            st.session_state.ch6_total_time = 0
-                            st.session_state.ch6_attempts = []
-                            st.session_state.ch6_correct_answers = 0
-                            st.rerun()
+                    st.session_state.ch6_show_results = True
+                    st.rerun()
             else:
                 error_placeholder.error("Incorrect answer. Try again." if current_question["type"] == "multiple_choice" else "Your answer is not quite right. Try including details about " + ", ".join(current_question["correct_keywords"]) + ".")
 
