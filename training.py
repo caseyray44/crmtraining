@@ -98,16 +98,11 @@ def reset_user_progress(username):
         return False
 
 ################################################################
-#            FALLBACK FUNCTION FOR RE-RUN BEHAVIOR             #
+#            FUNCTION FOR RE-RUN BEHAVIOR                      #
 ################################################################
 def rerun_app():
-    """
-    Try to call st.experimental_rerun(). If unavailable, warn the user.
-    """
-    if hasattr(st, "experimental_rerun"):
-        st.experimental_rerun()
-    else:
-        st.warning("st.experimental_rerun() is not available. Please manually select the next module in the sidebar.")
+    """Rerun the Streamlit app."""
+    st.rerun()
 
 ################################################################
 #         UNIVERSAL show_chapter() FUNCTION (for Chapters 1-5) #
@@ -227,7 +222,7 @@ def show_chapter(chapter_name: str, modules, final_quiz):
                 st.session_state[f"{chapter_name}_module_index"] = next_module_index
                 # Add module to completed_modules
                 module_id = f"{chapter_name.lower().replace(' ', '_')}_m{module_index + 1}"
-                if module_id not in st.session_state.get('completed_modules', []):
+                if module_id not and st.session_state.get('completed_modules', []):
                     st.session_state.completed_modules.append(module_id)
                     st.session_state.quiz_scores[module_id] = "N/A (Reflection)"
                     st.session_state.completion_dates[module_id] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -282,7 +277,7 @@ def show_chapter(chapter_name: str, modules, final_quiz):
 
                 # If all answers correct, auto-advance
                 if score == total:
-                    st.success("Great syndic job! Moving to the next module.")
+                    st.success("Great job! Moving to the next module.")
                     # Add module to completed_modules
                     module_id = f"{chapter_name.lower().replace(' ', '_')}_m{module_index + 1}"
                     if module_id not in st.session_state.get('completed_modules', []):
