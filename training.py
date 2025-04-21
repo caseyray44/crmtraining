@@ -396,9 +396,9 @@ def show_admin_view():
             },
             "chapter_6": {
                 "name": "Chapter 6: Speed Test with Live Markate",
-                "total_modules": 1,  # 1 module (speed test)
+                "total_modules": 1,  # 1 module (speed test, with 3 scenarios)
                 "modules": {
-                    "chapter_6_final": "Speed Test with Live Markate"
+                    "chapter_6_final": "Speed Test with Live Markate (3 Scenarios)"
                 }
             }
         }
