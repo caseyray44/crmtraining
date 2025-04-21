@@ -98,6 +98,21 @@ def reset_user_progress(username):
         return False
 
 ################################################################
+#            FUNCTION FOR RE-RUN BEHAVIOR                      #
+################################################################
+def safe_rerun():
+    """Safely rerun the Streamlit app, with fallback for older versions."""
+    try:
+        if hasattr(st, "rerun"):
+            st.rerun()
+        elif hasattr(st, "experimental_rerun"):
+            st.experimental_rerun()
+        else:
+            st.warning("Rerun functionality not available. Please manually refresh the page or select the next module.")
+    except Exception as e:
+        st.error(f"Error during rerun: {e}. Please manually refresh the page.")
+
+################################################################
 #         UNIVERSAL show_chapter() FUNCTION (for Chapters 1-5) #
 ################################################################
 def show_chapter(chapter_name: str, modules, final_quiz):
@@ -126,7 +141,9 @@ def show_chapter(chapter_name: str, modules, final_quiz):
 
     # Update the module index
     module_index = module_titles.index(selected_module)
-    st.session_state[f"{chapter_name}_module_index"] = module_index
+    if st.session_state[f"{chapter_name}_module_index"] != module_index:
+        st.session_state[f"{chapter_name}_module_index"] = module_index
+        safe_rerun()
 
     # ---------- If user chose "Final Quiz" ----------
     if selected_module == "Final Quiz":
@@ -182,7 +199,9 @@ def show_chapter(chapter_name: str, modules, final_quiz):
                     st.session_state.completion_dates[final_quiz_id] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                     save_user_progress(st.session_state.user, st.session_state.completed_modules,
                                       st.session_state.quiz_scores, st.session_state.completion_dates)
-                st.rerun()
+                # Reset module index to ensure UI updates
+                st.session_state[f"{chapter_name}_module_index"] = 0
+                safe_rerun()
         return
 
     # ---------- Otherwise, user selected a normal module ----------
@@ -221,7 +240,7 @@ def show_chapter(chapter_name: str, modules, final_quiz):
                     save_user_progress(st.session_state.user, st.session_state.completed_modules,
                                       st.session_state.quiz_scores, st.session_state.completion_dates)
                 st.session_state[f"{chapter_name}_module_index"] = next_module_index
-                st.rerun()
+                safe_rerun()
 
     # ---------- Scenario Tasks (single correct answer) ----------
     elif task_type == "scenario":
@@ -243,7 +262,7 @@ def show_chapter(chapter_name: str, modules, final_quiz):
                             save_user_progress(st.session_state.user, st.session_state.completed_modules,
                                               st.session_state.quiz_scores, st.session_state.completion_dates)
                         st.session_state[f"{chapter_name}_module_index"] = next_module_index
-                        st.rerun()
+                        safe_rerun()
                 else:
                     st.error("Incorrect answer. Please review the module and try again.")
 
@@ -282,7 +301,7 @@ def show_chapter(chapter_name: str, modules, final_quiz):
                     next_module_index = module_index + 1
                     if next_module_index < len(module_titles):
                         st.session_state[f"{chapter_name}_module_index"] = next_module_index
-                        st.rerun()
+                        safe_rerun()
                 else:
                     st.error("Not all answers are correct. Please review and try again.")
         else:
@@ -353,7 +372,7 @@ def show_admin_view():
                     "chapter_3_m2": "Module 2: Estimate Types",
                     "chapter_3_m3": "Module 3: Creating a Standard Estimate",
                     "chapter_3_m4": "Module 4: Creating an Options Estimate",
-                    "chapter_3_m5": "Module 5: Managing Estimates",
+                    "chapter_3_m5": "Module  Lillipop",
                     "chapter_3_m6": "Module 6: Create Estimates for Yourself",
                     "chapter_3_final": "Final Quiz"
                 }
@@ -449,10 +468,15 @@ def show_admin_view():
         # Reset progress button
         if st.button(f"Reset Progress for {selected_trainee}", key=f"reset_progress_{selected_trainee}"):
             if reset_user_progress(selected_trainee):
-                st.success(f"Progress for {selected_trainee} has been reset.")
+                st.session_state.admin_message = f"Progress for {selected_trainee} has been reset."
                 st.rerun()
             else:
                 st.error(f"Failed to reset progress for {selected_trainee}. Check logs for details.")
+
+    # Display admin message if present
+    if "admin_message" in st.session_state:
+        st.success(st.session_state.admin_message)
+        del st.session_state.admin_message  # Clear the message after displaying
 
 ################################################################
 #                     MAIN APP LOGIC                           #
@@ -471,9 +495,11 @@ def main():
         st.session_state.quiz_scores = {}
     if "completion_dates" not in st.session_state:
         st.session_state.completion_dates = {}
+    if "view" not in st.session_state:
+        st.session_state.view = "login"  # Track the current view
 
     # Sidebar for login and navigation
-    if not st.session_state.user:
+    if st.session_state.view == "login":
         st.sidebar.header("Login")
         username = st.sidebar.text_input("Username:", key="login_username")
         password = st.sidebar.text_input("Password:", type="password", key="login_password")
@@ -486,8 +512,9 @@ def main():
                 st.session_state.completed_modules = completed_modules
                 st.session_state.quiz_scores = quiz_scores
                 st.session_state.completion_dates = completion_dates
+                st.session_state.view = "chapter_select"
                 st.session_state.login_message = f"Welcome, {username}!"
-                st.rerun()
+                safe_rerun()
             else:
                 st.error("Incorrect username or password.")
         return
@@ -504,15 +531,16 @@ def main():
     st.sidebar.write(f"Progress: {int(progress * 100)}%")
 
     # Logout button
-    if st.sidebar.button("Logout", key="logout_button"):
+    if st.session_state.view != "login" and st.sidebar.button("Logout", key="logout_button"):
         # Clear session state
         st.session_state.user = ""
         st.session_state.role = ""
         st.session_state.completed_modules = []
         st.session_state.quiz_scores = {}
         st.session_state.completion_dates = {}
+        st.session_state.view = "login"
         st.session_state.logout_message = "You have been logged out."
-        st.rerun()
+        safe_rerun()
 
     # Display logout message if present
     if "logout_message" in st.session_state:
