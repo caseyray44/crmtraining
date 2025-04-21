@@ -4,13 +4,12 @@ import os
 import logging
 from datetime import datetime
 
-# Import chapter modules and quizzes for Chapters 1-6
+# Import chapter modules and quizzes for Chapters 1-5
 from chapter1 import CH1_MODULES, CH1_FINAL_QUIZ
 from chapter2 import CH2_MODULES, CH2_FINAL_QUIZ
 from chapter3 import CH3_MODULES, CH3_FINAL_QUIZ
 from chapter4 import CH4_MODULES, CH4_FINAL_QUIZ
 from chapter5 import CH5_MODULES, CH5_FINAL_QUIZ
-from chapter6 import CH6_MODULES, CH6_FINAL_QUIZ, show_chapter_6  # Import
 
 # Set up logging for debugging
 logging.basicConfig(level=logging.INFO, filename="training.log", filemode="a",
@@ -204,11 +203,6 @@ def show_chapter(chapter_name: str, modules, final_quiz):
     # Check the task type
     task_type = mod.get("task_type", "")
 
-    # ---------- Custom Task for Chapter 6 ----------
-    if task_type == "custom" and chapter_name == "Chapter 6":
-        show_chapter_6()
-        return
-
     # ---------- Reflection Tasks ----------
     if task_type == "reflection":
         response = st.text_area("Your Reflection:", value="", key=f"{chapter_name}_reflection_{module_index}")
@@ -318,7 +312,7 @@ def show_admin_view():
     if selected_trainee:
         # Load trainee's progress
         completed_modules, quiz_scores, completion_dates = load_user_progress(selected_trainee)
-        total_modules = 32  # 6 (Ch1) + 6 (Ch2) + 6 (Ch3) + 7 (Ch4) + 6 (Ch5) + 1 (Ch6)
+        total_modules = 31  # 6 (Ch1) + 6 (Ch2) + 6 (Ch3) + 7 (Ch4) + 6 (Ch5)
         progress = len(completed_modules) / total_modules
 
         # Display progress bar
@@ -393,13 +387,6 @@ def show_admin_view():
                     "chapter_5_m5": "Module 5: Hourly Rates",
                     "chapter_5_final": "Final Quiz"
                 }
-            },
-            "chapter_6": {
-                "name": "Chapter 6: Speed Test with Live Markate",
-                "total_modules": 1,  # 1 module (speed test, with 3 scenarios)
-                "modules": {
-                    "chapter_6_final": "Speed Test with Live Markate (3 Scenarios)"
-                }
             }
         }
 
@@ -432,7 +419,7 @@ def show_admin_view():
                         date = completion_dates.get(module_id, "Unknown")
                         # Simplify score display
                         if "N/A" in score:
-                            score_display = "Passed (Reflection)" if "Reflection" in score else "Completed (Speed Test)"
+                            score_display = "Passed (Reflection)" if "Reflection" in score else "Completed"
                         elif "Final Quiz" in module_name:
                             score_display = f"Score: {score}"
                         else:
@@ -447,7 +434,6 @@ def show_admin_view():
             written_questions = {
                 "Chapter 4 Final Quiz Q6": "Jane Doe calls and asks if she’s been scheduled for her pest control yet. How can you check that information?",
                 "Chapter 5 Final Quiz Q6": "You’re calling an existing customer, Jane Smith, to offer new services. Where can you find information about her past jobs to start the conversation?"
-                # Add more questions here if other chapters get written questions
             }
             for question_key, answer in answers.items():
                 question_text = written_questions.get(question_key, "Unknown question")
@@ -521,7 +507,7 @@ def main():
         del st.session_state.login_message  # Clear the message after displaying
 
     # Show progress bar in sidebar
-    total_modules = 32  # 6 (Ch1) + 6 (Ch2) + 6 (Ch3) + 7 (Ch4) + 6 (Ch5) + 1 (Ch6)
+    total_modules = 31  # 6 (Ch1) + 6 (Ch2) + 6 (Ch3) + 7 (Ch4) + 6 (Ch5)
     progress = len(st.session_state.completed_modules) / total_modules
     st.sidebar.progress(progress)
     st.sidebar.write(f"Progress: {int(progress * 100)}%")
@@ -557,8 +543,7 @@ def main():
         "Chapter 2": {"type": "module_list", "modules": CH2_MODULES, "quiz": CH2_FINAL_QUIZ},
         "Chapter 3": {"type": "module_list", "modules": CH3_MODULES, "quiz": CH3_FINAL_QUIZ},
         "Chapter 4": {"type": "module_list", "modules": CH4_MODULES, "quiz": CH4_FINAL_QUIZ},
-        "Chapter 5": {"type": "module_list", "modules": CH5_MODULES, "quiz": CH5_FINAL_QUIZ},
-        "Chapter 6": {"type": "module_list", "modules": CH6_MODULES, "quiz": CH6_FINAL_QUIZ}
+        "Chapter 5": {"type": "module_list", "modules": CH5_MODULES, "quiz": CH5_FINAL_QUIZ}
     }
 
     chapter = st.sidebar.selectbox("Select Chapter", list(chapter_options.keys()), key="chapter_select")
