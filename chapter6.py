@@ -137,6 +137,7 @@ def show_chapter_6():
             st.session_state.ch6_current_question = 0
             st.session_state.ch6_show_results = False
             st.session_state.ch6_show_history = False
+            st.rerun()
         return
 
     # Results page
@@ -156,6 +157,7 @@ def show_chapter_6():
                 st.session_state.ch6_attempts = []
                 st.session_state.ch6_correct_answers = 0
                 st.session_state.ch6_show_results = False
+                st.rerun()
         else:
             st.success("You have completed all scenarios in Chapter 6!")
             # Mark Chapter 6 as completed
@@ -176,10 +178,12 @@ def show_chapter_6():
                 st.session_state.ch6_correct_answers = 0
                 st.session_state.ch6_show_results = False
                 st.session_state.ch6_show_history = False
+                st.rerun()
 
         if st.button("View Past Results", key="view_history"):
             st.session_state.ch6_show_history = True
             st.session_state.ch6_show_results = False
+            st.rerun()
         return
 
     # History page
@@ -204,6 +208,7 @@ def show_chapter_6():
             st.session_state.ch6_correct_answers = 0
             st.session_state.ch6_show_results = False
             st.session_state.ch6_show_history = False
+            st.rerun()
         return
 
     # Quiz logic
@@ -250,6 +255,7 @@ def show_chapter_6():
         if st.button("I Give Up, Teach Me", key=f"give_up_{st.session_state.ch6_current_scenario}_{st.session_state.ch6_current_question}"):
             st.session_state[explanation_key] = True
             st.session_state.ch6_total_time += 300  # 5-minute penalty
+            st.rerun()
     with col2:
         if st.button("Submit", key=f"submit_{st.session_state.ch6_current_scenario}_{st.session_state.ch6_current_question}"):
             if error_key in st.session_state:
@@ -293,6 +299,7 @@ def show_chapter_6():
                     })
                     save_scenario_results(st.session_state.user, st.session_state.ch6_scenario_results)
                     st.session_state.ch6_show_results = True
+                    st.rerun()
             else:
                 st.session_state[error_key] = (
                     "Incorrect answer. Try again." if current_question["type"] == "multiple_choice"
