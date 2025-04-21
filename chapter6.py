@@ -54,13 +54,31 @@ CH6_SCENARIOS = [
         {
             "customer": "Marilyn Koehler",
             "question": "Marilyn Koehler asks, 'When did I get the windows done last?'",
-            "options": ["Sep 12, 2023", "Oct 2, 2024", "Nov 15, 2024", "Dec 1, 2024"],
-            "correct_answer": "Oct 2, 2024",
+            "options": ["Sep 12, 2023", "Oct 22, 2024", "Nov 15, 2024", "Dec 1, 2024"],
+            "correct_answer": "Oct 22, 2024",
             "type": "multiple_choice",
-            "explanation": "The correct answer is Oct 2, 2024. In the Markate dashboard, click on the customer’s name, 'Marilyn Koehler,' to access her profile. Navigate to the 'Work Orders' section to view past services. Find the most recent work order for window washing (Work Order #WO-008112). The 'Scheduled' column shows the date as Oct 2, 2024, indicating the last time the windows were done."
+            "explanation": "The correct answer is Oct 22, 2024. In the Markate dashboard, click on the customer’s name, 'Marilyn Koehler,' to access her profile. Navigate to the 'Work Orders' section to view past services. Find the most recent work order for window washing (Work Order #WO-008112). The 'Scheduled' column shows the date as Oct 22, 2024, indicating the last time the windows were done."
+        }
+    ],
+    # Scenario 3: Christine Reichl
+    [
+        {
+            "customer": "Christine Reichl",
+            "question": "Christine Reichl is on the phone and asks when her windows are scheduled?",
+            "options": ["I'm seeing a window job here", "May 14th", "It's not scheduled yet, when would you like it scheduled?", "I didn’t like your attitude. We ain’t doing them"],
+            "correct_answer": "It's not scheduled yet, when would you like it scheduled?",
+            "type": "multiple_choice",
+            "explanation": "Search customers, search the name 'Christine Reichl', view current work orders. From there, you will see that this has not been scheduled yet."
+        },
+        {
+            "customer": "Christine Reichl",
+            "question": "What button should you click to schedule?",
+            "options": ["Create an invoice", "More > Change status", "Edit", "Schedule & Assign"],
+            "correct_answer": "Edit",
+            "type": "multiple_choice",
+            "explanation": "The job title was not correct. If the job title had been correct, you could have used 'Schedule & Assign.' Since it’s incorrect, you must click 'Edit' to correct the job title to 'Christine Reichl - window washing' and then schedule on the date she requested. Note: Always ensure the job title is correct (e.g., 'Customer Name - Service') so everyone knows what’s going on with the account."
         }
     ]
-    # Placeholder for Scenarios 3-10 to be added later
 ]
 
 def format_time(seconds):
@@ -285,7 +303,7 @@ def show_chapter_6():
                     return
                 is_correct = selected == current_question["correct_answer"]
             else:
-                if not selected:
+                iftumt selected:
                     st.session_state[error_key] = "Please enter an answer."
                     return
                 response = selected.lower()
