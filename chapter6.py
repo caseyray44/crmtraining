@@ -94,6 +94,8 @@ def show_chapter_6():
     # Import save_user_progress inside the function to avoid circular import
     from training import save_user_progress
 
+    st.markdown("# Chapter 6: Speed Test with Live Markate")
+    
     # Initialize session state variables
     if "ch6_view" not in st.session_state:
         st.session_state.ch6_view = "intro"
@@ -112,19 +114,6 @@ def show_chapter_6():
     if "ch6_scenario_results" not in st.session_state:
         st.session_state.ch6_scenario_results = load_scenario_results(st.session_state.user)
 
-    # Sidebar view selection for Chapter 6
-    view_options = ["Intro", "Quiz", "Results", "History"]
-    selected_view = st.sidebar.selectbox(
-        "Chapter 6 View",
-        view_options,
-        index=view_options.index(st.session_state.ch6_view.capitalize()),
-        key="ch6_view_select"
-    )
-    st.session_state.ch6_view = selected_view.lower()
-
-    # Render the appropriate view based on ch6_view
-    st.markdown("# Chapter 6: Speed Test with Live Markate")
-
     # Intro page
     if st.session_state.ch6_view == "intro":
         st.markdown("""
@@ -136,7 +125,7 @@ def show_chapter_6():
         """)
         if st.button("Start Chapter 6 Quiz", key="start_quiz"):
             st.session_state.ch6_view = "quiz"
-            st.session_state.ch6_start_time = time.time()
+            st.session_state.ch6_start_time = time.time()  # Will be reset when quiz actually starts
             st.session_state.ch6_total_time = 0
             st.session_state.ch6_attempts = []
             st.session_state.ch6_correct_answers = 0
@@ -146,7 +135,7 @@ def show_chapter_6():
             for key in list(st.session_state.keys()):
                 if key.startswith("error_") or key.startswith("ch6_explanation_"):
                     del st.session_state[key]
-            return
+        return
 
     # Results page
     if st.session_state.ch6_view == "results":
@@ -160,7 +149,7 @@ def show_chapter_6():
             if st.button("Next Scenario", key=f"next_scenario_{st.session_state.ch6_current_scenario}"):
                 st.session_state.ch6_current_scenario += 1
                 st.session_state.ch6_current_question = 0
-                st.session_state.ch6_start_time = time.time()
+                st.session_state.ch6_start_time = None  # Reset for the next scenario
                 st.session_state.ch6_total_time = 0
                 st.session_state.ch6_attempts = []
                 st.session_state.ch6_correct_answers = 0
@@ -234,12 +223,22 @@ def show_chapter_6():
     current_scenario = CH6_SCENARIOS[st.session_state.ch6_current_scenario]
     current_question = current_scenario[st.session_state.ch6_current_question]
 
-    # Display timer
-    if st.session_state.ch6_start_time:
-        elapsed = int(time.time() - st.session_state.ch6_start_time) + st.session_state.ch6_total_time
-        minutes = elapsed // 60
-        seconds = elapsed % 60
-        st.markdown(f"<div style='font-size: 24px; font-weight: bold; color: #d32f2f;'>Time: {minutes} minutes {seconds} seconds</div>", unsafe_allow_html=True)
+    # Start the timer only when the quiz actually begins (first question)
+    if st.session_state.ch6_start_time is None:
+        st.session_state.ch6_start_time = time.time()
+
+    # Display timer in a styled container
+    elapsed = int(time.time() - st.session_state.ch6_start_time) + st.session_state.ch6_total_time
+    minutes = elapsed // 60
+    seconds = elapsed % 60
+    st.markdown(
+        f"""
+        <div style='border: 2px solid #4a90e2; border-radius: 10px; padding: 10px; background-color: #e6f0fa; text-align: center; margin: 10px 0;'>
+            <span style='font-size: 28px; font-weight: bold; color: #4a90e2;'>⏱ {minutes} minutes {seconds} seconds</span>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
     # Progress bar
     progress = (st.session_state.ch6_current_question / len(current_scenario))
@@ -318,6 +317,7 @@ def show_chapter_6():
                     })
                     save_scenario_results(st.session_state.user, st.session_state.ch6_scenario_results)
                     st.session_state.ch6_view = "results"
+                    st.session_state.ch6_start_time = None  # Reset the timer
                     # Clear any temporary state
                     for key in list(st.session_state.keys()):
                         if key.startswith("error_") or key.startswith("ch6_explanation_"):
