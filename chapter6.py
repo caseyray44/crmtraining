@@ -248,7 +248,7 @@ def show_chapter_6():
 
     # Display question
     st.markdown(f"<div style='background-color: #f9f9f9; padding: 15px; border-radius: 5px; margin-bottom: 20px;'><strong>{current_question['customer']}:</strong> {current_question['question']}</div>", unsafe_allow_html=True)
-    st.markdown("<p><em>Note: Use the live Markate dashboard in another tab to find the answers.</em></p>", unsafe_allow_html=True)
+    st.markdown("<p><strong>Note:</strong> Please click buttons twice to proceed (e.g., 'Submit', 'I Give Up, Teach Me').</p>", unsafe_allow_html=True)
 
     # Answer input
     selected_key = f"q_{st.session_state.ch6_current_scenario}_{st.session_state.ch6_current_question}"
