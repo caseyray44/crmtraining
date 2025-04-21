@@ -10,7 +10,7 @@ from chapter2 import CH2_MODULES, CH2_FINAL_QUIZ
 from chapter3 import CH3_MODULES, CH3_FINAL_QUIZ
 from chapter4 import CH4_MODULES, CH4_FINAL_QUIZ
 from chapter5 import CH5_MODULES, CH5_FINAL_QUIZ
-from chapter6 import CH6_MODULES, CH6_FINAL_QUIZ, show_chapter_6  # Import Chapter 6
+from chapter6 import CH6_MODULES, CH6_FINAL_QUIZ, show_chapter_6  # Import
 
 # Set up logging for debugging
 logging.basicConfig(level=logging.INFO, filename="training.log", filemode="a",
@@ -98,21 +98,6 @@ def reset_user_progress(username):
         return False
 
 ################################################################
-#            FUNCTION FOR RE-RUN BEHAVIOR                      #
-################################################################
-def safe_rerun():
-    """Safely rerun the Streamlit app, with fallback for older versions."""
-    try:
-        if hasattr(st, "rerun"):
-            st.rerun()
-        elif hasattr(st, "experimental_rerun"):
-            st.experimental_rerun()
-        else:
-            st.warning("Rerun functionality not available. Please manually refresh the page or select the next module.")
-    except Exception as e:
-        st.error(f"Error during rerun: {e}. Please manually refresh the page.")
-
-################################################################
 #         UNIVERSAL show_chapter() FUNCTION (for Chapters 1-5) #
 ################################################################
 def show_chapter(chapter_name: str, modules, final_quiz):
@@ -143,7 +128,7 @@ def show_chapter(chapter_name: str, modules, final_quiz):
     module_index = module_titles.index(selected_module)
     if st.session_state[f"{chapter_name}_module_index"] != module_index:
         st.session_state[f"{chapter_name}_module_index"] = module_index
-        safe_rerun()
+        # Removed safe_rerun() as it's not needed with the current structure
 
     # ---------- If user chose "Final Quiz" ----------
     if selected_module == "Final Quiz":
@@ -201,7 +186,8 @@ def show_chapter(chapter_name: str, modules, final_quiz):
                                       st.session_state.quiz_scores, st.session_state.completion_dates)
                 # Reset module index to ensure UI updates
                 st.session_state[f"{chapter_name}_module_index"] = 0
-                safe_rerun()
+                # Dummy widget to force Streamlit to recognize the state change
+                st.empty()
         return
 
     # ---------- Otherwise, user selected a normal module ----------
@@ -240,7 +226,9 @@ def show_chapter(chapter_name: str, modules, final_quiz):
                     save_user_progress(st.session_state.user, st.session_state.completed_modules,
                                       st.session_state.quiz_scores, st.session_state.completion_dates)
                 st.session_state[f"{chapter_name}_module_index"] = next_module_index
-                safe_rerun()
+                # Dummy widget to force Streamlit to recognize the state change
+                st.empty()
+                return
 
     # ---------- Scenario Tasks (single correct answer) ----------
     elif task_type == "scenario":
@@ -262,7 +250,9 @@ def show_chapter(chapter_name: str, modules, final_quiz):
                             save_user_progress(st.session_state.user, st.session_state.completed_modules,
                                               st.session_state.quiz_scores, st.session_state.completion_dates)
                         st.session_state[f"{chapter_name}_module_index"] = next_module_index
-                        safe_rerun()
+                        # Dummy widget to force Streamlit to recognize the state change
+                        st.empty()
+                        return
                 else:
                     st.error("Incorrect answer. Please review the module and try again.")
 
@@ -301,7 +291,9 @@ def show_chapter(chapter_name: str, modules, final_quiz):
                     next_module_index = module_index + 1
                     if next_module_index < len(module_titles):
                         st.session_state[f"{chapter_name}_module_index"] = next_module_index
-                        safe_rerun()
+                        # Dummy widget to force Streamlit to recognize the state change
+                        st.empty()
+                        return
                 else:
                     st.error("Not all answers are correct. Please review and try again.")
         else:
@@ -372,7 +364,7 @@ def show_admin_view():
                     "chapter_3_m2": "Module 2: Estimate Types",
                     "chapter_3_m3": "Module 3: Creating a Standard Estimate",
                     "chapter_3_m4": "Module 4: Creating an Options Estimate",
-                    "chapter_3_m5": "Module  Lillipop",
+                    "chapter_3_m5": "Module 5: Managing Estimates",
                     "chapter_3_m6": "Module 6: Create Estimates for Yourself",
                     "chapter_3_final": "Final Quiz"
                 }
@@ -469,9 +461,11 @@ def show_admin_view():
         if st.button(f"Reset Progress for {selected_trainee}", key=f"reset_progress_{selected_trainee}"):
             if reset_user_progress(selected_trainee):
                 st.session_state.admin_message = f"Progress for {selected_trainee} has been reset."
-                st.rerun()
             else:
                 st.error(f"Failed to reset progress for {selected_trainee}. Check logs for details.")
+            # Dummy widget to force Streamlit to recognize the state change
+            st.empty()
+            return
 
     # Display admin message if present
     if "admin_message" in st.session_state:
@@ -514,7 +508,9 @@ def main():
                 st.session_state.completion_dates = completion_dates
                 st.session_state.view = "chapter_select"
                 st.session_state.login_message = f"Welcome, {username}!"
-                safe_rerun()
+                # Dummy widget to force Streamlit to recognize the state change
+                st.empty()
+                return
             else:
                 st.error("Incorrect username or password.")
         return
@@ -540,7 +536,9 @@ def main():
         st.session_state.completion_dates = {}
         st.session_state.view = "login"
         st.session_state.logout_message = "You have been logged out."
-        safe_rerun()
+        # Dummy widget to force Streamlit to recognize the state change
+        st.empty()
+        return
 
     # Display logout message if present
     if "logout_message" in st.session_state:
